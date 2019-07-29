@@ -66,7 +66,7 @@ validated it must be merged back to the release increasing the version naming an
 
 ## Graphic summary
 
-[[images/git_branch_model.png]]
+[[git_branch_model.png]]
 
 # Release Naming
 ## SemVer
