@@ -1,7 +1,7 @@
 <p align="center">
   <img
     src="./logos/SatyrnJs-cropped.jpg"
-    width="200"
+    width="500"
   />
 </p>
 
