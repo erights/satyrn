@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src="./logos/Satyrn.js-logo-B1.svg"
+    src="./logos/SatyrnJs-cropped.jpg"
     width="200"
   />
 </p>
