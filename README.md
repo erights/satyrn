@@ -25,7 +25,13 @@ Looking for help? Check out the
 
 ## Getting started with satyrn
 
-First clone the repo and run npm install in the directory.
+First clone the repo and run install in the directory.
+```bash 
+git clone git@github.com:satyrnjs/satyrn.git
+cd satyrn
+npm install
+```
+
 
 To start the satyrn editor in develop mode run 
 
