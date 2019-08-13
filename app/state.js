@@ -107,13 +107,13 @@ showdown.extension('aceEditor', () => {
     replace: function (s, match) {
       content.push(match);
       var n = content.length - 1;
-      return '%EDITOR' + n + '%';
+      return '%EDITOR' + n + '%\n';
     }
   }, {
     type: 'output',
     filter: function (text) {
       for (var index = 0; index < content.length; ++index) {
-        var pat = '<p>%EDITOR' + index + '% *<\/p>';
+        var pat = '%EDITOR' + index + '%';
         text = text.replace(new RegExp(pat, 'gi'), _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
         _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
       } //reset array
