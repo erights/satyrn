@@ -43,6 +43,13 @@ export const fileMenuTemplate = {
     },
     { type: "separator" },
     {
+      label: "Close",
+      // accelerator: "CmdOrCtrl+Q",
+      click: () => {
+        BrowserWindow.getFocusedWindow().close()
+      }
+    },
+    {
       label: "Quit",
       accelerator: "CmdOrCtrl+Q",
       click: () => {

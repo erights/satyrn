@@ -16,11 +16,7 @@ const electronLocalshortcut = require('electron-localshortcut');
 
 
 export const createMenu = () => {
-  const menus = [fileMenuTemplate, editMenuTemplate];
-  // if (env.name !== "production") {
-  //   menus.push(devMenuTemplate);
-  // }
-  menus.push(helpMenuTemplate); // pushed after dev so it is always right-most menu
+  const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
   return Menu.buildFromTemplate(menus);
 };
 
