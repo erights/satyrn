@@ -192,10 +192,10 @@ showdown.extension('mailitoEmail', () => {
 
 /***/ }),
 
-/***/ "./src/helpers/converter.js":
-/*!**********************************!*\
-  !*** ./src/helpers/converter.js ***!
-  \**********************************/
+/***/ "./src/helpers/showdown_converter.js":
+/*!*******************************************!*\
+  !*** ./src/helpers/showdown_converter.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -208,13 +208,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../extensions/anchor-target */ "./src/extensions/anchor-target.js");
 /* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var showdown_katex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! showdown-katex */ "showdown-katex");
+/* harmony import */ var showdown_katex__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(showdown_katex__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-showdown__WEBPACK_IMPORTED_MODULE_0___default.a.setFlavor('github');
-const converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
-  extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
+
+showdown__WEBPACK_IMPORTED_MODULE_0___default.a.setFlavor('github'); // const latexExtension = showdownKatex({
+//   displayMode: false,
+//   throwOnError: false, // allows katex to fail silently
+//   errorColor: '#ff0000',
+//   delimiters: [
+//     { left: "$", right: "$", display: true }, // katex default
+//   ],
+// });
+
+const showdown_converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
+  extensions: [showdown_katex__WEBPACK_IMPORTED_MODULE_4___default()({
+    displayMode: false,
+    throwOnError: true,
+    // allows katex to fail silently
+    errorColor: '#ff0000',
+    delimiters: [{
+      left: "$",
+      right: "$",
+      display: true
+    }]
+  })],
   tables: true,
   simplifiedAutoLink: true,
   smoothLivePreview: true,
@@ -225,7 +246,7 @@ const converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter(
   ghMentions: true,
   splitAdjacentBlockquotes: true
 });
-/* harmony default export */ __webpack_exports__["default"] = (converter);
+/* harmony default export */ __webpack_exports__["default"] = (showdown_converter);
 
 /***/ }),
 
@@ -324,7 +345,7 @@ class Kernel {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _kernel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./kernel */ "./src/state/kernel.js");
-/* harmony import */ var _helpers_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/converter */ "./src/helpers/converter.js");
+/* harmony import */ var _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/showdown_converter */ "./src/helpers/showdown_converter.js");
 
 
 const EDITOR_ID = "editor-";
@@ -419,7 +440,7 @@ const state = {
     }
   },
   renderDocument: text => {
-    const html = _helpers_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
+    const html = _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
     state.initialiseEditors();
@@ -459,6 +480,17 @@ module.exports = require("os");
 /***/ (function(module, exports) {
 
 module.exports = require("showdown");
+
+/***/ }),
+
+/***/ "showdown-katex":
+/*!*********************************!*\
+  !*** external "showdown-katex" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("showdown-katex");
 
 /***/ })
 

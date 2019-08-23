@@ -1,5 +1,5 @@
 import { Kernel } from './kernel'
-import converter from '../helpers/converter';
+import showdown_converter from '../helpers/showdown_converter';
 
 const EDITOR_ID = "editor-"
 const EDITOR_OUTPUT_SELECTOR = "#output-editor-"
@@ -121,7 +121,7 @@ const state = {
 
   renderDocument: (text) => {
 
-    const html  = converter.makeHtml(text);
+    const html  = showdown_converter.makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
     state.initialiseEditors();
