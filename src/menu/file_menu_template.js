@@ -8,6 +8,11 @@ export const fileMenuTemplate = {
   label: "File",
   submenu: [
     {
+      label: "New",
+      accelerator: "CmdOrCtrl+N",
+      click: newFile
+    },
+    {
       label: "Open",
       accelerator: "CmdOrCtrl+O",
       click: fileOpenDialog
@@ -58,6 +63,14 @@ export const fileMenuTemplate = {
     },
   ]
 };
+
+function newFile() {
+  let focusedWindow = BrowserWindow.getFocusedWindow();
+
+
+  focusedWindow.send('open-file',["./markdown/untitled.md"]);
+
+}
 
 function reloadPage() {
   let focusedWindow = BrowserWindow.getFocusedWindow();

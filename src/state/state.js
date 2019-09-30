@@ -12,6 +12,7 @@ const state = {
   isEditMode: false,
   shouldRealTimeRender: true,
   currentFile: "",
+  currentFileSaved: true,
   kernel: undefined,
 
   initialiseEditors: () => {
@@ -51,8 +52,8 @@ const state = {
   openFile: (fname,data) => {
     state.resetKernel();
     state.editors = {};
-    state.currentFile = fname
-    console.log("CURRENT FILE", state.currentFile)
+    state.currentFile = fname;
+    state.currentFileSaved = true;
     const text = data.toString();
     state.renderDocument(text);
     state.handleTextChange();
