@@ -26,16 +26,18 @@ window.state = state;
 //  toggle-realtime-render -> flip real time render mode
 // load-url-> loads a external markdown file from url
 ipcRenderer.on('open-file', function (event, arg) {
-  console.log("OPEN FILE")
+
+  if (state.currentFileSaved) {
+    loadFile(arg[0]);
+    setTimeout(function () {
+      event.sender.send("set-reload-content", {
+        isFile: true,
+        url: arg[0]
+      })
+    }, 1000);
+  }
 
 
-  loadFile(arg[0]);
-  setTimeout(function () {
-    event.sender.send("set-reload-content", {
-      isFile: true,
-      url: arg[0]
-    })
-  }, 1000);
 
 });
 
@@ -48,9 +50,7 @@ ipcRenderer.on('save-file', function(event, arg) {
       return alert(err);
     }
     state.currentFile = fileName;
-    console.log("SET RELOAD")
-
-
+    state.currentFileSaved = true;
     state.renderDocument(fileContent);
     console.log("The file was saved and the name was changed!");
     event.sender.send("set-reload-content", {
@@ -118,13 +118,11 @@ function show(html, target) {
 }
 
 function loadFile(path) {
-  console.log("LOAD", window.reloadContent)
   fs.readFile( path, function (err, data) {
     if (err) {
       alert("Unable to load file " + path);
     }
 
-    console.log(data);
     state.openFile(path,data)
   })
 }
