@@ -126,7 +126,7 @@ function saveFileAs() {
     }
 
     focusedWindow.send('save-file',fileNames);
-    focusedWindow.send("reload-window", window.reloadContent);
+    focusedWindow.send("reload-window", focusedWindow.reloadContent);
   })
 }
 
