@@ -36,13 +36,10 @@ ipcRenderer.on('open-file', function (event, arg) {
       })
     }, 1000);
   }
-
-
-
 });
 
 ipcRenderer.on('save-file', function(event, arg) {
-  saveFile(arg)
+  saveFile(event, arg)
 
 });
 
@@ -131,7 +128,7 @@ function loadUrl(url) {
   }
 }
 
-function saveFile(url) {
+function saveFile(event, url) {
   let template = './markdown/untitled.mdt';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : state.currentFile;
@@ -153,7 +150,7 @@ function saveFile(url) {
         return;
       }
 
-      saveFile(fileNames);
+      saveFile(event, fileNames);
       reloadWindow({isFile: true, url: fileNames});
 
     })
