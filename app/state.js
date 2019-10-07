@@ -337,6 +337,7 @@ const state = {
   isEditMode: false,
   shouldRealTimeRender: true,
   currentFile: "",
+  currentFileSaved: true,
   kernel: undefined,
   initialiseEditors: () => {
     for (let key in state.editors) {
@@ -373,7 +374,7 @@ const state = {
     state.resetKernel();
     state.editors = {};
     state.currentFile = fname;
-    console.log("CURRENT FILE", state.currentFile);
+    state.currentFileSaved = true;
     const text = data.toString();
     state.renderDocument(text);
     state.handleTextChange();

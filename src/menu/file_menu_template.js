@@ -1,12 +1,18 @@
-import {app, BrowserWindow, dialog, remote} from "electron";
-import { createMenu} from "../background";
+import {app, BrowserWindow, dialog, Menu, remote} from "electron";
+import {createMenu, createNewWindow} from "../background";
 
 var path = require('path');
 import env from "env";
+import {helpMenuTemplate} from "./help_menu_template";
 
 export const fileMenuTemplate = {
   label: "File",
   submenu: [
+    {
+      label: "New",
+      accelerator: "CmdOrCtrl+N",
+      click: newFile
+    },
     {
       label: "Open",
       accelerator: "CmdOrCtrl+O",
@@ -59,6 +65,20 @@ export const fileMenuTemplate = {
   ]
 };
 
+function newFile() {
+  let url = "./markdown/untitled.mdt";
+  let onReady =  (currentWindow) => {
+    currentWindow.reloadContent = {
+      isFile: true,
+      url
+    };
+    currentWindow.send('open-file',[url]);
+  };
+  let window = createNewWindow("untitled", onReady);
+  const menus = [fileMenuTemplate, helpMenuTemplate];
+  window.setMenu(Menu.buildFromTemplate(menus));
+}
+
 function reloadPage() {
   let focusedWindow = BrowserWindow.getFocusedWindow();
   BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
@@ -106,7 +126,7 @@ function saveFileAs() {
     }
 
     focusedWindow.send('save-file',fileNames);
-    focusedWindow.reloadContent()
+    focusedWindow.send("reload-window", focusedWindow.reloadContent);
   })
 }
 

@@ -57,8 +57,7 @@ function createHelpWindow(name, url) {
   let window = createNewWindow(name,onReady);
   const menus = [fileMenuTemplate];
 
-  window.setMenu(Menu.buildFromTemplate(menus))
-  ;
+  window.setMenu(Menu.buildFromTemplate(menus));
   return window;
 }
 

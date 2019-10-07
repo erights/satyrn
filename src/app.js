@@ -7,7 +7,7 @@ import "./stylesheets/main.css";
 import "./helpers/context_menu.js";
 import "./helpers/external_links.js";
 
-import { ipcRenderer, BrowserWindow } from "electron";
+import {ipcRenderer, dialog, remote} from "electron";
 
 import showdown  from 'showdown';
 window.showdown = showdown;
@@ -28,41 +28,23 @@ window.state = state;
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('open-file', function (event, arg) {
-  console.log("OPEN FILE")
 
-
-  loadFile(arg[0]);
-  setTimeout(function () {
-    event.sender.send("set-reload-content", {
-      isFile: true,
-      url: arg[0]
-    })
-  }, 1000);
-
+  if (state.currentFileSaved) {
+    loadFile(arg[0]);
+    setTimeout(function () {
+      event.sender.send("set-reload-content", {
+        isFile: true,
+        url: arg[0]
+      })
+    }, 1000);
+  }
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('save-file', function(event, arg) {
-  let fileContent = document.getElementById("teacher").value;
-  let fileName = arg ? arg : state.currentFile;
-  console.log("SAVE", fileName, fileContent);
-  fs.writeFile(fileName, fileContent, function(err) {
-    if(err) {
-      return alert(err);
-    }
-    state.currentFile = fileName;
-    console.log("SET RELOAD")
+  saveFile(event, arg)
 
-
-    state.renderDocument(fileContent);
-    console.log("The file was saved and the name was changed!");
-    event.sender.send("set-reload-content", {
-      isFile: true,
-      url: fileName
-    })
-
-  });
 });
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -87,12 +69,16 @@ ipcRenderer.on('load-url', (event,url) => {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('reload-window', (event, reloadContents) => {
+  reloadWindow(reloadContents)
+})
+
+function reloadWindow(reloadContents) {
   if (reloadContents.isFile) {
     loadFile(reloadContents.url)
   } else {
     loadUrl(reloadContents.url)
   }
-})
+}
 
 // --------------------- --------------------- ---------------------
 // action implementations
@@ -135,13 +121,11 @@ function show(html, target) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 function loadFile(path) {
-  console.log("LOAD", window.reloadContent)
   fs.readFile( path, function (err, data) {
     if (err) {
       alert("Unable to load file " + path);
     }
 
-    console.log(data);
     state.openFile(path,data)
   })
 }
@@ -162,5 +146,50 @@ function loadUrl(url) {
 
       }
     }
+  }
+}
+
+function saveFile(event, url) {
+  let template = './markdown/untitled.mdt';
+  let fileContent = document.getElementById("teacher").value;
+  let fileName = url ? url : state.currentFile;
+  console.log(fileName, template);
+  if (fileName === template) {
+    var fileNames;
+    const options = {
+      title: 'Save Markdown As',
+      buttonLabel: 'Save',
+      filters: [
+        { name: 'markdown', extensions: ['md'] }
+      ]
+    };
+    remote.dialog.showSaveDialog(remote.getCurrentWindow(), options, (fileNames) => {
+
+      // fileNames is an array that contains all the selected
+      if(fileNames === undefined){
+        console.log("No file selected");
+        return;
+      }
+
+      saveFile(event, fileNames);
+      reloadWindow({isFile: true, url: fileNames});
+
+    })
+  }
+  else {
+    fs.writeFile(fileName, fileContent, function(err) {
+      if(err) {
+        return alert(err);
+      }
+      state.currentFile = fileName;
+      state.currentFileSaved = true;
+      state.renderDocument(fileContent);
+      console.log("The file was saved and the name was changed!");
+      event.sender.send("set-reload-content", {
+        isFile: true,
+        url: fileName
+      })
+
+    });
   }
 }
