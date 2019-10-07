@@ -25,6 +25,8 @@ window.state = state;
 //  toggle-edit-mode -> enable document editing (teacher mode)
 //  toggle-realtime-render -> flip real time render mode
 // load-url-> loads a external markdown file from url
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('open-file', function (event, arg) {
   console.log("OPEN FILE")
 
@@ -39,6 +41,8 @@ ipcRenderer.on('open-file', function (event, arg) {
 
 });
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('save-file', function(event, arg) {
   let fileContent = document.getElementById("teacher").value;
   let fileName = arg ? arg : state.currentFile;
@@ -61,19 +65,27 @@ ipcRenderer.on('save-file', function(event, arg) {
   });
 });
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('toggle-edit-mode', function(event, args) {
   state.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
   state.isEditMode = !state.isEditMode;
 });
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('toggle-realtime-render', (event, args) => {
   state.shouldRealTimeRender = !state.shouldRealTimeRender;
 });
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('load-url', (event,url) => {
   loadUrl(url)
 })
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('reload-window', (event, reloadContents) => {
   if (reloadContents.isFile) {
     loadFile(reloadContents.url)
@@ -92,6 +104,8 @@ ipcRenderer.on('reload-window', (event, reloadContents) => {
 // renderDocument -> used by open-file to display a document other
 //                   than about and guide, also used during realTime
 //                   rendering
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 function show(html, target) {
   let w = window.open("", target, "toolbar=no,scrollbars=yes,resizable=yes,width=800,height=500");
   // close the old window so we can open with focus
@@ -117,6 +131,9 @@ function show(html, target) {
   w.document.head.appendChild(link);
 }
 
+// loadFile is called when a opening a file from the open dialog box
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 function loadFile(path) {
   console.log("LOAD", window.reloadContent)
   fs.readFile( path, function (err, data) {
@@ -129,9 +146,13 @@ function loadFile(path) {
   })
 }
 
+// loadUrl is called when a link has been clicked on
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 function loadUrl(url) {
   let request = new XMLHttpRequest();
   request.open('GET', url, true);
+  console.log('looking for file:', url);
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
