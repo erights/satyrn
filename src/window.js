@@ -72,6 +72,8 @@ ipcRenderer.on('reload-window', (event, reloadContents) => {
   reloadWindow(reloadContents)
 })
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 function reloadWindow(reloadContents) {
   if (reloadContents.isFile) {
     loadFile(reloadContents.url)
@@ -149,13 +151,14 @@ function loadUrl(url) {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 function saveFile(event, url) {
   let template = './markdown/untitled.mdt';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : state.currentFile;
   console.log(fileName, template);
   if (fileName === template) {
-    var fileNames;
     const options = {
       title: 'Save Markdown As',
       buttonLabel: 'Save',
