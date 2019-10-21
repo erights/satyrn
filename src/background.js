@@ -14,7 +14,8 @@ import createWindow from "./helpers/window";
 import env from "env";
 const electronLocalshortcut = require('electron-localshortcut');
 
-
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 export const createMenu = () => {
   const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
   return Menu.buildFromTemplate(menus);
@@ -23,6 +24,8 @@ export const createMenu = () => {
 // Save userData in separate folders for each environment.
 // Thanks to this you can use production and development versions of the app
 // on same machine like those are two separate apps.
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 if (env.name !== "production") {
   let reload = require('electron-reload')
   reload(__dirname);
@@ -30,6 +33,8 @@ if (env.name !== "production") {
   app.setPath("userData", `${userDataPath} (${env.name})`);
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 app.on("ready", () => {
   let onReady =  (currentWindow) => {
     currentWindow.reloadContent = {
@@ -43,13 +48,14 @@ app.on("ready", () => {
 });
 
 
-
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 app.on("window-all-closed", () => {
   app.quit();
 });
 
-
-
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 export function createNewWindow(name, onReady) {
   const window = createWindow(name, {
     width: 1000,
@@ -86,6 +92,7 @@ export function createNewWindow(name, onReady) {
   electronLocalshortcut.register(window, 'CmdOrCtrl+Shift+J', () => {
     window.toggleDevTools();
   });
+
 
   window.webContents.on('new-window', function(e, url, disposition) {
     // about:blank is opened when creating stand-alone helper windows
@@ -128,9 +135,12 @@ export function createNewWindow(name, onReady) {
   return window;
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 ipcMain.on('set-reload-content', (event, reloadContent) => {
   let focusedWindow = BrowserWindow.getFocusedWindow()
   focusedWindow.reloadContent = reloadContent
-})
+});
 
 

@@ -8,13 +8,13 @@ The code started from this [electron boilerplate code](https://github.com/szwacz
 
 The src file contains all JS code for the application. This build process compiles the src folder and adds it to the app folder. Webpack configuration is under the /build folder.
 
-The entry-points are src/background.js and src/app.js. Webpack will follow all import statements starting from those files and compile code of the whole dependency tree into one .js file for each entry point.
+The entry-points are src/background.js and src/window.js. Webpack will follow all import statements starting from those files and compile code of the whole dependency tree into one .js file for each entry point.
 
-### app.js
+### window.js
 
 This file has access to the html document and provides functions callable from the index.html. It can be thought of as the view or frontend layer of the application.
 
-The app.js can listen to ipcRenderer events sent from the background.js file
+The window.js can listen to ipcRenderer events sent from the background.js file
 
 App.js has access to the application state under src/state/state.js. This contains the core logic of the application including:
  * Tracking JavaScript editors
@@ -27,7 +27,7 @@ App.js has access to the application state under src/state/state.js. This contai
 
 The key functionality of this file is to create new Windows and register the appropriate listeners for these windows.
 
-All application windows are created using the createNewWindow() function. This generates a new BrowserWindow and loads the app.html which contains scripts for app.js and state.js enabling all satyrn functionality to work in all the windows.
+All application windows are created using the createNewWindow() function. This generates a new BrowserWindow and loads the app.html which contains scripts for window.js and state.js enabling all satyrn functionality to work in all the windows.
 
 A BrowserWindow has a number of listeners attached to them:
 * *Reload* - Each BrowserWindow stores the state of it's last loaded page in window.reloadContent. On a reload event, this reload content is used to repopulate the page.
