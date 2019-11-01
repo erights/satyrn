@@ -21,11 +21,12 @@ export const createMenu = () => {
   return Menu.buildFromTemplate(menus);
 };
 
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 // Save userData in separate folders for each environment.
 // Thanks to this you can use production and development versions of the app
 // on same machine like those are two separate apps.
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 if (env.name !== "production") {
   let reload = require('electron-reload')
   reload(__dirname);
@@ -113,6 +114,7 @@ export function createNewWindow(name, onReady) {
       return false
     }
     if (disposition === "satyrn") {
+      console.log("New FILE", url)
       e.preventDefault();
       window.reloadContent = {
         isFile: false,

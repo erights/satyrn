@@ -18,17 +18,11 @@ window.showdown = showdown;
 import state from './state/state'
 window.state = state;
 
-// --------------------- --------------------- ---------------------
-// respond to events from the main-process
-//  open-file -> load a file, and replace it in the browser
-//  save-file -> write the current document to a file.
-//  toggle-edit-mode -> enable document editing (teacher mode)
-//  toggle-realtime-render -> flip real time render mode
-// load-url-> loads a external markdown file from url
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-ipcRenderer.on('open-file', function (event, arg) {
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+//  open-file -> load a file, and replace it in the browser
+ipcRenderer.on('open-file', function (event, arg) {
   if (state.currentFileSaved) {
     loadFile(arg[0]);
     setTimeout(function () {
@@ -42,6 +36,7 @@ ipcRenderer.on('open-file', function (event, arg) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  save-file -> write the current document to a file.
 ipcRenderer.on('save-file', function(event, arg) {
   saveFile(event, arg)
 
@@ -49,6 +44,7 @@ ipcRenderer.on('save-file', function(event, arg) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  toggle-edit-mode -> enable document editing (teacher mode)
 ipcRenderer.on('toggle-edit-mode', function(event, args) {
   state.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
   state.isEditMode = !state.isEditMode;
@@ -56,12 +52,14 @@ ipcRenderer.on('toggle-edit-mode', function(event, args) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  toggle-realtime-render -> flip real time render mode
 ipcRenderer.on('toggle-realtime-render', (event, args) => {
   state.shouldRealTimeRender = !state.shouldRealTimeRender;
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+// load-url-> loads a external markdown file from url
 ipcRenderer.on('load-url', (event,url) => {
   loadUrl(url)
 })
