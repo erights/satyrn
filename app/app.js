@@ -1210,15 +1210,9 @@ window.showdown = showdown__WEBPACK_IMPORTED_MODULE_6___default.a; // ----------
 // application state
 
 
-window.state = _state_state__WEBPACK_IMPORTED_MODULE_7__["default"]; // --------------------- --------------------- ---------------------
-// respond to events from the main-process
+window.state = _state_state__WEBPACK_IMPORTED_MODULE_7__["default"]; //////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 //  open-file -> load a file, and replace it in the browser
-//  save-file -> write the current document to a file.
-//  toggle-edit-mode -> enable document editing (teacher mode)
-//  toggle-realtime-render -> flip real time render mode
-// load-url-> loads a external markdown file from url
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('open-file', function (event, arg) {
   if (_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].currentFileSaved) {
@@ -1232,22 +1226,26 @@ electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('open-file', function (e
   }
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  save-file -> write the current document to a file.
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('save-file', function (event, arg) {
   saveFile(event, arg);
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  toggle-edit-mode -> enable document editing (teacher mode)
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('toggle-edit-mode', function (event, args) {
   _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode ? document.querySelector("#teacher-input").style.display = "none" : document.querySelector("#teacher-input").style.display = "block";
   _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode = !_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode;
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+//  toggle-realtime-render -> flip real time render mode
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('toggle-realtime-render', (event, args) => {
   _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender = !_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender;
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
+// load-url-> loads a external markdown file from url
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('load-url', (event, url) => {
   loadUrl(url);
