@@ -6,8 +6,7 @@ const EDITOR_OUTPUT_SELECTOR = "#output-editor-"
 // This handles the windowState of a single notebook document.
 const state = {
   editors: {},
-  //TODO why is this called state?
-  state: {},
+  editorsResetValues: {},
 
   isEditMode: false,
   shouldRealTimeRender: true,
@@ -28,13 +27,13 @@ const state = {
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/javascript");
     state.editors[key]=editor;
-    state.state[key]=editor.getValue()
+    state.editorsResetValues[key]=editor.getValue()
   },
-  reset: (key) => {
+  resetEditor: (key) => {
     let editor = state.getEditor(key);
     document.querySelector("#output-editor-"+key).innerHTML = "";
 
-    editor.setValue(state.state[key])
+    editor.setValue(state.editorsResetValues[key])
   },
 
   toggleRealTimeRender: () => {
@@ -50,7 +49,6 @@ const state = {
   },
 
   openFile: (fname,data) => {
-    console.log("Open file", fname)
     state.resetKernel();
     state.editors = {};
     state.currentFile = fname;
@@ -60,16 +58,11 @@ const state = {
     state.handleTextChange();
   },
 
-  run: (key) => {
+  runEditor: (key) => {
     document.querySelector(EDITOR_OUTPUT_SELECTOR+key).innerHTML = "....";
     let editor = state.getEditor(key);
     const code = editor.getValue()
     state.kernel.run(key,code)
-    let markdown = document.querySelector("#teacher").innerHTML;
-
-    console.log("INDEX,", markdown.indexOf('```javascript'));
-
-    console.log("teacher, key", markdown, key)
     document.querySelector(EDITOR_OUTPUT_SELECTOR+key).innerHTML = ""
   },
 
@@ -102,8 +95,8 @@ const state = {
   getEditorHtml: (content, key) => {
     return "<div class=\"showdown-js-editor\">\n" +
       "    <div>\n" +
-      "    <i class=\"fas fa-play\" onclick=\"state.run('"+key+"')\" value=\"Run\" ></i>\n" +
-      "    <i class=\"fas fa-redo\" onclick=\"state.reset('"+key+"')\" value=\"Refresh\" ></i>\n" +
+      "    <i class=\"fas fa-play\" onclick=\"state.runEditor('"+key+"')\" value=\"Run\" ></i>\n" +
+      "    <i class=\"fas fa-redo\" onclick=\"state.resetEditor('"+key+"')\" value=\"Refresh\" ></i>\n" +
       "    </div>\n" +
       "\n" +
       "    <pre id=\"editor-"+key+"\" class=\"editor\">" + content +

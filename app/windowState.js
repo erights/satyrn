@@ -116,8 +116,7 @@ showdown.extension('aceEditor', () => {
         var pat = '%EDITOR' + index + '%';
         text = text.replace(new RegExp(pat, 'gi'), _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
         _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
-      } //reset array
-
+      }
 
       content = [];
       return text;
@@ -181,7 +180,7 @@ showdown.extension('mailitoEmail', () => {
       for (var i = 0; i < content.length; ++i) {
         var pat = '%EMAIL' + i + '%';
         text = text.replace(new RegExp(pat, 'gi'), "<a href=\"mailto:" + content[i] + "\" >" + content[i] + "</a>");
-      } //reset array
+      } //resetEditor array
 
 
       content = [];
@@ -332,8 +331,7 @@ const EDITOR_OUTPUT_SELECTOR = "#output-editor-"; // This handles the windowStat
 
 const state = {
   editors: {},
-  //TODO why is this called state?
-  state: {},
+  editorsResetValues: {},
   isEditMode: false,
   shouldRealTimeRender: true,
   currentFile: "",
@@ -352,12 +350,12 @@ const state = {
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/javascript");
     state.editors[key] = editor;
-    state.state[key] = editor.getValue();
+    state.editorsResetValues[key] = editor.getValue();
   },
-  reset: key => {
+  resetEditor: key => {
     let editor = state.getEditor(key);
     document.querySelector("#output-editor-" + key).innerHTML = "";
-    editor.setValue(state.state[key]);
+    editor.setValue(state.editorsResetValues[key]);
   },
   toggleRealTimeRender: () => {
     state.shouldRealTimeRender = !state.shouldRealTimeRender;
@@ -412,7 +410,7 @@ const state = {
     state.kernel = undefined;
   },
   getEditorHtml: (content, key) => {
-    return "<div class=\"showdown-js-editor\">\n" + "    <div>\n" + "    <i class=\"fas fa-play\" onclick=\"state.run('" + key + "')\" value=\"Run\" ></i>\n" + "    <i class=\"fas fa-redo\" onclick=\"state.reset('" + key + "')\" value=\"Refresh\" ></i>\n" + "    </div>\n" + "\n" + "    <pre id=\"editor-" + key + "\" class=\"editor\">" + content + "    </pre>\n" + "    <pre class='editor-output' id=\"output-editor-" + key + "\">\n" + "    </pre>\n" + "  </div>";
+    return "<div class=\"showdown-js-editor\">\n" + "    <div>\n" + "    <i class=\"fas fa-play\" onclick=\"state.run('" + key + "')\" value=\"Run\" ></i>\n" + "    <i class=\"fas fa-redo\" onclick=\"state.resetEditor('" + key + "')\" value=\"Refresh\" ></i>\n" + "    </div>\n" + "\n" + "    <pre id=\"editor-" + key + "\" class=\"editor\">" + content + "    </pre>\n" + "    <pre class='editor-output' id=\"output-editor-" + key + "\">\n" + "    </pre>\n" + "  </div>";
   },
   handleTextChange: () => {
     if (state.shouldRealTimeRender) {
