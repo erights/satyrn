@@ -1,7 +1,7 @@
 const child_process = require('child_process');
 const os = require('os');
 
-// This handles the state of a single notebook document.
+// This handles the windowState of a single notebook document.
 export class Kernel {
 
   constructor(state) {

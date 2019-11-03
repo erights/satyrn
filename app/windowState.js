@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/state/state.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/state/windowState.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -95,7 +95,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _state_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state/state */ "./src/state/state.js");
+/* harmony import */ var _state_windowState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state/windowState */ "./src/state/windowState.js");
 const showdown = __webpack_require__(/*! showdown */ "showdown");
 
 
@@ -114,8 +114,8 @@ showdown.extension('aceEditor', () => {
     filter: function (text) {
       for (var index = 0; index < content.length; ++index) {
         var pat = '%EDITOR' + index + '%';
-        text = text.replace(new RegExp(pat, 'gi'), _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
-        _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
+        text = text.replace(new RegExp(pat, 'gi'), _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
+        _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
       } //reset array
 
 
@@ -192,10 +192,10 @@ showdown.extension('mailitoEmail', () => {
 
 /***/ }),
 
-/***/ "./src/helpers/converter.js":
-/*!**********************************!*\
-  !*** ./src/helpers/converter.js ***!
-  \**********************************/
+/***/ "./src/helpers/showdown-converter.js":
+/*!*******************************************!*\
+  !*** ./src/helpers/showdown-converter.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -213,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 showdown__WEBPACK_IMPORTED_MODULE_0___default.a.setFlavor('github');
-const converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
+const showdownConverter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
   extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
   tables: true,
   simplifiedAutoLink: true,
@@ -225,7 +225,7 @@ const converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter(
   ghMentions: true,
   splitAdjacentBlockquotes: true
 });
-/* harmony default export */ __webpack_exports__["default"] = (converter);
+/* harmony default export */ __webpack_exports__["default"] = (showdownConverter);
 
 /***/ }),
 
@@ -241,7 +241,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Kernel", function() { return Kernel; });
 const child_process = __webpack_require__(/*! child_process */ "child_process");
 
-const os = __webpack_require__(/*! os */ "os"); // This handles the state of a single notebook document.
+const os = __webpack_require__(/*! os */ "os"); // This handles the windowState of a single notebook document.
 
 
 class Kernel {
@@ -314,21 +314,21 @@ class Kernel {
 
 /***/ }),
 
-/***/ "./src/state/state.js":
-/*!****************************!*\
-  !*** ./src/state/state.js ***!
-  \****************************/
+/***/ "./src/state/windowState.js":
+/*!**********************************!*\
+  !*** ./src/state/windowState.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _kernel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./kernel */ "./src/state/kernel.js");
-/* harmony import */ var _helpers_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/converter */ "./src/helpers/converter.js");
+/* harmony import */ var _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/showdown-converter */ "./src/helpers/showdown-converter.js");
 
 
 const EDITOR_ID = "editor-";
-const EDITOR_OUTPUT_SELECTOR = "#output-editor-"; // This handles the state of a single notebook document.
+const EDITOR_OUTPUT_SELECTOR = "#output-editor-"; // This handles the windowState of a single notebook document.
 
 const state = {
   editors: {},
@@ -365,7 +365,7 @@ const state = {
   },
   resetKernel: () => {
     if (state.kernel) {// TODO kill is not a function? Seems to work without killing - probably not good!
-      // state.kernel.kill()
+      // windowState.kernel.kill()
     }
 
     state.kernel = new _kernel__WEBPACK_IMPORTED_MODULE_0__["Kernel"](state);
@@ -421,7 +421,7 @@ const state = {
     }
   },
   renderDocument: text => {
-    const html = _helpers_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
+    const html = _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
     state.initialiseEditors();
@@ -465,4 +465,4 @@ module.exports = require("showdown");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=state.js.map
+//# sourceMappingURL=windowState.js.map

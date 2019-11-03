@@ -1,5 +1,5 @@
 const showdown  = require('showdown');
-import state from '../state/state';
+import state from '../state/windowState';
 
 showdown.extension('aceEditor', () => {
   let content = [];

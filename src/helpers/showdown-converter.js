@@ -5,7 +5,7 @@ import "../extensions/anchor-target";
 
 showdown.setFlavor('github');
 
-const converter = new showdown.Converter({
+const showdownConverter = new showdown.Converter({
   extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
   tables: true,
   simplifiedAutoLink: true,
@@ -20,4 +20,4 @@ const converter = new showdown.Converter({
 
 
 
-export default converter;
+export default showdownConverter;

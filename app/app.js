@@ -692,7 +692,7 @@ module.exports = function (css) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _state_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state/state */ "./src/state/state.js");
+/* harmony import */ var _state_windowState__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../state/windowState */ "./src/state/windowState.js");
 const showdown = __webpack_require__(/*! showdown */ "showdown");
 
 
@@ -711,8 +711,8 @@ showdown.extension('aceEditor', () => {
     filter: function (text) {
       for (var index = 0; index < content.length; ++index) {
         var pat = '%EDITOR' + index + '%';
-        text = text.replace(new RegExp(pat, 'gi'), _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
-        _state_state__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
+        text = text.replace(new RegExp(pat, 'gi'), _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].getEditorHtml(content[index], index));
+        _state_windowState__WEBPACK_IMPORTED_MODULE_0__["default"].editors[index] = null;
       } //reset array
 
 
@@ -853,43 +853,6 @@ document.addEventListener("contextmenu", event => {
 
 /***/ }),
 
-/***/ "./src/helpers/converter.js":
-/*!**********************************!*\
-  !*** ./src/helpers/converter.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! showdown */ "showdown");
-/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _extensions_ace_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../extensions/ace-editor */ "./src/extensions/ace-editor.js");
-/* harmony import */ var _extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../extensions/mailito-email */ "./src/extensions/mailito-email.js");
-/* harmony import */ var _extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../extensions/anchor-target */ "./src/extensions/anchor-target.js");
-/* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-showdown__WEBPACK_IMPORTED_MODULE_0___default.a.setFlavor('github');
-const converter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
-  extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
-  tables: true,
-  simplifiedAutoLink: true,
-  smoothLivePreview: true,
-  tasklists: true,
-  parseImgDimensions: true,
-  strikethrough: true,
-  ghCodeBlocks: true,
-  ghMentions: true,
-  splitAdjacentBlockquotes: true
-});
-/* harmony default export */ __webpack_exports__["default"] = (converter);
-
-/***/ }),
-
 /***/ "./src/helpers/external_links.js":
 /*!***************************************!*\
   !*** ./src/helpers/external_links.js ***!
@@ -945,6 +908,43 @@ document.addEventListener("click", supportExternalLinks, false);
 
 /***/ }),
 
+/***/ "./src/helpers/showdown-converter.js":
+/*!*******************************************!*\
+  !*** ./src/helpers/showdown-converter.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! showdown */ "showdown");
+/* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _extensions_ace_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../extensions/ace-editor */ "./src/extensions/ace-editor.js");
+/* harmony import */ var _extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../extensions/mailito-email */ "./src/extensions/mailito-email.js");
+/* harmony import */ var _extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_extensions_mailito_email__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../extensions/anchor-target */ "./src/extensions/anchor-target.js");
+/* harmony import */ var _extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_extensions_anchor_target__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+showdown__WEBPACK_IMPORTED_MODULE_0___default.a.setFlavor('github');
+const showdownConverter = new showdown__WEBPACK_IMPORTED_MODULE_0___default.a.Converter({
+  extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
+  tables: true,
+  simplifiedAutoLink: true,
+  smoothLivePreview: true,
+  tasklists: true,
+  parseImgDimensions: true,
+  strikethrough: true,
+  ghCodeBlocks: true,
+  ghMentions: true,
+  splitAdjacentBlockquotes: true
+});
+/* harmony default export */ __webpack_exports__["default"] = (showdownConverter);
+
+/***/ }),
+
 /***/ "./src/state/kernel.js":
 /*!*****************************!*\
   !*** ./src/state/kernel.js ***!
@@ -957,7 +957,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Kernel", function() { return Kernel; });
 const child_process = __webpack_require__(/*! child_process */ "child_process");
 
-const os = __webpack_require__(/*! os */ "os"); // This handles the state of a single notebook document.
+const os = __webpack_require__(/*! os */ "os"); // This handles the windowState of a single notebook document.
 
 
 class Kernel {
@@ -1030,21 +1030,21 @@ class Kernel {
 
 /***/ }),
 
-/***/ "./src/state/state.js":
-/*!****************************!*\
-  !*** ./src/state/state.js ***!
-  \****************************/
+/***/ "./src/state/windowState.js":
+/*!**********************************!*\
+  !*** ./src/state/windowState.js ***!
+  \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _kernel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./kernel */ "./src/state/kernel.js");
-/* harmony import */ var _helpers_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/converter */ "./src/helpers/converter.js");
+/* harmony import */ var _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/showdown-converter */ "./src/helpers/showdown-converter.js");
 
 
 const EDITOR_ID = "editor-";
-const EDITOR_OUTPUT_SELECTOR = "#output-editor-"; // This handles the state of a single notebook document.
+const EDITOR_OUTPUT_SELECTOR = "#output-editor-"; // This handles the windowState of a single notebook document.
 
 const state = {
   editors: {},
@@ -1081,7 +1081,7 @@ const state = {
   },
   resetKernel: () => {
     if (state.kernel) {// TODO kill is not a function? Seems to work without killing - probably not good!
-      // state.kernel.kill()
+      // windowState.kernel.kill()
     }
 
     state.kernel = new _kernel__WEBPACK_IMPORTED_MODULE_0__["Kernel"](state);
@@ -1136,7 +1136,7 @@ const state = {
     }
   },
   renderDocument: text => {
-    const html = _helpers_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
+    const html = _helpers_showdown_converter__WEBPACK_IMPORTED_MODULE_1__["default"].makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
     state.initialiseEditors();
@@ -1197,7 +1197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var electron__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(electron__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! showdown */ "showdown");
 /* harmony import */ var showdown__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(showdown__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _state_state__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./state/state */ "./src/state/state.js");
+/* harmony import */ var _state_windowState__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./state/windowState */ "./src/state/windowState.js");
 
 
  // Small helpers you might want to keep
@@ -1210,12 +1210,12 @@ window.showdown = showdown__WEBPACK_IMPORTED_MODULE_6___default.a; // ----------
 // application state
 
 
-window.state = _state_state__WEBPACK_IMPORTED_MODULE_7__["default"]; //////////////////////////////////////////////////////////////////////////////////
+window.state = _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"]; //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  open-file -> load a file, and replace it in the browser
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('open-file', function (event, arg) {
-  if (_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].currentFileSaved) {
+  if (_state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].currentFileSaved) {
     loadFile(arg[0]);
     setTimeout(function () {
       event.sender.send("set-reload-content", {
@@ -1235,14 +1235,14 @@ electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('save-file', function (e
 //  toggle-edit-mode -> enable document editing (teacher mode)
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('toggle-edit-mode', function (event, args) {
-  _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode ? document.querySelector("#teacher-input").style.display = "none" : document.querySelector("#teacher-input").style.display = "block";
-  _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode = !_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode;
+  _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode ? document.querySelector("#teacher-input").style.display = "none" : document.querySelector("#teacher-input").style.display = "block";
+  _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode = !_state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].isEditMode;
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-realtime-render -> flip real time render mode
 
 electron__WEBPACK_IMPORTED_MODULE_5__["ipcRenderer"].on('toggle-realtime-render', (event, args) => {
-  _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender = !_state_state__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender;
+  _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender = !_state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].shouldRealTimeRender;
 }); //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // load-url-> loads a external markdown file from url
@@ -1309,7 +1309,7 @@ function loadFile(path) {
       alert("Unable to load file " + path);
     }
 
-    _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].openFile(path, data);
+    _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].openFile(path, data);
   });
 } // loadUrl is called when a link has been clicked on
 //////////////////////////////////////////////////////////////////////////////////
@@ -1327,7 +1327,7 @@ function loadUrl(url) {
       let type = request.getResponseHeader('Content-Type');
 
       if (type.indexOf("text") !== 1) {
-        _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].openFile("NEW FILE", request.responseText);
+        _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].openFile("NEW FILE", request.responseText);
       }
     }
   };
@@ -1338,7 +1338,7 @@ function loadUrl(url) {
 function saveFile(event, url) {
   let template = './markdown/untitled.mdt';
   let fileContent = document.getElementById("teacher").value;
-  let fileName = url ? url : _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].currentFile;
+  let fileName = url ? url : _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].currentFile;
   console.log(fileName, template);
 
   if (fileName === template) {
@@ -1369,9 +1369,9 @@ function saveFile(event, url) {
         return alert(err);
       }
 
-      _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].currentFile = fileName;
-      _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].currentFileSaved = true;
-      _state_state__WEBPACK_IMPORTED_MODULE_7__["default"].renderDocument(fileContent);
+      _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].currentFile = fileName;
+      _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].currentFileSaved = true;
+      _state_windowState__WEBPACK_IMPORTED_MODULE_7__["default"].renderDocument(fileContent);
       console.log("The file was saved and the name was changed!");
       event.sender.send("set-reload-content", {
         isFile: true,

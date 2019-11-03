@@ -15,7 +15,7 @@ window.showdown = showdown;
 
 // --------------------- --------------------- ---------------------
 // application state
-import state from './state/state'
+import state from './state/windowState'
 window.state = state;
 
 

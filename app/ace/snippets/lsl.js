@@ -1206,8 +1206,8 @@ snippet sensor\n\
 	{\n\
 		$0\n\
 	}\n\
-snippet state\n\
-	state ${1:name}\n\
+snippet windowState\n\
+	windowState ${1:name}\n\
 snippet touch\n\
 	touch(${1:integer index})\n\
 	{\n\
@@ -1243,4 +1243,3 @@ exports.scope = "lsl";
                         }
                     });
                 })();
-            

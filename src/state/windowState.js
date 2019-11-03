@@ -1,9 +1,9 @@
 import { Kernel } from './kernel'
-import converter from '../helpers/converter';
+import showdownConverter from '../helpers/showdown-converter';
 
 const EDITOR_ID = "editor-"
 const EDITOR_OUTPUT_SELECTOR = "#output-editor-"
-// This handles the state of a single notebook document.
+// This handles the windowState of a single notebook document.
 const state = {
   editors: {},
   //TODO why is this called state?
@@ -44,7 +44,7 @@ const state = {
   resetKernel: () => {
     if(state.kernel) {
       // TODO kill is not a function? Seems to work without killing - probably not good!
-      // state.kernel.kill()
+      // windowState.kernel.kill()
     }
     state.kernel = new Kernel(state)
   },
@@ -123,7 +123,7 @@ const state = {
 
   renderDocument: (text) => {
 
-    const html  = converter.makeHtml(text);
+    const html  = showdownConverter.makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
     state.initialiseEditors();
