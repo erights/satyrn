@@ -170,7 +170,7 @@ function saveFile(event, url) {
         console.log("No file selected");
         return;
       }
-
+      console.log("Save File", fileNames)
       saveFile(event, fileNames);
       reloadWindow({isFile: true, url: fileNames});
 
