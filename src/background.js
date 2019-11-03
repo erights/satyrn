@@ -141,7 +141,6 @@ export function createNewWindow(name, onReady) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcMain.on('set-reload-content', (event, reloadContent) => {
-  // console.log("Set reload content", )
   let focusedWindow = event.sender.getOwnerBrowserWindow()
   focusedWindow.reloadContent = reloadContent
 });
