@@ -114,7 +114,6 @@ export function createNewWindow(name, onReady) {
       return false
     }
     if (disposition === "satyrn") {
-      console.log("New FILE", url)
       e.preventDefault();
       window.reloadContent = {
         isFile: false,
