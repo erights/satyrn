@@ -50,6 +50,7 @@ const state = {
   },
 
   openFile: (fname,data) => {
+    console.log("Open file", fname)
     state.resetKernel();
     state.editors = {};
     state.currentFile = fname;

@@ -371,6 +371,7 @@ const state = {
     state.kernel = new _kernel__WEBPACK_IMPORTED_MODULE_0__["Kernel"](state);
   },
   openFile: (fname, data) => {
+    console.log("Open file", fname);
     state.resetKernel();
     state.editors = {};
     state.currentFile = fname;
