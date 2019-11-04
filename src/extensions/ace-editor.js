@@ -1,5 +1,5 @@
 const showdown  = require('showdown');
-import state from '../state/state';
+import state from '../state/windowState';
 
 showdown.extension('aceEditor', () => {
   let content = [];
@@ -22,7 +22,6 @@ showdown.extension('aceEditor', () => {
           text = text.replace(new RegExp(pat, 'gi'), state.getEditorHtml(content[index], index));
           state.editors[index] = null;
         }
-        //reset array
         content = [];
         return text;
       }

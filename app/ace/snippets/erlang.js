@@ -125,7 +125,7 @@ snippet gen_server\n\
 \n\
 	-define(SERVER, ?MODULE).\n\
 \n\
-	-record(state, {}).\n\
+	-record(windowState, {}).\n\
 \n\
 	%%%===================================================================\n\
 	%%% API\n\
@@ -139,7 +139,7 @@ snippet gen_server\n\
 	%%%===================================================================\n\
 \n\
 	init([]) ->\n\
-	    {ok, #state{}}.\n\
+	    {ok, #windowState{}}.\n\
 \n\
 	handle_call(_Request, _From, State) ->\n\
 	    Reply = ok,\n\
@@ -171,4 +171,3 @@ exports.scope = "erlang";
                         }
                     });
                 })();
-            

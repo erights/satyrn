@@ -20,7 +20,7 @@ showdown.extension('mailitoEmail', () => {
           var pat = '%EMAIL' + i + '%';
           text = text.replace(new RegExp(pat, 'gi'), "<a href=\"mailto:" + content[i] + "\" >" + content[i] + "</a>");
         }
-        //reset array
+        //resetEditor array
         content = [];
         return text;
       }
