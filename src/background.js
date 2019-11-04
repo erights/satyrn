@@ -42,7 +42,8 @@ app.on("ready", () => {
       isFile: true,
       url: "./markdown/default.md"
     };
-    currentWindow.send('open-file',["./markdown/default.md"]);
+    var filePath = process.cwd() + "/markdown/default.md";
+    currentWindow.send('open-file',[filePath]);
   };
   let window = createNewWindow("initial", onReady);
   window.setMenu(createMenu());
