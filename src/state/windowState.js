@@ -1,5 +1,6 @@
 import { Kernel } from './kernel'
 import showdownConverter from '../helpers/showdown-converter';
+import path from "path";
 
 const EDITOR_ID = "editor-"
 const EDITOR_OUTPUT_SELECTOR = "#output-editor-"
@@ -49,6 +50,7 @@ const state = {
   },
 
   openFile: (fname,data) => {
+    console.log("Open file", fname, data)
     state.resetKernel();
     state.editors = {};
     state.currentFile = fname;
@@ -115,11 +117,27 @@ const state = {
   },
 
   renderDocument: (text) => {
-
     const html  = showdownConverter.makeHtml(text);
     document.querySelector("#markdown").innerHTML = html;
     document.querySelector("#teacher").innerHTML = text;
+    state.convertToAbsolutePath();
     state.initialiseEditors();
+  },
+
+  convertToAbsolutePath() {
+    const baseDir = path.dirname(state.currentFile) + "/"
+    let baseTag = document.getElementById("base-dir")
+    console.log(baseTag)
+    if (!baseTag) {
+
+      baseTag = document.createElement("base");
+      baseTag.id = "base-dir";
+      document.head.appendChild(baseTag)
+    }
+    //
+    baseTag.href = baseDir
+    console.log(document)
+
   }
 
 };

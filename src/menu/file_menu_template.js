@@ -66,13 +66,12 @@ export const fileMenuTemplate = {
 };
 
 function newFile() {
-  let url = "./markdown/untitled.mdt";
+  let url = process.cwd() + "/markdown/untitled.mdt";
   let onReady =  (currentWindow) => {
     currentWindow.reloadContent = {
-      isFile: true,
       url
     };
-    currentWindow.send('open-file',[url]);
+    currentWindow.send('load-content',url);
   };
   let window = createNewWindow("untitled", onReady);
   const menus = [fileMenuTemplate, helpMenuTemplate];
@@ -152,16 +151,16 @@ function fileOpenDialog() {
 
     dialog.showOpenDialog(focusedWindow, options, (fileNames) => {
 
-        // fileNames is an array that contains all the selected
-        if(fileNames === undefined){
-            console.log("No file selected");
-            return;
-        }
+      // fileNames is an array that contains all the selected
+      if(fileNames === undefined){
+          console.log("No file selected");
+          return;
+      }
 
-      focusedWindow.send('open-file',fileNames);
       focusedWindow.reloadContent = {
-        isFile: true,
         url: fileNames[0]
       }
+      focusedWindow.send('load-content',fileNames[0]);
+
     })
 }

@@ -47,13 +47,11 @@ function showHelpMenuWindow(helpWindow, name, url) {
 function createHelpWindow(name, url) {
   let onReady =  (currentWindow) => {
     currentWindow.reloadContent = {
-      isFile: true,
       url
     };
     currentWindow.send('open-file',[url]);
   };
 
-  let isHelpWindowMenu = true;
   let window = createNewWindow(name,onReady);
   const menus = [fileMenuTemplate];
 

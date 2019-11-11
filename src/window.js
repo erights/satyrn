@@ -21,21 +21,6 @@ window.state = state;
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-//  open-file -> load a file, and replace it in the browser
-ipcRenderer.on('open-file', function (event, arg) {
-  if (state.currentFileSaved) {
-    loadFile(arg[0]);
-    setTimeout(function () {
-      event.sender.send("set-reload-content", {
-        isFile: true,
-        url: arg[0]
-      })
-    }, 1000);
-  }
-});
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 //  save-file -> write the current document to a file.
 ipcRenderer.on('save-file', function(event, arg) {
   saveFile(event, arg)
@@ -59,26 +44,16 @@ ipcRenderer.on('toggle-realtime-render', (event, args) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// load-url-> loads a external markdown file from url
-ipcRenderer.on('load-url', (event,url) => {
-  loadUrl(url)
+// load-content-> loads either a file or external url
+ipcRenderer.on('load-content', (event,url) => {
+  loadContent(url)
 })
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('reload-window', (event, reloadContents) => {
-  reloadWindow(reloadContents)
-})
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-function reloadWindow(reloadContents) {
-  if (reloadContents.isFile) {
-    loadFile(reloadContents.url)
-  } else {
-    loadUrl(reloadContents.url)
-  }
-}
+  loadContent(reloadContents.url)
+});
 
 // --------------------- --------------------- ---------------------
 // action implementations
@@ -117,26 +92,47 @@ function show(html, target) {
   w.document.head.appendChild(link);
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// Checks to see if url is for a file or a external url
+function loadContent(url) {
+  console.log("Loading content at URL:", url)
+  console.log(url.substring(0,4))
+  if (url[0] === "/") {
+    loadFile(url)
+  }
+  else if (url.substring(0,4) === "file") {
+    loadFile(url.substring(7))
+  } else {
+    loadUrl(url)
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 // loadFile is called when a opening a file from the open dialog box
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 function loadFile(path) {
+  console.log("loading file")
+
   fs.readFile( path, function (err, data) {
     if (err) {
       alert("Unable to load file " + path);
     }
+    else {
+      state.openFile(path,data)
+    }
 
-    state.openFile(path,data)
   })
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 // loadUrl is called when a link has been clicked on
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 function loadUrl(url) {
+  console.log('loading external url');
+
   let request = new XMLHttpRequest();
   request.open('GET', url, true);
-  console.log('looking for file:', url);
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
@@ -151,8 +147,8 @@ function loadUrl(url) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-function saveFile(event, url) {
-  let template = './markdown/untitled.mdt';
+function  saveFile(event, url) {
+  let template = process.cwd() + '/markdown/untitled.mdt';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : state.currentFile;
   console.log(fileName, template);
@@ -172,8 +168,8 @@ function saveFile(event, url) {
         return;
       }
 
-      saveFile(event, fileNames);
-      reloadWindow({isFile: true, url: fileNames});
+      saveFile(event, fileNames[0]);
+      loadFile(fileNames[0])
 
     })
   }
@@ -187,7 +183,6 @@ function saveFile(event, url) {
       state.renderDocument(fileContent);
       console.log("The file was saved and the name was changed!");
       event.sender.send("set-reload-content", {
-        isFile: true,
         url: fileName
       })
 

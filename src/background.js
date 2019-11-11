@@ -38,12 +38,13 @@ if (env.name !== "production") {
 //////////////////////////////////////////////////////////////////////////////////
 app.on("ready", () => {
   let onReady =  (currentWindow) => {
-    currentWindow.reloadContent = {
-      isFile: true,
-      url: "./markdown/default.md"
-    };
     var filePath = process.cwd() + "/markdown/default.md";
-    currentWindow.send('open-file',[filePath]);
+    currentWindow.reloadContent = {
+      url: filePath
+    };
+    console.log("App ready", filePath)
+
+    currentWindow.send('load-content',filePath);
   };
   let window = createNewWindow("initial", onReady);
   window.setMenu(createMenu());
@@ -81,7 +82,6 @@ export function createNewWindow(name, onReady) {
 
   // Store Relaod Content, either a file or a external URL
   window.reloadContent = {
-    isFile: false,
     defaultUrl
   }
 
@@ -99,15 +99,14 @@ export function createNewWindow(name, onReady) {
   window.webContents.on('new-window', function(e, url, disposition) {
     // about:blank is opened when creating stand-alone helper windows
     // such as for the About page and the Guide
-    console.log('new-window');
+    console.log('new-window', e, url, disposition);
     if (disposition === "_satyrn") {
       e.preventDefault();
       let onReady = (currentWindow) => {
         currentWindow.reloadContent = {
-          isFile: false,
           url: url
         };
-        currentWindow.send("load-url", url);
+        currentWindow.send("load-content", url);
 
       }
       let newWindow = createNewWindow(url, onReady);
@@ -117,10 +116,9 @@ export function createNewWindow(name, onReady) {
     if (disposition === "satyrn") {
       e.preventDefault();
       window.reloadContent = {
-        isFile: false,
         url: url
       };
-      window.send("load-url", url);
+      window.send("load-content", url);
       return false
     }
     if(url && url !== 'about:blank') {

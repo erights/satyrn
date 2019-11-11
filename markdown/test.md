@@ -23,7 +23,7 @@ Source specified targets
 * _satyrn target but not a markdown file (open in new Satyrn window) <a href="http://blog.joeandrieu.com" target="_satyrn"> http://blog.joeandrieu.com</a> 
 * local #fragment url html (just scroll within current document) <a href="#example">Example</a> 
 * local #fragment url markdown (just scroll within current document) [Example](#example)]
-* file url html <a target="satyrn" href="file:/C:/Users/Joe/Documents/Organizations/Satyrn/satyrn.js/markdown/tutorial.md">Example</a> 
+* file url html <a target="satyrn" href="tutorial.md">Example</a> 
 
 <a name="example">Example anchor</a>
 
