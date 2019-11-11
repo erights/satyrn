@@ -39,12 +39,13 @@ if (env.name !== "production") {
 app.on("ready", () => {
   let onReady =  (currentWindow) => {
     var filePath = process.cwd() + "/markdown/default.md";
+    var url = 'file:///' + filePath;
     currentWindow.reloadContent = {
-      url: filePath
+      url
     };
-    console.log("App ready", filePath)
+    console.log("App ready", url)
 
-    currentWindow.send('load-content',filePath);
+    currentWindow.send('load-content',url);
   };
   let window = createNewWindow("initial", onReady);
   window.setMenu(createMenu());
