@@ -125,6 +125,7 @@ const state = {
   },
 
   convertToAbsolutePath() {
+    console.log('setting path for ' + state.currentFile);
     const baseDir = path.dirname(state.currentFile) + "/"
     let baseTag = document.getElementById("base-dir")
     console.log(baseTag)
