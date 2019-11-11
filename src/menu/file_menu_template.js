@@ -160,7 +160,7 @@ function fileOpenDialog() {
       focusedWindow.reloadContent = {
         url: fileNames[0]
       }
-      focusedWindow.send('load-content',fileNames[0]);
+      focusedWindow.send('load-content','file:///'+fileNames[0]);
 
     })
 }
