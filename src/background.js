@@ -45,7 +45,7 @@ app.on("ready", () => {
     };
     console.log("App ready", url)
 
-    currentWindow.send('load-content',url);
+    currentWindow.send('load-url',url);
   };
   let window = createNewWindow("initial", onReady);
   window.setMenu(createMenu());
@@ -107,7 +107,7 @@ export function createNewWindow(name, onReady) {
         currentWindow.reloadContent = {
           url: url
         };
-        currentWindow.send("load-content", url);
+        currentWindow.send("load-url", url);
 
       }
       let newWindow = createNewWindow(url, onReady);
@@ -119,7 +119,7 @@ export function createNewWindow(name, onReady) {
       window.reloadContent = {
         url: url
       };
-      window.send("load-content", url);
+      window.send("load-url", url);
       return false
     }
     if(url && url !== 'about:blank') {
@@ -139,7 +139,7 @@ export function createNewWindow(name, onReady) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-ipcMain.on('set-reload-content', (event, reloadContent) => {
+ipcMain.on('set-reload-url', (event, reloadContent) => {
   let focusedWindow = event.sender.getOwnerBrowserWindow()
   focusedWindow.reloadContent = reloadContent
 });

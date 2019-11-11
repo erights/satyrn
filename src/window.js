@@ -44,15 +44,15 @@ ipcRenderer.on('toggle-realtime-render', (event, args) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// load-content-> loads either a file or external url
-ipcRenderer.on('load-content', (event,url) => {
-  loadContent(url)
+// load-url-> loads either a file or external url
+ipcRenderer.on('load-url', (event,url) => {
+  loadUrl(url);
 })
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('reload-window', (event, reloadContents) => {
-  loadContent(reloadContents.url)
+  loadUrl(reloadContents.url);
 });
 
 // --------------------- --------------------- ---------------------
@@ -94,36 +94,20 @@ function show(html, target) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// Checks to see if url is for a file or a external url
-function loadContent(url) {
-  console.log("Loading content at URL:", url)
-  console.log(url.substring(0,4))
-  if (url[0] === "/") {
-    loadFile(url)
-  }
-  else if (url.substring(0,4) === "file") {
-    loadFile(url.substring(7))
-  } else {
-    loadUrl(url)
-  }
-}
+// // loadFile is called when a opening a file from the open dialog box
+// function loadFile(path) {
+//   console.log("loading file")
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-// loadFile is called when a opening a file from the open dialog box
-function loadFile(path) {
-  console.log("loading file")
+//   fs.readFile( path, function (err, data) {
+//     if (err) {
+//       alert("Unable to load file " + path);
+//     }
+//     else {
+//       state.openFile(path,data)
+//     }
 
-  fs.readFile( path, function (err, data) {
-    if (err) {
-      alert("Unable to load file " + path);
-    }
-    else {
-      state.openFile(path,data)
-    }
-
-  })
-}
+//   })
+// }
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
@@ -136,11 +120,11 @@ function loadUrl(url) {
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
-      let type = request.getResponseHeader('Content-Type');
-      if (type.indexOf("text") !== 1) {
-        state.openFile("NEW FILE", request.responseText)
-
-      }
+//      let type = request.getResponseHeader('Content-Type');
+//      if (type.indexOf("text") !== 1) {
+        state.openFile(url, request.responseText)
+//
+//      }
     }
   }
 }
@@ -169,7 +153,8 @@ function  saveFile(event, url) {
       }
 
       saveFile(event, fileNames[0]);
-      loadFile(fileNames[0])
+      var url = 'file:///' + fileNames[0];
+      loadUrl(url);
 
     })
   }

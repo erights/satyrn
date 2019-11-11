@@ -71,7 +71,7 @@ function newFile() {
     currentWindow.reloadContent = {
       url
     };
-    currentWindow.send('load-content',url);
+    currentWindow.send('load-url',url);
   };
   let window = createNewWindow("untitled", onReady);
   const menus = [fileMenuTemplate, helpMenuTemplate];
@@ -160,7 +160,7 @@ function fileOpenDialog() {
       focusedWindow.reloadContent = {
         url: fileNames[0]
       }
-      focusedWindow.send('load-content','file:///'+fileNames[0]);
+      focusedWindow.send('load-url','file:///'+fileNames[0]);
 
     })
 }
