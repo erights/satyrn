@@ -92,28 +92,12 @@ function show(html, target) {
   w.document.head.appendChild(link);
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-// // loadFile is called when a opening a file from the open dialog box
-// function loadFile(path) {
-//   console.log("loading file")
-
-//   fs.readFile( path, function (err, data) {
-//     if (err) {
-//       alert("Unable to load file " + path);
-//     }
-//     else {
-//       state.openFile(path,data)
-//     }
-
-//   })
-// }
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // loadUrl is called when a link has been clicked on
 function loadUrl(url) {
-  console.log('loading external url');
+  console.log('loading url', url);
 
   let request = new XMLHttpRequest();
   request.open('GET', url, true);
@@ -167,7 +151,7 @@ function  saveFile(event, url) {
       state.currentFileSaved = true;
       state.renderDocument(fileContent);
       console.log("The file was saved and the name was changed!");
-      event.sender.send("set-reload-content", {
+      event.sender.send("set-reload-url", {
         url: fileName
       })
 
