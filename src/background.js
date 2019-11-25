@@ -39,13 +39,12 @@ if (env.name !== "production") {
 app.on("ready", () => {
   var filePath = process.cwd() + "/markdown/default.md";
   let onReady =  (currentWindow) => {
-    var url = 'file:///' + filePath;
     currentWindow.reloadContent = {
       url
     };
     console.log("App ready", url)
 
-    currentWindow.send('load-url',url);
+    currentWindow.send('load-url',filePath);
   };
   let window = createNewWindow(filePath, onReady);
   window.setMenu(createMenu());
@@ -101,7 +100,7 @@ export function createNewWindow(name, onReady) {
   window.webContents.on('new-window', function(e, url, disposition) {
     // about:blank is opened when creating stand-alone helper windows
     // such as for the About page and the Guide
-    console.log('new-window', e, url, disposition);
+    console.log('new-window', url);
     if (disposition === "_satyrn") {
       e.preventDefault();
       let onReady = (currentWindow) => {
@@ -142,7 +141,11 @@ export function createNewWindow(name, onReady) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 export function setWindowTitle(window, filePath) {
+  if (!window) {
+    window = BrowserWindow.get;
+  }
   console.log(filePath)
+  console.log(window);
   let filename = path.parse(filePath).base;
 
   window.setTitle(filename + " -- Satyrn")
@@ -150,7 +153,7 @@ export function setWindowTitle(window, filePath) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-export function saveFileAs() {
+export function saveFileAs(focusedWindow) {
   const options = {
     title: 'Save Markdown As',
     buttonLabel: 'Save',
@@ -158,7 +161,6 @@ export function saveFileAs() {
       { name: 'markdown', extensions: ['md'] }
     ]
   };
-  const focusedWindow = BrowserWindow.getFocusedWindow()
   dialog.showSaveDialog(focusedWindow, options, (fileNames) => {
 
     // fileNames is an array that contains all the selected
@@ -182,6 +184,7 @@ ipcMain.on('set-reload-url', (event, reloadContent) => {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcMain.on('save-file-as', (event) => {
-  saveFileAs();
+  let focusedWindow = event.sender.getOwnerBrowserWindow()
+  saveFileAs(focusedWindow);
 })
 

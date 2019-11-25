@@ -116,27 +116,44 @@ function loadUrl(url) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 function  saveFile(event, url) {
-  let template = process.cwd() + '/markdown/';
+  let protectedFolderPath = process.cwd() + '/markdown/';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : state.currentFile;
-  console.log(fileName, template);
-  if (fileName.includes(template)) {
-    event.sender.send("save-file-as");
+  console.log(fileName, protectedFolderPath);
+  if (fileName.includes(protectedFolderPath)) {
 
+    remote.dialog.showMessageBox(remote.getCurrentWindow(), {
+      type: "question",
+      title: "Modify Satryn file?",
+      message: "You asked to save to a Satyrn program file. This may make Satyrn unusable. Continue with save?",
+      buttons: ["Cancel", "Save as", "Save"]
+    }, response => {
+      if (response === 0) {
+        console.log("Cancelled Save")
+      } else if (response === 1) {
+        event.sender.send("save-file-as")
+      } else if (response === 2) {
+        writeFile(event.sender, fileName, fileContent)
+      }
+    })
   }
   else {
-    fs.writeFile(fileName, fileContent, function(err) {
-      if(err) {
-        return alert(err);
-      }
-      state.currentFile = fileName;
-      state.currentFileSaved = true;
-      state.renderDocument(fileContent);
-      console.log("The file was saved and the name was changed!");
-      event.sender.send("set-reload-url", {
-        url: fileName
-      })
-
-    });
+    writeFile(event.sender, fileName, fileContent);
   }
+}
+
+function writeFile(sender, fileName, fileContent) {
+  console.log("Write file", fileName);
+  fs.writeFile(fileName, fileContent, function(err) {
+    if(err) {
+      return alert(err);
+    }
+    state.currentFile = fileName;
+    state.currentFileSaved = true;
+    state.renderDocument(fileContent);
+    console.log("The file was saved and the name was changed!");
+    sender.send("set-reload-url", {
+      url: fileName
+    })
+  });
 }

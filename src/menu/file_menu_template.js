@@ -136,7 +136,7 @@ function fileOpenDialog() {
         url: fileNames[0]
       }
       setWindowTitle(focusedWindow, fileNames[0]);
-      focusedWindow.send('load-url','file:///'+fileNames[0]);
+      focusedWindow.send('load-url', fileNames[0]);
 
     })
 }
