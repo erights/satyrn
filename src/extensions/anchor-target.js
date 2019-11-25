@@ -14,14 +14,14 @@ showdown.extension('anchorTarget', () => {
           return newTag
         })
       }
-      // if ( anchorTag.indexOf("href=\"#") !== -1) {
-      //   anchorTag = anchorTag.replace(FragmentRx, (href) => {
-      //     console.log("# LINK", href);
-      //     let newHref = process.cwd() + "/app/app.html" + href
-      //     console.log(newHref)
-      //     return newHref
-      //   })
-      // }
+      if ( anchorTag.indexOf("href=\"#") !== -1) {
+        anchorTag = anchorTag.replace(FragmentRx, (href) => {
+          console.log("# LINK", href);
+          let newHref = process.cwd() + "/app/app.html" + href
+          console.log(newHref)
+          return newHref
+        })
+      }
 
       return anchorTag
     }
