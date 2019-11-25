@@ -1,9 +1,10 @@
 import {app, BrowserWindow, dialog, Menu, remote} from "electron";
-import {createMenu, createNewWindow} from "../background";
+import {createMenu, createNewWindow, saveFileAs, setWindowTitle} from "../background";
 
 var path = require('path');
 import env from "env";
 import {helpMenuTemplate} from "./help_menu_template";
+import url from "url";
 
 export const fileMenuTemplate = {
   label: "File",
@@ -73,7 +74,7 @@ function newFile() {
     };
     currentWindow.send('load-url',url);
   };
-  let window = createNewWindow("untitled", onReady);
+  let window = createNewWindow(url, onReady);
   const menus = [fileMenuTemplate, helpMenuTemplate];
   window.setMenu(Menu.buildFromTemplate(menus));
 }
@@ -113,34 +114,8 @@ function saveFile() {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-function saveFileAs() {
-  var fileNames;
-  const options = {
-    title: 'Save Markdown As',
-    buttonLabel: 'Save',
-    filters: [
-      { name: 'markdown', extensions: ['md'] }
-    ]
-  };
-  const focusedWindow = BrowserWindow.getFocusedWindow()
-  dialog.showSaveDialog(focusedWindow, options, (fileNames) => {
-
-    // fileNames is an array that contains all the selected
-    if(fileNames === undefined){
-      console.log("No file selected");
-      return;
-    }
-
-    focusedWindow.send('save-file',fileNames);
-    // focusedWindow.send("reload-window", focusedWindow.reloadContent);
-  })
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 function fileOpenDialog() {
   const focusedWindow = BrowserWindow.getFocusedWindow();
-    var fileNames;
     const options = {
         title: 'Open a markdown file',
         buttonLabel: 'Open',
@@ -160,6 +135,7 @@ function fileOpenDialog() {
       focusedWindow.reloadContent = {
         url: fileNames[0]
       }
+      setWindowTitle(focusedWindow, fileNames[0]);
       focusedWindow.send('load-url','file:///'+fileNames[0]);
 
     })

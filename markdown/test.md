@@ -21,9 +21,13 @@ Source specified targets
 * satyrn target (open in current Satyrn) <a href="https://github.com/WebOfTrustInfo/satyrn/raw/master/README.md" target="satyrn"> https://github.com/WebOfTrustInfo/satyrn/raw/master/README.md</a> 
 * _satyrn target (open in new Satyrn window) <a href="https://github.com/WebOfTrustInfo/satyrn/raw/master/README.md" target="_satyrn"> https://github.com/WebOfTrustInfo/satyrn/raw/master/README.md</a> 
 * _satyrn target but not a markdown file (open in new Satyrn window) <a href="http://blog.joeandrieu.com" target="_satyrn"> http://blog.joeandrieu.com</a> 
+
+* fully qualified #fragment url html (just scroll within current document) <a href="file:////home/will/satyrn/markdown/test.md#example">Example</a> 
 * local #fragment url html (just scroll within current document) <a href="#example">Example</a> 
+
 * local #fragment url markdown (just scroll within current document) [Example](#example)]
-* file url html <a target="satyrn" href="tutorial.md">Example</a> 
+
+* file url html <a target="satyrn" href="tutorial.md">tutorial.md</a> 
 
 <a name="example">Example anchor</a>
 

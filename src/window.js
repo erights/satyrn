@@ -116,31 +116,13 @@ function loadUrl(url) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 function  saveFile(event, url) {
-  let template = process.cwd() + '/markdown/untitled.mdt';
+  let template = process.cwd() + '/markdown/';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : state.currentFile;
   console.log(fileName, template);
-  if (fileName === template) {
-    const options = {
-      title: 'Save Markdown As',
-      buttonLabel: 'Save',
-      filters: [
-        { name: 'markdown', extensions: ['md'] }
-      ]
-    };
-    remote.dialog.showSaveDialog(remote.getCurrentWindow(), options, (fileNames) => {
+  if (fileName.includes(template)) {
+    event.sender.send("save-file-as");
 
-      // fileNames is an array that contains all the selected
-      if(fileNames === undefined){
-        console.log("No file selected");
-        return;
-      }
-
-      saveFile(event, fileNames[0]);
-      var url = 'file:///' + fileNames[0];
-      loadUrl(url);
-
-    })
   }
   else {
     fs.writeFile(fileName, fileContent, function(err) {

@@ -4,7 +4,6 @@
 | json-schema                                 | https://github.com/kriszyp/json-schema                                                        | AFLv2.1        |
 | aws-sign2                                   | https://github.com/mikeal/aws-sign                                                            | Apache         |
 | caseless                                    | https://github.com/mikeal/caseless                                                            | Apache         |
-| detect-libc                                 | https://github.com/lovell/detect-libc                                                         | Apache         |
 | ejs                                         | https://github.com/mde/ejs                                                                    | Apache         |
 | electron-license                            | https://github.com/mongodb-js/electron-license                                                | Apache         |
 | es6-templates                               | https://github.com/esnext/es6-templates                                                       | Apache         |
@@ -38,7 +37,6 @@
 | ieee754                                     | https://github.com/feross/ieee754                                                             | BSD            |
 | mississippi                                 | https://github.com/maxogden/mississippi                                                       | BSD            |
 | ndjson                                      | https://github.com/maxogden/ndjson                                                            | BSD            |
-| node-pre-gyp                                | https://github.com/mapbox/node-pre-gyp                                                        | BSD            |
 | normalize-package-data                      | https://github.com/npm/normalize-package-data                                                 | BSD            |
 | nugget                                      | https://github.com/maxogden/nugget                                                            | BSD            |
 | progress-stream                             | https://github.com/freeall/progress-stream                                                    | BSD            |
@@ -57,36 +55,29 @@
 | caniuse-lite                                | https://github.com/ben-eb/caniuse-lite                                                        | CC-BY          |
 | spdx-exceptions                             | https://github.com/kemitchell/spdx-exceptions.json                                            | CC-BY          |
 | spdx-license-ids                            | https://github.com/shinnn/spdx-license-ids                                                    | CC0-1.0        |
-| abbrev                                      | https://github.com/isaacs/abbrev-js                                                           | ISC            |
 | ansi-align                                  | https://github.com/nexdrew/ansi-align                                                         | ISC            |
 | anymatch                                    | https://github.com/micromatch/anymatch                                                        | ISC            |
 | aproba                                      | https://github.com/iarna/aproba                                                               | ISC            |
-| are-we-there-yet                            | https://github.com/iarna/are-we-there-yet                                                     | ISC            |
 | browser-stdout                              | https://github.com/kumavis/browser-stdout                                                     | ISC            |
 | browserify-sign                             | https://github.com/crypto-browserify/browserify-sign                                          | ISC            |
 | cacache                                     | https://github.com/zkat/cacache                                                               | ISC            |
 | chownr                                      | https://github.com/isaacs/chownr                                                              | ISC            |
 | cli-width                                   | https://github.com/knownasilya/cli-width                                                      | ISC            |
 | cliui                                       | https://github.com/yargs/cliui                                                                | ISC            |
-| console-control-strings                     | https://github.com/iarna/console-control-strings                                              | ISC            |
 | copy-concurrently                           | https://github.com/npm/copy-concurrently                                                      | ISC            |
 | dezalgo                                     | https://github.com/npm/dezalgo                                                                | ISC            |
 | electron-to-chromium                        | https://github.com/kilian/electron-to-chromium                                                | ISC            |
 | figgy-pudding                               | https://github.com/zkat/figgy-pudding                                                         | ISC            |
-| fs-minipass                                 | https://github.com/npm/fs-minipass                                                            | ISC            |
 | fs-write-stream-atomic                      | https://github.com/npm/fs-write-stream-atomic                                                 | ISC            |
 | fs.realpath                                 | https://github.com/isaacs/fs.realpath                                                         | ISC            |
-| gauge                                       | https://github.com/iarna/gauge                                                                | ISC            |
 | get-caller-file                             | https://github.com/stefanpenner/get-caller-file                                               | ISC            |
 | glob-parent                                 | https://github.com/es128/glob-parent                                                          | ISC            |
 | glob                                        | https://github.com/isaacs/node-glob                                                           | ISC            |
 | graceful-fs                                 | https://github.com/isaacs/node-graceful-fs                                                    | ISC            |
 | har-schema                                  | https://github.com/ahmadnassri/har-schema                                                     | ISC            |
-| has-unicode                                 | https://github.com/iarna/has-unicode                                                          | ISC            |
 | hosted-git-info                             | https://github.com/npm/hosted-git-info                                                        | ISC            |
 | icss-replace-symbols                        | https://github.com/css-modules/icss-replace-symbols                                           | ISC            |
 | icss-utils                                  | https://github.com/css-modules/icss-utils                                                     | ISC            |
-| ignore-walk                                 | https://github.com/isaacs/ignore-walk                                                         | ISC            |
 | inflight                                    | https://github.com/npm/inflight                                                               | ISC            |
 | inherits                                    | https://github.com/isaacs/inherits                                                            | ISC            |
 | ini                                         | https://github.com/isaacs/ini                                                                 | ISC            |
@@ -95,15 +86,9 @@
 | lru-cache                                   | https://github.com/isaacs/node-lru-cache                                                      | ISC            |
 | minimalistic-assert                         | https://github.com/calvinmetcalf/minimalistic-assert                                          | ISC            |
 | minimatch                                   | https://github.com/isaacs/minimatch                                                           | ISC            |
-| minipass                                    | https://github.com/isaacs/minipass                                                            | ISC            |
 | move-concurrently                           | https://github.com/npm/move-concurrently                                                      | ISC            |
 | mute-stream                                 | https://github.com/isaacs/mute-stream                                                         | ISC            |
-| nopt                                        | https://github.com/npm/nopt                                                                   | ISC            |
-| npm-bundled                                 | https://github.com/npm/npm-bundled                                                            | ISC            |
-| npm-packlist                                | https://github.com/npm/npm-packlist                                                           | ISC            |
-| npmlog                                      | https://github.com/npm/npmlog                                                                 | ISC            |
 | once                                        | https://github.com/isaacs/once                                                                | ISC            |
-| osenv                                       | https://github.com/npm/osenv                                                                  | ISC            |
 | parse-asn1                                  | https://github.com/crypto-browserify/parse-asn1                                               | ISC            |
 | postcss-modules-extract-imports             | https://github.com/css-modules/postcss-modules-extract-imports                                | ISC            |
 | postcss-modules-scope                       | https://github.com/css-modules/postcss-modules-scope                                          | ISC            |
@@ -124,7 +109,6 @@
 | slide                                       | https://github.com/isaacs/slide-flow-control                                                  | ISC            |
 | split2                                      | https://github.com/mcollina/split2                                                            | ISC            |
 | ssri                                        | https://github.com/zkat/ssri                                                                  | ISC            |
-| tar                                         | https://github.com/npm/node-tar                                                               | ISC            |
 | unique-filename                             | https://github.com/iarna/unique-filename                                                      | ISC            |
 | unique-slug                                 | https://github.com/iarna/unique-slug                                                          | ISC            |
 | which-module                                | https://github.com/nexdrew/which-module                                                       | ISC            |
@@ -137,7 +121,7 @@
 | yargs-parser                                | https://github.com/yargs/yargs-parser                                                         | ISC            |
 | xmldom                                      | https://github.com/jindw/xmldom                                                               | LGPL           |
 | 7zip-bin                                    | https://github.com/develar/7zip-bin                                                           | MIT            |
-|                                             | https://github.com/babel/babel/tree/master/packages/babel-code-frame                          | MIT            |
+|                                             |                                                                                               | MIT            |
 | acorn-dynamic-import                        | https://github.com/kesne/acorn-dynamic-import                                                 | MIT            |
 | acorn                                       | https://github.com/acornjs/acorn                                                              | MIT            |
 | ajv-errors                                  | https://github.com/epoberezkin/ajv-errors                                                     | MIT            |
@@ -198,7 +182,7 @@
 | buffer-alloc-unsafe                         | https://github.com/LinusU/buffer-alloc-unsafe                                                 | MIT            |
 | buffer-alloc                                | https://github.com/LinusU/buffer-alloc                                                        | MIT            |
 | buffer-crc32                                | https://github.com/brianloveswords/buffer-crc32                                               | MIT            |
-| buffer-fill                                 | https://github.com/linusu/buffer-fill                                                         | MIT            |
+| buffer-fill                                 | https://github.com/LinusU/buffer-fill                                                         | MIT            |
 | buffer-from                                 | https://github.com/LinusU/buffer-from                                                         | MIT            |
 | buffer-xor                                  | https://github.com/crypto-browserify/buffer-xor                                               | MIT            |
 | buffer                                      | https://github.com/feross/buffer                                                              | MIT            |
@@ -257,22 +241,23 @@
 | css                                         | https://github.com/reworkcss/css                                                              | MIT            |
 | cssesc                                      | https://github.com/mathiasbynens/cssesc                                                       | MIT            |
 | currently-unhandled                         | https://github.com/jamestalmage/currently-unhandled                                           | MIT            |
+| cyclist                                     | https://github.com/mafintosh/cyclist                                                          | MIT            |
 | dashdash                                    | https://github.com/trentm/node-dashdash                                                       | MIT            |
 | date-now                                    | https://github.com/Colingo/date-now                                                           | MIT            |
 | debug                                       | https://github.com/visionmedia/debug                                                          | MIT            |
 | debuglog                                    | https://github.com/sam-github/node-debuglog                                                   | MIT            |
 | decamelize                                  | https://github.com/sindresorhus/decamelize                                                    | MIT            |
-| decode-uri-component                        | https://github.com/samverschueren/decode-uri-component                                        | MIT            |
+| decode-uri-component                        | https://github.com/SamVerschueren/decode-uri-component                                        | MIT            |
 | deep-eql                                    | https://github.com/chaijs/deep-eql                                                            | MIT            |
 | deep-extend                                 | https://github.com/unclechu/node-deep-extend                                                  | MIT            |
 | deepmerge                                   | https://github.com/KyleAMathews/deepmerge                                                     | MIT            |
 | define-properties                           | https://github.com/ljharb/define-properties                                                   | MIT            |
 | define-property                             | https://github.com/jonschlinkert/define-property                                              | MIT            |
 | delayed-stream                              | https://github.com/felixge/node-delayed-stream                                                | MIT            |
-| delegates                                   | https://github.com/visionmedia/node-delegates                                                 | MIT            |
 | des.js                                      | https://github.com/indutny/des.js                                                             | MIT            |
 | detect-file                                 | https://github.com/doowb/detect-file                                                          | MIT            |
 | dev-null                                    | https://github.com/thlorenz/dev-null                                                          | MIT            |
+| dialog                                      | https://github.com/tomas/dialog                                                               | MIT            |
 | diffie-hellman                              | https://github.com/crypto-browserify/diffie-hellman                                           | MIT            |
 | dmg-builder                                 | https://github.com/electron-userland/electron-builder                                         | MIT            |
 | domain-browser                              | https://github.com/bevry/domain-browser                                                       | MIT            |
@@ -332,7 +317,6 @@
 | fs-extra-p                                  | https://github.com/develar/fs-extra-p                                                         | MIT            |
 | fs-extra                                    | https://github.com/jprichardson/node-fs-extra                                                 | MIT            |
 | fs-jetpack                                  | https://github.com/szwacz/fs-jetpack                                                          | MIT            |
-| fsevents                                    | https://github.com/strongloop/fsevents                                                        | MIT            |
 | function-bind                               | https://github.com/Raynos/function-bind                                                       | MIT            |
 | gaze                                        | https://github.com/shama/gaze                                                                 | MIT            |
 | generate-object-property                    | https://github.com/mafintosh/generate-object-property                                         | MIT            |
@@ -371,6 +355,7 @@
 | import-local                                | https://github.com/sindresorhus/import-local                                                  | MIT            |
 | imurmurhash                                 | https://github.com/jensyt/imurmurhash-js                                                      | MIT            |
 | indent-string                               | https://github.com/sindresorhus/indent-string                                                 | MIT            |
+| indexof                                     |                                                                                               | MIT            |
 | inquirer                                    | https://github.com/SBoudrias/Inquirer.js                                                      | MIT            |
 | interpret                                   | https://github.com/gulpjs/interpret                                                           | MIT            |
 | invariant                                   | https://github.com/zertosh/invariant                                                          | MIT            |
@@ -420,6 +405,7 @@
 | json5                                       | https://github.com/json5/json5                                                                | MIT            |
 | jsonfile                                    | https://github.com/jprichardson/node-jsonfile                                                 | MIT            |
 | jsprim                                      | https://github.com/joyent/node-jsprim                                                         | MIT            |
+| katex                                       | https://github.com/KaTeX/KaTeX                                                                | MIT            |
 | keyboardevent-from-electron-accelerator     | https://github.com/parro-it/keyboardevent-from-electron-accelerator                           | MIT            |
 | keyboardevents-areequal                     | https://github.com/parro-it/keyboardevents-areequal                                           | MIT            |
 | kind-of                                     | https://github.com/jonschlinkert/kind-of                                                      | MIT            |
@@ -460,14 +446,11 @@
 | mimic-fn                                    | https://github.com/sindresorhus/mimic-fn                                                      | MIT            |
 | minimalistic-crypto-utils                   | https://github.com/indutny/minimalistic-crypto-utils                                          | MIT            |
 | minimist                                    | https://github.com/substack/minimist                                                          | MIT            |
-| minizlib                                    | https://github.com/isaacs/minizlib                                                            | MIT            |
 | mixin-deep                                  | https://github.com/jonschlinkert/mixin-deep                                                   | MIT            |
 | mkdirp                                      | https://github.com/substack/node-mkdirp                                                       | MIT            |
 | mocha                                       | https://github.com/mochajs/mocha                                                              | MIT            |
 | ms                                          |                                                                                               | MIT            |
-| nan                                         | https://github.com/nodejs/nan                                                                 | MIT            |
 | nanomatch                                   | https://github.com/micromatch/nanomatch                                                       | MIT            |
-| needle                                      | https://github.com/tomas/needle                                                               | MIT            |
 | neo-async                                   | https://github.com/suguru03/neo-async                                                         | MIT            |
 | nice-try                                    | https://github.com/electerious/nice-try                                                       | MIT            |
 | no-case                                     | https://github.com/blakeembrey/no-case                                                        | MIT            |
@@ -487,7 +470,6 @@
 | onetime                                     | https://github.com/sindresorhus/onetime                                                       | MIT            |
 | optimist                                    | https://github.com/substack/node-optimist                                                     | MIT            |
 | os-browserify                               | https://github.com/CoderPuppy/os-browserify                                                   | MIT            |
-| os-homedir                                  | https://github.com/sindresorhus/os-homedir                                                    | MIT            |
 | os-locale                                   | https://github.com/sindresorhus/os-locale                                                     | MIT            |
 | os-tmpdir                                   | https://github.com/sindresorhus/os-tmpdir                                                     | MIT            |
 | p-defer                                     | https://github.com/sindresorhus/p-defer                                                       | MIT            |
@@ -573,17 +555,18 @@
 | ret                                         | https://github.com/fent/ret.js                                                                | MIT            |
 | rgb2hex                                     | https://github.com/christian-bromann/rgb2hex                                                  | MIT            |
 | ripemd160                                   | https://github.com/crypto-browserify/ripemd160                                                | MIT            |
-| run-async                                   | https://github.com/sboudrias/run-async                                                        | MIT            |
+| run-async                                   | https://github.com/SBoudrias/run-async                                                        | MIT            |
 | safe-buffer                                 | https://github.com/feross/safe-buffer                                                         | MIT            |
 | safe-regex                                  | https://github.com/substack/safe-regex                                                        | MIT            |
 | safer-buffer                                | https://github.com/ChALkeR/safer-buffer                                                       | MIT            |
 | schema-utils                                | https://github.com/webpack-contrib/schema-utils                                               | MIT            |
 | semver-diff                                 | https://github.com/sindresorhus/semver-diff                                                   | MIT            |
 | set-value                                   | https://github.com/jonschlinkert/set-value                                                    | MIT            |
-| setimmediate                                | https://github.com/yuzujs/setImmediate                                                        | MIT            |
+| setimmediate                                | https://github.com/YuzuJS/setImmediate                                                        | MIT            |
 | sha.js                                      | https://github.com/crypto-browserify/sha.js                                                   | MIT            |
 | shebang-command                             | https://github.com/kevva/shebang-command                                                      | MIT            |
 | shebang-regex                               | https://github.com/sindresorhus/shebang-regex                                                 | MIT            |
+| showdown-katex                              | https://github.com/obedm503/showdown-katex                                                    | MIT            |
 | single-line-log                             | https://github.com/freeall/single-line-log                                                    | MIT            |
 | slash                                       | https://github.com/sindresorhus/slash                                                         | MIT            |
 | snapdragon-node                             | https://github.com/jonschlinkert/snapdragon-node                                              | MIT            |
@@ -595,6 +578,7 @@
 | source-map-url                              | https://github.com/lydell/source-map-url                                                      | MIT            |
 | spdx-expression-parse                       | https://github.com/jslicense/spdx-expression-parse.js                                         | MIT            |
 | spectron                                    | https://github.com/electron/spectron                                                          | MIT            |
+| speedometer                                 | https://github.com/mafintosh/speedometer                                                      | MIT            |
 | split-string                                | https://github.com/jonschlinkert/split-string                                                 | MIT            |
 | split                                       | https://github.com/dominictarr/split                                                          | MIT            |
 | sshpk                                       | https://github.com/joyent/node-sshpk                                                          | MIT            |
@@ -680,12 +664,8 @@
 | yargs                                       | https://github.com/yargs/yargs                                                                | MIT            |
 | yauzl                                       | https://github.com/thejoshwolfe/yauzl                                                         | MIT            |
 | zip-stream                                  | https://github.com/archiverjs/node-zip-stream                                                 | MIT            |
-| cyclist                                     | https://github.com/mafintosh/cyclist                                                          | UNKNOWN        |
-| dialog                                      | https://github.com/tomas/dialog                                                               | UNKNOWN        |
-| indexof                                     |                                                                                               | UNKNOWN        |
 | pause-stream                                | https://github.com/dominictarr/pause-stream                                                   | UNKNOWN        |
 | satyrn                                      |                                                                                               | UNKNOWN        |
-| speedometer                                 | https://github.com/mafintosh/speedometer                                                      | UNKNOWN        |
 | tweetnacl                                   | https://github.com/dchest/tweetnacl-js                                                        | Unlicense      |
 | sanitize-filename                           | https://github.com/parshap/node-sanitize-filename                                             | WTFPL OR ISC   |
 | truncate-utf8-bytes                         | https://github.com/parshap/truncate-utf8-bytes                                                | WTF            |

@@ -4,7 +4,7 @@
 // window from here.
 import path from "path";
 import url from "url";
-import {app, Menu, ipcMain, shell, BrowserWindow} from "electron";
+import {app, Menu, ipcMain, shell, BrowserWindow, remote, dialog} from "electron";
 import { editMenuTemplate } from "./menu/edit_menu_template";
 import { fileMenuTemplate } from "./menu/file_menu_template";
 import { helpMenuTemplate } from "./menu/help_menu_template";
@@ -37,8 +37,8 @@ if (env.name !== "production") {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 app.on("ready", () => {
+  var filePath = process.cwd() + "/markdown/default.md";
   let onReady =  (currentWindow) => {
-    var filePath = process.cwd() + "/markdown/default.md";
     var url = 'file:///' + filePath;
     currentWindow.reloadContent = {
       url
@@ -47,7 +47,7 @@ app.on("ready", () => {
 
     currentWindow.send('load-url',url);
   };
-  let window = createNewWindow("initial", onReady);
+  let window = createNewWindow(filePath, onReady);
   window.setMenu(createMenu());
 });
 
@@ -67,8 +67,9 @@ export function createNewWindow(name, onReady) {
     webPreferences: {
       nativeWindowOpen: true,
       nodeIntegration: true
-    }
+    },
   });
+
 
   const defaultUrl = url.format({
     pathname: path.join(__dirname, "app.html"),
@@ -108,7 +109,6 @@ export function createNewWindow(name, onReady) {
           url: url
         };
         currentWindow.send("load-url", url);
-
       }
       let newWindow = createNewWindow(url, onReady);
       newWindow.setMenu(createMenu());
@@ -119,6 +119,7 @@ export function createNewWindow(name, onReady) {
       window.reloadContent = {
         url: url
       };
+      setWindowTitle(window, url);
       window.send("load-url", url);
       return false
     }
@@ -131,11 +132,45 @@ export function createNewWindow(name, onReady) {
 
   window.webContents.once('dom-ready', () => {
     onReady(window);
+    setWindowTitle(window, name);
+
   })
 
   return window;
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+export function setWindowTitle(window, filePath) {
+  console.log(filePath)
+  let filename = path.parse(filePath).base;
+
+  window.setTitle(filename + " -- Satyrn")
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+export function saveFileAs() {
+  const options = {
+    title: 'Save Markdown As',
+    buttonLabel: 'Save',
+    filters: [
+      { name: 'markdown', extensions: ['md'] }
+    ]
+  };
+  const focusedWindow = BrowserWindow.getFocusedWindow()
+  dialog.showSaveDialog(focusedWindow, options, (fileNames) => {
+
+    // fileNames is an array that contains all the selected
+    if(fileNames === undefined){
+      console.log("No file selected");
+      return;
+    }
+    setWindowTitle(focusedWindow, fileNames);
+    focusedWindow.send('save-file',fileNames);
+    // focusedWindow.send("reload-window", focusedWindow.reloadContent);
+  })
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
@@ -144,4 +179,9 @@ ipcMain.on('set-reload-url', (event, reloadContent) => {
   focusedWindow.reloadContent = reloadContent
 });
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+ipcMain.on('save-file-as', (event) => {
+  saveFileAs();
+})
 

@@ -128,17 +128,16 @@ const state = {
     console.log('setting path for ' + state.currentFile);
     const baseDir = path.dirname(state.currentFile) + "/"
     let baseTag = document.getElementById("base-dir")
-    console.log(baseTag)
+    console.log("base tag", baseTag)
     if (!baseTag) {
 
       baseTag = document.createElement("base");
       baseTag.id = "base-dir";
-      document.head.appendChild(baseTag)
-    }
-    //
-    baseTag.href = baseDir
-    console.log(document)
 
+    document.head.appendChild(baseTag)
+  }
+
+    baseTag.href = baseDir
   }
 
 };
