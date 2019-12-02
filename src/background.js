@@ -40,9 +40,8 @@ app.on("ready", () => {
   var filePath = process.cwd() + "/markdown/default.md";
   let onReady =  (currentWindow) => {
     currentWindow.reloadContent = {
-      url
+      url: filePath
     };
-    console.log("App ready", url)
 
     currentWindow.send('load-url',filePath);
   };
@@ -119,7 +118,7 @@ export function createNewWindow(name, onReady) {
         url: url
       };
       setWindowTitle(window, url);
-      window.send("load-url", url);
+      window.send("load-url", url, true);
       return false
     }
     if(url && url !== 'about:blank') {
