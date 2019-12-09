@@ -9,6 +9,7 @@ import { editMenuTemplate } from "./menu/edit_menu_template";
 import { fileMenuTemplate } from "./menu/file_menu_template";
 import { helpMenuTemplate } from "./menu/help_menu_template";
 import createWindow from "./helpers/window";
+import BrowserState from './state/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
@@ -58,8 +59,8 @@ app.on("window-all-closed", () => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-export function createNewWindow(name, onReady) {
-  const window = createWindow(name, {
+export function createNewWindow(filePath, onReady) {
+  const window = createWindow(filePath, {
     width: 1000,
     height: 600,
     webPreferences: {
@@ -67,7 +68,6 @@ export function createNewWindow(name, onReady) {
       nodeIntegration: true
     },
   });
-
 
   const defaultUrl = url.format({
     pathname: path.join(__dirname, "app.html"),
@@ -130,7 +130,7 @@ export function createNewWindow(name, onReady) {
 
   window.webContents.once('dom-ready', () => {
     onReady(window);
-    setWindowTitle(window, name);
+    setWindowTitle(window, filePath);
 
   })
 

@@ -15,8 +15,10 @@ window.showdown = showdown;
 
 // --------------------- --------------------- ---------------------
 // application state
-import state from './state/windowState'
-window.state = state;
+import BrowserState from './state/browserState'
+
+let browserState = new BrowserState();
+window.browserState = browserState;
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -31,29 +33,35 @@ ipcRenderer.on('save-file', function(event, arg) {
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-edit-mode -> enable document editing (teacher mode)
 ipcRenderer.on('toggle-edit-mode', function(event, args) {
-  state.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
-  state.isEditMode = !state.isEditMode;
+  browserState.contentState.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
+  browserState.contentState.isEditMode = !browserState.contentState.isEditMode;
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-realtime-render -> flip real time render mode
 ipcRenderer.on('toggle-realtime-render', (event, args) => {
-  state.shouldRealTimeRender = !state.shouldRealTimeRender;
+  browserState.contentState.shouldRealTimeRender = !browserState.contentState.shouldRealTimeRender;
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // load-url-> loads either a file or external url
-ipcRenderer.on('load-url', (event,url) => {
-  loadUrl(url);
+ipcRenderer.on('load-url', (event,url, addToBackstack) => {
+  loadUrl(url, addToBackstack);
 })
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 ipcRenderer.on('reload-window', (event, reloadContents) => {
-  loadUrl(reloadContents.url);
+  console.log()
+  browserState.contentState.reloadContent();
+  // loadUrl(reloadContents.url);
 });
+
+ipcRenderer.on('browser-state', (event, newBrowserState) => {
+  console.log("New Browser State", newBrowserState);
+})
 
 // --------------------- --------------------- ---------------------
 // action implementations
@@ -96,7 +104,7 @@ function show(html, target) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // loadUrl is called when a link has been clicked on
-function loadUrl(url) {
+function loadUrl(url, addToBackstack) {
   console.log('loading url', url);
 
   let request = new XMLHttpRequest();
@@ -106,9 +114,7 @@ function loadUrl(url) {
     if (request.readyState === 4 && request.status === 200) {
 //      let type = request.getResponseHeader('Content-Type');
 //      if (type.indexOf("text") !== 1) {
-        state.openFile(url, request.responseText)
-//
-//      }
+        window.browserState.openFile(url, request.responseText, addToBackstack)
     }
   }
 }
@@ -118,7 +124,7 @@ function loadUrl(url) {
 function  saveFile(event, url) {
   let protectedFolderPath = process.cwd() + '/markdown/';
   let fileContent = document.getElementById("teacher").value;
-  let fileName = url ? url : state.currentFile;
+  let fileName = url ? url : browserState.contentState.currentFile;
   console.log(fileName, protectedFolderPath);
   if (fileName.includes(protectedFolderPath)) {
 
@@ -148,12 +154,16 @@ function writeFile(sender, fileName, fileContent) {
     if(err) {
       return alert(err);
     }
-    state.currentFile = fileName;
-    state.currentFileSaved = true;
-    state.renderDocument(fileContent);
+    browserState.contentState.saveFile(fileName, fileContent);
+
     console.log("The file was saved and the name was changed!");
     sender.send("set-reload-url", {
       url: fileName
     })
   });
 }
+
+window.navigateBackwards = function() {
+  let contentState = browserState.navigateBackwards();
+  console.log("Navigation Backwards content state", contentState)
+};

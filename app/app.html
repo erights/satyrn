@@ -7,14 +7,14 @@
 </head>
 <body>
 <div>
-
+  <div><button onclick="window.navigateBackwards()">Back</button><button onclick="window.browserState.navigateForwards()">Forwards</button></div>
   <div id="app" class="container">
     <div id="teacher-input">
-      <textarea id="teacher" rows="4" onkeyup="state.handleTextChange()"></textarea>
+      <textarea id="teacher" rows="4" onkeyup="window.browserState.contentState.handleTextChange()"></textarea>
     </div>
     <div id="markdown" />
 </div>
-  <script src="./windowState.js"></script>
+  <!--<script src="./windowState.js"></script>-->
 
 <script src="window.js"></script>
 
