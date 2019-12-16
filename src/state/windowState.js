@@ -134,10 +134,11 @@ const state = {
       baseTag = document.createElement("base");
       baseTag.id = "base-dir";
 
-    document.head.appendChild(baseTag)
-  }
+      document.head.appendChild(baseTag)
+    }
 
     baseTag.href = baseDir
+    state.baseDir = baseDir;
   }
 
 };
