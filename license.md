@@ -405,7 +405,6 @@
 | json5                                       | https://github.com/json5/json5                                                                | MIT            |
 | jsonfile                                    | https://github.com/jprichardson/node-jsonfile                                                 | MIT            |
 | jsprim                                      | https://github.com/joyent/node-jsprim                                                         | MIT            |
-| katex                                       | https://github.com/KaTeX/KaTeX                                                                | MIT            |
 | keyboardevent-from-electron-accelerator     | https://github.com/parro-it/keyboardevent-from-electron-accelerator                           | MIT            |
 | keyboardevents-areequal                     | https://github.com/parro-it/keyboardevents-areequal                                           | MIT            |
 | kind-of                                     | https://github.com/jonschlinkert/kind-of                                                      | MIT            |
@@ -566,7 +565,6 @@
 | sha.js                                      | https://github.com/crypto-browserify/sha.js                                                   | MIT            |
 | shebang-command                             | https://github.com/kevva/shebang-command                                                      | MIT            |
 | shebang-regex                               | https://github.com/sindresorhus/shebang-regex                                                 | MIT            |
-| showdown-katex                              | https://github.com/obedm503/showdown-katex                                                    | MIT            |
 | single-line-log                             | https://github.com/freeall/single-line-log                                                    | MIT            |
 | slash                                       | https://github.com/sindresorhus/slash                                                         | MIT            |
 | snapdragon-node                             | https://github.com/jonschlinkert/snapdragon-node                                              | MIT            |
