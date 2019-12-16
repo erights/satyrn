@@ -131,12 +131,9 @@ function ContentState (){
     // console.log("Render Document", text);
     this.teacherMarkdown  = text;
     const html  = showdownConverter.makeHtml(text);
-    console.log("Set teacher", text)
+    let teacher = document.getElementById("teacher")
+    teacher.value = text;
     document.getElementById("markdown").innerHTML = html;
-    console.log("Teacher Text Before : ", document.querySelector("#teacher").innerHTML );
-    document.getElementById("teacher").innerHTML = text;
-    console.log("Teacher Text After : ", document.querySelector("#teacher").innerHTML );
-
     this.initialiseEditors();
   };
 
@@ -157,8 +154,6 @@ function ContentState (){
   };
 
   this.reloadContent = () => {
-    this.toggleRealTimeRender();
-    console.log("Reload the page contents : ", this.savedTeacherMarkdown);
     this.renderDocument(this.savedTeacherMarkdown);
   }
 

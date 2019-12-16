@@ -84,10 +84,10 @@ function newFile() {
 function reloadPage() {
   let focusedWindow = BrowserWindow.getFocusedWindow();
   // TODO check it is okay not to use this
+  // focusedWindow.reload()
   // BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
   // focusedWindow.setMenu(createMenu());
-  console.log("reload Content", focusedWindow.reloadContent)
-  focusedWindow.send('reload-window', focusedWindow.reloadContent);
+  focusedWindow.send('reload-window-content');
 
 }
 

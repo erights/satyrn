@@ -53,10 +53,10 @@ ipcRenderer.on('load-url', (event,url, addToBackstack) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-ipcRenderer.on('reload-window', (event, reloadContents) => {
-  console.log()
-  browserState.contentState.reloadContent();
-  // loadUrl(reloadContents.url);
+ipcRenderer.on('reload-window-content', (event) => {
+  console.log("Reload window content", browserState);
+  window.browserState.contentState.reloadContent();
+
 });
 
 ipcRenderer.on('browser-state', (event, newBrowserState) => {
