@@ -2,11 +2,12 @@ import showdown from "showdown";
 import "../extensions/ace-editor";
 import "../extensions/mailito-email";
 import "../extensions/anchor-target";
+import "../extensions/include";
 
 showdown.setFlavor('github');
 
 const showdownConverter = new showdown.Converter({
-  extensions: ['aceEditor', 'mailitoEmail', 'anchorTarget'],
+  extensions: ['include', 'aceEditor', 'mailitoEmail', 'anchorTarget'],
   tables: true,
   simplifiedAutoLink: true,
   smoothLivePreview: true,
