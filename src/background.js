@@ -69,6 +69,8 @@ export function createNewWindow(filePath, onReady) {
     },
   });
 
+
+
   const defaultUrl = url.format({
     pathname: path.join(__dirname, "app.html"),
     protocol: "file:",
@@ -80,14 +82,10 @@ export function createNewWindow(filePath, onReady) {
     defaultUrl
   );
 
-  // Store Relaod Content, either a file or a external URL
-  window.reloadContent = {
-    defaultUrl
-  }
 
   window.webContents.on('devtools-reload-page', () => {
     window.webContents.once('dom-ready', () => {
-      window.send("reload-window", window.reloadContent);
+      window.send("load-url", window.reloadContent.url, false);
     });
   });
 
@@ -143,8 +141,6 @@ export function setWindowTitle(window, filePath) {
   if (!window) {
     window = BrowserWindow.get;
   }
-  console.log(filePath)
-  console.log(window);
   let filename = path.parse(filePath).base;
 
   window.setTitle(filename + " -- Satyrn")
