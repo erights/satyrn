@@ -1,7 +1,8 @@
 const showdown  = require('showdown');
 const fs = require('fs');
+const path = require('path');
 
-//import state from '../state/windowState';
+import state from '../state/windowState';
 
 showdown.extension('include', () => {
 
@@ -26,8 +27,13 @@ showdown.extension('include', () => {
   //////////////////////////////////////////////////////////////////////////////////
 
   function loadSource(src) {
+    if(!src) return '';
+
     console.log('loading source', src);
-    var inc=fs.readFileSync(src,'UTF-8');
+    var filePath = path.join(state.baseDir, src);
+
+    console.log('front: ', filePath);
+    var inc=fs.readFileSync(filePath,'UTF-8');
     return inc+'\n';
   }
 
