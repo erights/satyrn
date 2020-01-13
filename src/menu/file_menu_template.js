@@ -136,6 +136,7 @@ function fileOpenDialog() {
         url: fileNames[0]
       }
       setWindowTitle(focusedWindow, fileNames[0]);
+      focusedWindow.state.newBrowser()
       focusedWindow.send('load-url', fileNames[0]);
 
     })
