@@ -15,7 +15,7 @@ window.showdown = showdown;
 
 // --------------------- --------------------- ---------------------
 // application state
-import BrowserState from './state/browserState'
+import BrowserState from './state/window/browserState'
 
 let browserState = new BrowserState();
 window.browserState = browserState;
@@ -33,22 +33,22 @@ ipcRenderer.on('save-file', function(event, arg) {
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-edit-mode -> enable document editing (teacher mode)
 ipcRenderer.on('toggle-edit-mode', function(event, args) {
-  browserState.contentState.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
-  browserState.contentState.isEditMode = !browserState.contentState.isEditMode;
+  browserState.contentState.setEditMode(!browserState.contentState.isEditMode)
+
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-realtime-render -> flip real time render mode
 ipcRenderer.on('toggle-realtime-render', (event, args) => {
-  browserState.contentState.shouldRealTimeRender = !browserState.contentState.shouldRealTimeRender;
+  browserState.contentState.toggleRealTimeRender();
 });
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // load-url-> loads either a file or external url
-ipcRenderer.on('load-url', (event,url, addToBackstack) => {
-  loadUrl(url, addToBackstack);
+ipcRenderer.on('load-url', (event,url) => {
+  loadUrl(url);
 })
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@ function show(html, target) {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // loadUrl is called when a link has been clicked on
-function loadUrl(url, addToBackstack) {
+function loadUrl(url) {
   console.log('loading url', url);
 
   let request = new XMLHttpRequest();
@@ -114,7 +114,7 @@ function loadUrl(url, addToBackstack) {
     if (request.readyState === 4 && request.status === 200) {
 //      let type = request.getResponseHeader('Content-Type');
 //      if (type.indexOf("text") !== 1) {
-        window.browserState.openFile(url, request.responseText, addToBackstack)
+        window.browserState.openFile(url, request.responseText)
     }
   }
 }
