@@ -1,20 +1,17 @@
 import ContentState from './contentState';
+import {ipcRenderer} from "electron";
 
 function BrowserState(file) {
 
   this.forwardStack = [];
   this.backwardStack = [];
-  this.contentState = new ContentState(file);
+  this.contentState = new ContentState()
 
-  this.openFile = (filePath, content, addToBackstack) => {
-    if (addToBackstack) {
-      this.updateBackwardStack()
-    } else {
-      this.resetNavigationStacks();
-    }
+  this.openFile = (filePath, content) => {
+    this.updateBackwardStack()
     this.contentState = new ContentState();
     this.contentState.openFile(filePath, content)
-
+    this.contentState.rebuildDocument();
   }
 
   this.updateBackwardStack = () => {
@@ -24,11 +21,14 @@ function BrowserState(file) {
 
   this.navigateBackwards = () => {
     let previousContentState = null;
-    if (this.backwardStack.length > 0) {
+    if (this.backwardStack.length > 1) {
       this.forwardStack.push(this.contentState);
       previousContentState = this.backwardStack.pop();
       this.contentState = previousContentState;
-      this.contentState.renderDocument(previousContentState.teacherMarkdown)
+
+      this.contentState.rebuildDocument()
+      ipcRenderer.send("navigate-backwards")
+
     } else {
       console.log("Nothing on the backwards stack")
     }
@@ -40,7 +40,9 @@ function BrowserState(file) {
       let nextContentState = this.forwardStack.pop();
       this.backwardStack.push(this.contentState);
       this.contentState = nextContentState;
-      this.contentState.renderDocument(nextContentState.teacherMarkdown)
+      this.contentState.rebuildDocument()
+      ipcRenderer.send("navigate-forwards")
+
     } else {
       console.log("Nothing on the forwards stack")
     }

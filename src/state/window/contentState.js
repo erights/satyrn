@@ -1,5 +1,5 @@
-import { Kernel } from './kernel'
-import showdownConverter from '../helpers/showdown-converter';
+import { Kernel } from '../kernel'
+import showdownConverter from '../../helpers/showdown-converter';
 import path from "path";
 
 const EDITOR_ID = "editor-"
@@ -43,6 +43,13 @@ function ContentState (){
     this.shouldRealTimeRender = !this.shouldRealTimeRender;
     this.handleTextChange();
   };
+
+  this.setEditMode = (editMode) => {
+    console.log("Set edit mode", editMode)
+    editMode ? document.querySelector("#teacher-input").style.display = "block"  :  document.querySelector("#teacher-input").style.display = "none";
+    this.isEditMode = editMode
+  }
+
   this.resetKernel = () => {
     if(this.kernel) {
       // TODO kill is not a function? Seems to work without killing - probably not good!
@@ -157,6 +164,10 @@ function ContentState (){
     this.renderDocument(this.savedTeacherMarkdown);
   }
 
+  this.rebuildDocument= () => {
+    this.setEditMode(this.isEditMode)
+    this.renderDocument(this.teacherMarkdown)
+  }
 
 
 
