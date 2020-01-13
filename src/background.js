@@ -9,11 +9,16 @@ import { editMenuTemplate } from "./menu/edit_menu_template";
 import { fileMenuTemplate } from "./menu/file_menu_template";
 import { helpMenuTemplate } from "./menu/help_menu_template";
 import createWindow from "./helpers/window";
-import BrowserState from './state/browserState';
+import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
+import BackgroundState from "./state/background/backgroundState";
 const electronLocalshortcut = require('electron-localshortcut');
+
+
+let backgroundState = new BackgroundState();
+
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
@@ -38,16 +43,9 @@ if (env.name !== "production") {
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 app.on("ready", () => {
-  var filePath = process.cwd() + "/markdown/default.md";
-  let onReady =  (currentWindow) => {
-    currentWindow.reloadContent = {
-      url: filePath
-    };
+  var url = process.cwd() + "/markdown/default.md";
 
-    currentWindow.send('load-url',filePath);
-  };
-  let window = createNewWindow(filePath, onReady);
-  window.setMenu(createMenu());
+  backgroundState.newWindow(url)
 });
 
 
@@ -85,7 +83,7 @@ export function createNewWindow(filePath, onReady) {
 
   window.webContents.on('devtools-reload-page', () => {
     window.webContents.once('dom-ready', () => {
-      window.send("load-url", window.reloadContent.url, false);
+      window.send("load-url", window.reloadContent.url);
     });
   });
 
@@ -100,14 +98,15 @@ export function createNewWindow(filePath, onReady) {
     console.log('new-window', url);
     if (disposition === "_satyrn") {
       e.preventDefault();
-      let onReady = (currentWindow) => {
-        currentWindow.reloadContent = {
-          url: url
-        };
-        currentWindow.send("load-url", url);
-      }
-      let newWindow = createNewWindow(url, onReady);
-      newWindow.setMenu(createMenu());
+      backgroundState.newWindow(url)
+      // let onReady = (currentWindow) => {
+      //   currentWindow.reloadContent = {
+      //     url: url
+      //   };
+      //   currentWindow.send("load-url", url);
+      // }
+      // let newWindow = createNewWindow(url, onReady);
+      // newWindow.setMenu(createMenu());
       return false
     }
     if (disposition === "satyrn") {
@@ -115,8 +114,12 @@ export function createNewWindow(filePath, onReady) {
       window.reloadContent = {
         url: url
       };
+
       setWindowTitle(window, url);
-      window.send("load-url", url, true);
+      console.log("Set Menu")
+      window.state.newMenu()
+
+      window.send("load-url", url);
       return false
     }
     if(url && url !== 'about:blank') {
@@ -183,3 +186,12 @@ ipcMain.on('save-file-as', (event) => {
   saveFileAs(focusedWindow);
 })
 
+ipcMain.on('navigate-backwards', (event) => {
+  let focusedWindow = event.sender.getOwnerBrowserWindow()
+  focusedWindow.state.navigateBackwards();
+})
+
+ipcMain.on('navigate-forwards', (event) => {
+  let focusedWindow = event.sender.getOwnerBrowserWindow()
+  focusedWindow.state.navigateForwards();
+})
