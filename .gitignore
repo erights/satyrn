@@ -70,3 +70,4 @@ Thumbs.db
 /app/contentState.js
 /app/background.js
 /app/**/*.map
+/app/*.js
