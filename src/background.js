@@ -13,11 +13,11 @@ import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
-import BackgroundState from "./state/background/backgroundState";
+import AppState from "./state/background/appState";
 const electronLocalshortcut = require('electron-localshortcut');
 
 
-let backgroundState = new BackgroundState();
+let appState = new AppState();
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +45,7 @@ if (env.name !== "production") {
 app.on("ready", () => {
   var url = process.cwd() + "/markdown/default.md";
 
-  backgroundState.newWindow(url)
+  appState.newWindow(url)
 });
 
 
@@ -98,7 +98,7 @@ export function createNewWindow(filePath, onReady) {
     console.log('new-window', url);
     if (disposition === "_satyrn") {
       e.preventDefault();
-      backgroundState.newWindow(url)
+      appState.newWindow(url);
       // let onReady = (currentWindow) => {
       //   currentWindow.reloadContent = {
       //     url: url
