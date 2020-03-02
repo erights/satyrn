@@ -2,7 +2,7 @@ import WindowState from "./windowState";
 import {createMenu, createNewWindow} from "../../background";
 
 
-function BackgroundState() {
+function AppState() {
 
   this.windowStates = [];
 
@@ -24,4 +24,4 @@ function BackgroundState() {
 }
 
 
-export default BackgroundState
+export default AppState
