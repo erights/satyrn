@@ -55,44 +55,6 @@ ipcRenderer.on('reload-window', (event, reloadContents) => {
   loadUrl(reloadContents.url);
 });
 
-// --------------------- --------------------- ---------------------
-// action implementations
-// show -> display a styled file like about, guide
-// loadGuide - display the guide file
-// loadAbout -> display the about file
-// loadUrl -> returns contents of http request to a url
-// handleTextChanged -> re-render document on change if real-time rendering
-// renderDocument -> used by open-file to display a document other
-//                   than about and guide, also used during realTime
-//                   rendering
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-function show(html, target) {
-  let w = window.open("", target, "toolbar=no,scrollbars=yes,resizable=yes,width=800,height=500");
-  // close the old window so we can open with focus
-  if (w.document.body.innerHTML) {
-  //    console.log(target + ' exists');
-    setTimeout(function () {
-      w.close();
-      show(html, target);
-    }, 100);
-    return;
-  }
-
-  w.document.body.innerHTML = "";
-  w.document.write(html)
-
-  let link = document.createElement("link")
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  const cssPath = path.resolve(__dirname, './main.css');
-  console.log(cssPath);
-  link.href = cssPath;
-
-  w.document.head.appendChild(link);
-}
-
-
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 // loadUrl is called when a link has been clicked on

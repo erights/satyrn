@@ -11,15 +11,15 @@ export const helpMenuTemplate = {
   submenu: [
     {
       label: "Tutorial",
-      click: () => showHelpMenuWindow(tutorialWindow, "Tutorial", "./markdown/tutorial.md")
+      click: () => showHelpMenuWindow(tutorialWindow, "Tutorial", "/markdown/tutorial.md")
     },
     {
       label: "About",
-      click: () => showHelpMenuWindow(aboutWindow, "About", "./markdown/about.md")
+      click: () => showHelpMenuWindow(aboutWindow, "About", "/markdown/about.md")
     },
     {
       label: "Copyright",
-      click: () => showHelpMenuWindow(copyrightWindow, "Copyright", "./license.md")
+      click: () => showHelpMenuWindow(copyrightWindow, "Copyright", "/license.md")
     }
   ]
 };
@@ -45,11 +45,12 @@ function showHelpMenuWindow(helpWindow, name, url) {
 }
 
 function createHelpWindow(name, url) {
+  let fileUrl = process.cwd() + url;
   let onReady =  (currentWindow) => {
     currentWindow.reloadContent = {
       url
     };
-    currentWindow.send('open-file',[url]);
+    currentWindow.send('load-url',fileUrl);
   };
 
   let window = createNewWindow(name,onReady);
