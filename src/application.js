@@ -21,20 +21,39 @@ const electronLocalshortcut = require('electron-localshortcut');
 let windowStates = [];
 // TODO: we need to add the ability to reopen closed windows
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+app.on("ready", () => {
+  var url = process.cwd() + "/markdown/default.md";
+
+  newWindow(url)
+});
+
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 let newWindow = (url) => {
-  let onReady = (currentWindow) => {
-    currentWindow.reloadContent = {
+  // first define the callback function for window creation
+  let onReady = (currentElectronWindow) => {
+    // first, store the URL for reloading later (if called to do so)
+    currentElectronWindow.reloadContent = {
       url: url
     };
 
-    currentWindow.send('load-url', url);
+    // now send the URL to the window so it loads the Satyrn file
+    currentElectronWindow.send('load-url', url);
   };
+
+  // create a menu object
   let menu = createMenu();
+
+  // create the window, passing the url and onReady callback
   let window = createNewWindow(url, onReady);
+
   window.setMenu(menu)
   let windowState = new WindowState(window, menu);
   windowStates.push(windowState);
-  window.state = windowState
+  window.state = windowState;
 }
 
 
@@ -57,14 +76,6 @@ if (env.name !== "production") {
   const userDataPath = app.getPath("userData");
   app.setPath("userData", `${userDataPath} (${env.name})`);
 }
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-app.on("ready", () => {
-  var url = process.cwd() + "/markdown/default.md";
-
-  newWindow(url)
-});
 
 
 //////////////////////////////////////////////////////////////////////////////////
