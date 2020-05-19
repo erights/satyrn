@@ -1,6 +1,6 @@
-import {createNewWindow} from "../background";
+import { createNewWindow } from "../application";
 import { fileMenuTemplate } from "./help_popup_window_file_menu_template";
-import {Menu} from "electron";
+import { Menu } from "electron";
 
 let aboutWindow = null;
 let tutorialWindow = null;
@@ -46,14 +46,14 @@ function showHelpMenuWindow(helpWindow, name, url) {
 
 function createHelpWindow(name, url) {
   let fileUrl = process.cwd() + url;
-  let onReady =  (currentWindow) => {
+  let onReady = (currentWindow) => {
     currentWindow.reloadContent = {
       url
     };
-    currentWindow.send('load-url',fileUrl);
+    currentWindow.send('load-url', fileUrl);
   };
 
-  let window = createNewWindow(name,onReady);
+  let window = createNewWindow(name, onReady);
   const menus = [fileMenuTemplate];
 
   window.setMenu(Menu.buildFromTemplate(menus));

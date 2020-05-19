@@ -1,9 +1,9 @@
-import {app, BrowserWindow, dialog, Menu, remote} from "electron";
-import {createMenu, createNewWindow, saveFileAs, setWindowTitle} from "../background";
+import { app, BrowserWindow, dialog, Menu, remote } from "electron";
+import { createMenu, createNewWindow, saveFileAs, setWindowTitle } from "../application";
 
 var path = require('path');
 import env from "env";
-import {helpMenuTemplate} from "./help_menu_template";
+import { helpMenuTemplate } from "./help_menu_template";
 import url from "url";
 
 export const fileMenuTemplate = {
@@ -68,11 +68,11 @@ export const fileMenuTemplate = {
 
 function newFile() {
   let url = process.cwd() + "/markdown/untitled.mdt";
-  let onReady =  (currentWindow) => {
+  let onReady = (currentWindow) => {
     currentWindow.reloadContent = {
       url
     };
-    currentWindow.send('load-url',url);
+    currentWindow.send('load-url', url);
   };
   let window = createNewWindow(url, onReady);
   const menus = [fileMenuTemplate, helpMenuTemplate];
@@ -116,28 +116,28 @@ function saveFile() {
 //////////////////////////////////////////////////////////////////////////////////
 function fileOpenDialog() {
   const focusedWindow = BrowserWindow.getFocusedWindow();
-    const options = {
-        title: 'Open a markdown file',
-        buttonLabel: 'Open',
-        filters: [
-          { name: 'markdown', extensions: ['md'] }
-        ]
-    };
+  const options = {
+    title: 'Open a markdown file',
+    buttonLabel: 'Open',
+    filters: [
+      { name: 'markdown', extensions: ['md'] }
+    ]
+  };
 
-    dialog.showOpenDialog(focusedWindow, options, (fileNames) => {
+  dialog.showOpenDialog(focusedWindow, options, (fileNames) => {
 
-      // fileNames is an array that contains all the selected
-      if(fileNames === undefined){
-          console.log("No file selected");
-          return;
-      }
+    // fileNames is an array that contains all the selected
+    if (fileNames === undefined) {
+      console.log("No file selected");
+      return;
+    }
 
-      focusedWindow.reloadContent = {
-        url: fileNames[0]
-      }
-      setWindowTitle(focusedWindow, fileNames[0]);
-      focusedWindow.state.newBrowser()
-      focusedWindow.send('load-url', fileNames[0]);
+    focusedWindow.reloadContent = {
+      url: fileNames[0]
+    }
+    setWindowTitle(focusedWindow, fileNames[0]);
+    focusedWindow.state.newBrowser()
+    focusedWindow.send('load-url', fileNames[0]);
 
-    })
+  })
 }

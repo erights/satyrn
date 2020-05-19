@@ -1,4 +1,4 @@
-import {createMenu} from "../../background";
+import { createMenu } from "../../application";
 import BrowserState from "../window/browserState";
 
 

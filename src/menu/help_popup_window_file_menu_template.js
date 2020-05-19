@@ -1,5 +1,5 @@
-import {app, BrowserWindow, dialog, remote} from "electron";
-import { createMenu} from "../background";
+import { app, BrowserWindow, dialog, remote } from "electron";
+import { createMenu } from "../application";
 
 var path = require('path');
 import env from "env";
@@ -14,7 +14,7 @@ export const fileMenuTemplate = {
         BrowserWindow.getFocusedWindow().close()
       }
     },
-  {
+    {
       label: "Quit",
       accelerator: "CmdOrCtrl+Q",
       click: () => {

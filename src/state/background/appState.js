@@ -1,5 +1,5 @@
 import WindowState from "./windowState";
-import {createMenu, createNewWindow} from "../../background";
+import { createMenu, createNewWindow } from "../../application";
 
 
 function AppState() {
@@ -7,12 +7,12 @@ function AppState() {
   this.windowStates = [];
 
   this.newWindow = (url) => {
-    let onReady =  (currentWindow) => {
+    let onReady = (currentWindow) => {
       currentWindow.reloadContent = {
         url: url
       };
 
-      currentWindow.send('load-url',url);
+      currentWindow.send('load-url', url);
     };
     let menu = createMenu();
     let window = createNewWindow(url, onReady);
