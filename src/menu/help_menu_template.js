@@ -1,6 +1,7 @@
 import { newSatyrnWindow } from "../application";
 import { fileMenuTemplate } from "./help_popup_window_file_menu_template";
 import { Menu } from "electron";
+import WindowState from "../state/application/windowState";
 
 let aboutWindow = null;
 let tutorialWindow = null;
@@ -51,6 +52,7 @@ function createHelpWindow(name, url) {
   const menus = [fileMenuTemplate];
 
   window.setMenu(Menu.buildFromTemplate(menus));
+  window.setMenuBarVisibility(false);
   return window;
 }
 
