@@ -127,9 +127,7 @@ function fileOpenDialog() {
       return;
     }
 
-    focusedWindow.reloadContent = {
-      url: fileNames[0]
-    }
+    focusedWindow.documentSrcUrl = fileNames[0]
     setWindowTitle(focusedWindow, fileNames[0]);
     focusedWindow.state.newBrowser()
     focusedWindow.send('load-document', fileNames[0]);

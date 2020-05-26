@@ -119,9 +119,7 @@ function writeFile(sender, fileName, fileContent) {
     browserState.contentState.saveFile(fileName, fileContent);
 
     console.log("The file was saved and the name was changed!");
-    sender.send("set-reload-url", {
-      url: fileName
-    })
+    sender.send("set-document-src-url", fileName)
   });
 }
 

@@ -49,9 +49,7 @@ export let newSatyrnWindow = (satyrnDocumentUrl) => {
   // first define the callback function for window creation
   let onDomReady = (electronWindow) => {
     // first, store the URL for reloading later (if called to do so)
-    electronWindow.reloadContent = {
-      url: satyrnDocumentUrl
-    };
+    electronWindow.documentSrcUrl = satyrnDocumentUrl
     setWindowTitle(electronWindow, satyrnDocumentUrl);
     // now send the URL to the window so it loads the Satyrn file
     electronWindow.send('load-document', satyrnDocumentUrl);
@@ -110,7 +108,7 @@ function registerListenersOnElectronWindow(window, onDomReady) {
 
   window.webContents.on('devtools-reload-page', () => {
     window.webContents.once('dom-ready', () => {
-      window.send("load-document", window.reloadContent.url);
+      window.send("load-document", window.documentSrcUrl);
     });
   });
 
@@ -130,9 +128,7 @@ function registerListenersOnElectronWindow(window, onDomReady) {
     // Opens satyrn document in current electron window
     else if (disposition === "satyrn") {
       e.preventDefault();
-      window.reloadContent = {
-        url: newSatyrnDocumentUrl
-      };
+      window.documentSrcUrl = newSatyrnDocumentUrl
 
       setWindowTitle(window, newSatyrnDocumentUrl);
       console.log("Set Menu")
@@ -180,15 +176,14 @@ export function saveFileAs(focusedWindow) {
     }
     setWindowTitle(focusedWindow, fileNames);
     focusedWindow.send('save-file', fileNames);
-    // focusedWindow.send("reload-window", focusedWindow.reloadContent);
   })
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-ipcMain.on('set-reload-url', (event, reloadContent) => {
+ipcMain.on('set-document-src-url', (event, documentSrcUrl) => {
   let focusedWindow = event.sender.getOwnerBrowserWindow()
-  focusedWindow.reloadContent = reloadContent
+  focusedWindow.documentSrcUrl = documentSrcUrl
 });
 
 //////////////////////////////////////////////////////////////////////////////////
