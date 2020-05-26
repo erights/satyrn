@@ -46,9 +46,9 @@ ipcRenderer.on('toggle-realtime-render', (event, args) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// load-url-> loads either a file or external url
-ipcRenderer.on('load-url', (event,url) => {
-  loadUrl(url);
+// load-document-> loads a satyrn document from either a file or external url
+ipcRenderer.on('load-document', (event,url) => {
+  loadSatyrnDocument(url);
 })
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -65,9 +65,9 @@ ipcRenderer.on('browser-state', (event, newBrowserState) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// loadUrl is called when a link has been clicked on
-function loadUrl(url) {
-  console.log('loading url', url);
+// loadSatyrnDocument is called when a link has been clicked on
+function loadSatyrnDocument(url) {
+  console.log('loading satyrn document from url : ', url);
 
   let request = new XMLHttpRequest();
   request.open('GET', url, true);

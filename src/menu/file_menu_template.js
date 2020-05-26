@@ -132,7 +132,7 @@ function fileOpenDialog() {
     }
     setWindowTitle(focusedWindow, fileNames[0]);
     focusedWindow.state.newBrowser()
-    focusedWindow.send('load-url', fileNames[0]);
+    focusedWindow.send('load-document', fileNames[0]);
 
   })
 }
