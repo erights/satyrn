@@ -1,4 +1,4 @@
-import { createNewWindow } from "../application";
+import { newSatyrnWindow } from "../application";
 import { fileMenuTemplate } from "./help_popup_window_file_menu_template";
 import { Menu } from "electron";
 
@@ -46,14 +46,8 @@ function showHelpMenuWindow(helpWindow, name, url) {
 
 function createHelpWindow(name, url) {
   let fileUrl = process.cwd() + url;
-  let onReady = (currentWindow) => {
-    currentWindow.reloadContent = {
-      url
-    };
-    currentWindow.send('load-url', fileUrl);
-  };
 
-  let window = createNewWindow(name, onReady);
+  let window = newSatyrnWindow(fileUrl);
   const menus = [fileMenuTemplate];
 
   window.setMenu(Menu.buildFromTemplate(menus));

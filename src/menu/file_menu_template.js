@@ -1,5 +1,5 @@
 import { app, BrowserWindow, dialog, Menu, remote } from "electron";
-import { createMenu, createNewWindow, saveFileAs, setWindowTitle } from "../application";
+import { createMenu, newSatyrnWindow, saveFileAs, setWindowTitle } from "../application";
 
 var path = require('path');
 import env from "env";
@@ -68,13 +68,8 @@ export const fileMenuTemplate = {
 
 function newFile() {
   let url = process.cwd() + "/markdown/untitled.mdt";
-  let onReady = (currentWindow) => {
-    currentWindow.reloadContent = {
-      url
-    };
-    currentWindow.send('load-url', url);
-  };
-  let window = createNewWindow(url, onReady);
+
+  let window = newSatyrnWindow(url);
   const menus = [fileMenuTemplate, helpMenuTemplate];
   window.setMenu(Menu.buildFromTemplate(menus));
 }

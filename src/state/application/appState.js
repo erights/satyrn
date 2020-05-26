@@ -1,5 +1,5 @@
 import WindowState from "./windowState";
-import { createMenu, createNewWindow } from "../../application";
+import { createMenu, createSatyrnWindow } from "../../application";
 
 
 function AppState() {
@@ -15,7 +15,7 @@ function AppState() {
       currentWindow.send('load-url', url);
     };
     let menu = createMenu();
-    let window = createNewWindow(url, onReady);
+    let window = createSatyrnWindow(url, onReady);
     window.setMenu(menu)
     let windowState = new WindowState(window, menu);
     this.windowStates.push(windowState);

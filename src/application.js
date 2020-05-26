@@ -8,7 +8,7 @@ import { app, Menu, ipcMain, shell, BrowserWindow, remote, dialog } from "electr
 import { editMenuTemplate } from "./menu/edit_menu_template";
 import { fileMenuTemplate } from "./menu/file_menu_template";
 import { helpMenuTemplate } from "./menu/help_menu_template";
-import createWindow from "./helpers/window";
+import createElectronWindow from "./helpers/window";
 import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
@@ -27,13 +27,13 @@ let windowStates = [];
 app.on("ready", () => {
   var url = process.cwd() + "/markdown/default.md";
 
-  newWindow(url)
+  newSatyrnWindow(url)
 });
 
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-let newWindow = (url) => {
+export let newSatyrnWindow = (url) => {
   // first define the callback function for window creation
   let onReady = (currentElectronWindow) => {
     // first, store the URL for reloading later (if called to do so)
@@ -49,12 +49,14 @@ let newWindow = (url) => {
   let menu = createMenu();
 
   // create the window, passing the url and onReady callback
-  let window = createNewWindow(url, onReady);
+  let window = createSatyrnWindow(url, onReady);
 
   window.setMenu(menu)
   let windowState = new WindowState(window, menu);
   windowStates.push(windowState);
   window.state = windowState;
+
+  return window
 }
 
 
@@ -87,8 +89,8 @@ app.on("window-all-closed", () => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-export function createNewWindow(filePath, onReady) {
-  const window = createWindow(filePath, {
+function createSatyrnWindow(filePath, onReady) {
+  const window = createElectronWindow(filePath, {
     width: 1000,
     height: 600,
     webPreferences: {
@@ -128,14 +130,14 @@ export function createNewWindow(filePath, onReady) {
     console.log('new-window', url);
     if (disposition === "_satyrn") {
       e.preventDefault();
-      newWindow(url);
+      newSatyrnWindow(url);
       // let onReady = (currentWindow) => {
       //   currentWindow.reloadContent = {
       //     url: url
       //   };
       //   currentWindow.send("load-url", url);
       // }
-      // let newWindow = createNewWindow(url, onReady);
+      // let newWindow = createSatyrnWindow(url, onReady);
       // newWindow.setMenu(createMenu());
       return false
     }
