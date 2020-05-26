@@ -39,77 +39,77 @@ snippet @m\n\
 		${2}\n\
 	}\n\
 snippet bg+\n\
-	background: #${1:FFF} url(${2}) ${3:0} ${4:0} ${5:no-repeat};\n\
+	application: #${1:FFF} url(${2}) ${3:0} ${4:0} ${5:no-repeat};\n\
 snippet bga\n\
-	background-attachment: ${1};\n\
+	application-attachment: ${1};\n\
 snippet bga:f\n\
-	background-attachment: fixed;\n\
+	application-attachment: fixed;\n\
 snippet bga:s\n\
-	background-attachment: scroll;\n\
+	application-attachment: scroll;\n\
 snippet bgbk\n\
-	background-break: ${1};\n\
+	application-break: ${1};\n\
 snippet bgbk:bb\n\
-	background-break: bounding-box;\n\
+	application-break: bounding-box;\n\
 snippet bgbk:c\n\
-	background-break: continuous;\n\
+	application-break: continuous;\n\
 snippet bgbk:eb\n\
-	background-break: each-box;\n\
+	application-break: each-box;\n\
 snippet bgcp\n\
-	background-clip: ${1};\n\
+	application-clip: ${1};\n\
 snippet bgcp:bb\n\
-	background-clip: border-box;\n\
+	application-clip: border-box;\n\
 snippet bgcp:cb\n\
-	background-clip: content-box;\n\
+	application-clip: content-box;\n\
 snippet bgcp:nc\n\
-	background-clip: no-clip;\n\
+	application-clip: no-clip;\n\
 snippet bgcp:pb\n\
-	background-clip: padding-box;\n\
+	application-clip: padding-box;\n\
 snippet bgc\n\
-	background-color: #${1:FFF};\n\
+	application-color: #${1:FFF};\n\
 snippet bgc:t\n\
-	background-color: transparent;\n\
+	application-color: transparent;\n\
 snippet bgi\n\
-	background-image: url(${1});\n\
+	application-image: url(${1});\n\
 snippet bgi:n\n\
-	background-image: none;\n\
+	application-image: none;\n\
 snippet bgo\n\
-	background-origin: ${1};\n\
+	application-origin: ${1};\n\
 snippet bgo:bb\n\
-	background-origin: border-box;\n\
+	application-origin: border-box;\n\
 snippet bgo:cb\n\
-	background-origin: content-box;\n\
+	application-origin: content-box;\n\
 snippet bgo:pb\n\
-	background-origin: padding-box;\n\
+	application-origin: padding-box;\n\
 snippet bgpx\n\
-	background-position-x: ${1};\n\
+	application-position-x: ${1};\n\
 snippet bgpy\n\
-	background-position-y: ${1};\n\
+	application-position-y: ${1};\n\
 snippet bgp\n\
-	background-position: ${1:0} ${2:0};\n\
+	application-position: ${1:0} ${2:0};\n\
 snippet bgr\n\
-	background-repeat: ${1};\n\
+	application-repeat: ${1};\n\
 snippet bgr:n\n\
-	background-repeat: no-repeat;\n\
+	application-repeat: no-repeat;\n\
 snippet bgr:x\n\
-	background-repeat: repeat-x;\n\
+	application-repeat: repeat-x;\n\
 snippet bgr:y\n\
-	background-repeat: repeat-y;\n\
+	application-repeat: repeat-y;\n\
 snippet bgr:r\n\
-	background-repeat: repeat;\n\
+	application-repeat: repeat;\n\
 snippet bgz\n\
-	background-size: ${1};\n\
+	application-size: ${1};\n\
 snippet bgz:a\n\
-	background-size: auto;\n\
+	application-size: auto;\n\
 snippet bgz:ct\n\
-	background-size: contain;\n\
+	application-size: contain;\n\
 snippet bgz:cv\n\
-	background-size: cover;\n\
+	application-size: cover;\n\
 snippet bg\n\
-	background: ${1};\n\
+	application: ${1};\n\
 snippet bg:ie\n\
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${1}',sizingMethod='${2:crop}');\n\
 snippet bg:n\n\
-	background: none;\n\
+	application: none;\n\
 snippet bd+\n\
 	border: ${1:1px} ${2:solid} #${3:000};\n\
 snippet bdb+\n\
@@ -978,4 +978,3 @@ exports.scope = "css";
                         }
                     });
                 })();
-            

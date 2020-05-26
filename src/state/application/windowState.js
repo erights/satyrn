@@ -33,7 +33,7 @@ function WindowState(window, menu) {
 
   // Called when a new file is opened or a link clicked within the browserWindow
   // This creates new BrowserState tracked within the window.
-  // It's menu needs to be tracked within the background.
+  // It's menu needs to be tracked within the application.
   //////////////////////////////////////////////////////////////////////////////////
   this.newBrowser = () => {
     let newMenu = createMenu();

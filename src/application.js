@@ -13,7 +13,8 @@ import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
-//import AppState from "./state/background/appState";
+import WindowState from "./state/application/windowState";
+//import AppState from "./state/application/appState";
 const electronLocalshortcut = require('electron-localshortcut');
 
 // the only state managemed by application.js is the array of windows

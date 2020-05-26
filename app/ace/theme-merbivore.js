@@ -3,38 +3,38 @@ ace.define("ace/theme/merbivore",["require","exports","module","ace/lib/dom"], f
 exports.isDark = true;
 exports.cssClass = "ace-merbivore";
 exports.cssText = ".ace-merbivore .ace_gutter {\
-background: #202020;\
+application: #202020;\
 color: #E6E1DC\
 }\
 .ace-merbivore .ace_print-margin {\
 width: 1px;\
-background: #555651\
+application: #555651\
 }\
 .ace-merbivore {\
-background-color: #161616;\
+application-color: #161616;\
 color: #E6E1DC\
 }\
 .ace-merbivore .ace_cursor {\
 color: #FFFFFF\
 }\
 .ace-merbivore .ace_marker-layer .ace_selection {\
-background: #454545\
+application: #454545\
 }\
 .ace-merbivore.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #161616;\
 }\
 .ace-merbivore .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-merbivore .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #404040\
 }\
 .ace-merbivore .ace_marker-layer .ace_active-line {\
-background: #333435\
+application: #333435\
 }\
 .ace-merbivore .ace_gutter-active-line {\
-background-color: #333435\
+application-color: #333435\
 }\
 .ace-merbivore .ace_marker-layer .ace_selected-word {\
 border: 1px solid #454545\
@@ -73,10 +73,10 @@ color: #58C554\
 }\
 .ace-merbivore .ace_invalid {\
 color: #FFFFFF;\
-background-color: #990000\
+application-color: #990000\
 }\
 .ace-merbivore .ace_fold {\
-background-color: #FC6F09;\
+application-color: #FC6F09;\
 border-color: #E6E1DC\
 }\
 .ace-merbivore .ace_comment {\
@@ -87,7 +87,7 @@ color: #AD2EA4\
 color: #FFFF89\
 }\
 .ace-merbivore .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQFxf3ZXB1df0PAAdsAmERTkEHAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQFxf3ZXB1df0PAAdsAmERTkEHAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -99,4 +99,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

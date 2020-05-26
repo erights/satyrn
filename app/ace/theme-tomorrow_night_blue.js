@@ -3,15 +3,15 @@ ace.define("ace/theme/tomorrow_night_blue",["require","exports","module","ace/li
 exports.isDark = true;
 exports.cssClass = "ace-tomorrow-night-blue";
 exports.cssText = ".ace-tomorrow-night-blue .ace_gutter {\
-background: #00204b;\
+application: #00204b;\
 color: #7388b5\
 }\
 .ace-tomorrow-night-blue .ace_print-margin {\
 width: 1px;\
-background: #00204b\
+application: #00204b\
 }\
 .ace-tomorrow-night-blue {\
-background-color: #002451;\
+application-color: #002451;\
 color: #FFFFFF\
 }\
 .ace-tomorrow-night-blue .ace_constant.ace_other,\
@@ -19,23 +19,23 @@ color: #FFFFFF\
 color: #FFFFFF\
 }\
 .ace-tomorrow-night-blue .ace_marker-layer .ace_selection {\
-background: #003F8E\
+application: #003F8E\
 }\
 .ace-tomorrow-night-blue.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #002451;\
 }\
 .ace-tomorrow-night-blue .ace_marker-layer .ace_step {\
-background: rgb(127, 111, 19)\
+application: rgb(127, 111, 19)\
 }\
 .ace-tomorrow-night-blue .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #404F7D\
 }\
 .ace-tomorrow-night-blue .ace_marker-layer .ace_active-line {\
-background: #00346E\
+application: #00346E\
 }\
 .ace-tomorrow-night-blue .ace_gutter-active-line {\
-background-color: #022040\
+application-color: #022040\
 }\
 .ace-tomorrow-night-blue .ace_marker-layer .ace_selected-word {\
 border: 1px solid #003F8E\
@@ -63,14 +63,14 @@ color: #FFC58F\
 }\
 .ace-tomorrow-night-blue .ace_invalid {\
 color: #FFFFFF;\
-background-color: #F99DA5\
+application-color: #F99DA5\
 }\
 .ace-tomorrow-night-blue .ace_invalid.ace_deprecated {\
 color: #FFFFFF;\
-background-color: #EBBBFF\
+application-color: #EBBBFF\
 }\
 .ace-tomorrow-night-blue .ace_fold {\
-background-color: #BBDAFF;\
+application-color: #BBDAFF;\
 border-color: #FFFFFF\
 }\
 .ace-tomorrow-night-blue .ace_entity.ace_name.ace_function,\
@@ -98,7 +98,7 @@ color: #FF9DA4\
 color: #7285B7\
 }\
 .ace-tomorrow-night-blue .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYJDzqfwPAANXAeNsiA+ZAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYJDzqfwPAANXAeNsiA+ZAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -110,4 +110,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

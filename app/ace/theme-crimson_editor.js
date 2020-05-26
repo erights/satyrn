@@ -1,7 +1,7 @@
 ace.define("ace/theme/crimson_editor",["require","exports","module","ace/lib/dom"], function(require, exports, module) {
 exports.isDark = false;
 exports.cssText = ".ace-crimson-editor .ace_gutter {\
-background: #ebebeb;\
+application: #ebebeb;\
 color: #333;\
 overflow : hidden;\
 }\
@@ -11,10 +11,10 @@ text-align: right;\
 }\
 .ace-crimson-editor .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8;\
+application: #e8e8e8;\
 }\
 .ace-crimson-editor {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: rgb(64, 64, 64);\
 }\
 .ace-crimson-editor .ace_cursor {\
@@ -79,36 +79,36 @@ color: rgb(0, 64, 128);\
 color: rgb(104, 104, 91);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_selection {\
-background: rgb(181, 213, 255);\
+application: rgb(181, 213, 255);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_step {\
-background: rgb(252, 255, 0);\
+application: rgb(252, 255, 0);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_stack {\
-background: rgb(164, 229, 101);\
+application: rgb(164, 229, 101);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_active-line {\
-background: rgb(232, 242, 254);\
+application: rgb(232, 242, 254);\
 }\
 .ace-crimson-editor .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+application-color : #dcdcdc;\
 }\
 .ace-crimson-editor .ace_meta.ace_tag {\
 color:rgb(28, 2, 255);\
 }\
 .ace-crimson-editor .ace_marker-layer .ace_selected-word {\
-background: rgb(250, 250, 255);\
+application: rgb(250, 250, 255);\
 border: 1px solid rgb(200, 200, 250);\
 }\
 .ace-crimson-editor .ace_string.ace_regex {\
 color: rgb(192, 0, 192);\
 }\
 .ace-crimson-editor .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }";
 
 exports.cssClass = "ace-crimson-editor";
@@ -122,4 +122,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

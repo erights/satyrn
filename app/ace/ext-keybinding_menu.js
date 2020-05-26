@@ -2,7 +2,7 @@ ace.define("ace/ext/menu_tools/overlay_page",["require","exports","module","ace/
 'use strict';
 var dom = require("../../lib/dom");
 var cssText = "#ace_settingsmenu, #kbshortcutmenu {\
-background-color: #F7F7F7;\
+application-color: #F7F7F7;\
 color: black;\
 box-shadow: -5px 4px 5px rgba(126, 126, 126, 0.55);\
 padding: 1em 0.5em 2em 1em;\
@@ -17,15 +17,15 @@ cursor: default;\
 }\
 .ace_dark #ace_settingsmenu, .ace_dark #kbshortcutmenu {\
 box-shadow: -20px 10px 25px rgba(126, 126, 126, 0.25);\
-background-color: rgba(255, 255, 255, 0.6);\
+application-color: rgba(255, 255, 255, 0.6);\
 color: black;\
 }\
 .ace_optionsMenuEntry:hover {\
-background-color: rgba(100, 100, 100, 0.1);\
+application-color: rgba(100, 100, 100, 0.1);\
 transition: all 0.3s\
 }\
 .ace_closeButton {\
-background: rgba(245, 146, 146, 0.5);\
+application: rgba(245, 146, 146, 0.5);\
 border: 1px solid #F48A8A;\
 border-radius: 50%;\
 padding: 7px;\
@@ -35,7 +35,7 @@ top: -8px;\
 z-index: 100000;\
 }\
 .ace_closeButton{\
-background: rgba(245, 146, 146, 0.9);\
+application: rgba(245, 146, 146, 0.9);\
 }\
 .ace_optionsMenuKey {\
 color: darkslateblue;\
@@ -49,17 +49,17 @@ font-weight: normal;\
 vertical-align: middle;\
 }\
 .ace_optionsMenuEntry button[ace_selected_button=true] {\
-background: #e7e7e7;\
+application: #e7e7e7;\
 box-shadow: 1px 0px 2px 0px #adadad inset;\
 border-color: #adadad;\
 }\
 .ace_optionsMenuEntry button {\
-background: white;\
+application: white;\
 border: 1px solid lightgray;\
 margin: 0px;\
 }\
 .ace_optionsMenuEntry button:hover{\
-background: #f0f0f0;\
+application: #f0f0f0;\
 }";
 dom.importCssString(cssText);
 module.exports.overlayPage = function overlayPage(editor, contentElement, top, right, bottom, left) {
@@ -80,7 +80,7 @@ module.exports.overlayPage = function overlayPage(editor, contentElement, top, r
     closer.style.cssText = 'margin: 0; padding: 0; ' +
         'position: fixed; top:0; bottom:0; left:0; right:0;' +
         'z-index: 9990; ' +
-        'background-color: rgba(0, 0, 0, 0.3);';
+        'application-color: rgba(0, 0, 0, 0.3);';
     closer.addEventListener('click', function() {
         document.removeEventListener('keydown', documentEscListener);
         closer.parentNode.removeChild(closer);
@@ -96,16 +96,16 @@ module.exports.overlayPage = function overlayPage(editor, contentElement, top, r
 
     var wrapper = dom.createElement("div");
     wrapper.style.position = "relative";
-    
+
     var closeButton = dom.createElement("div");
     closeButton.className = "ace_closeButton";
     closeButton.addEventListener('click', function() {
         closer.click();
     });
-    
+
     wrapper.appendChild(closeButton);
     contentContainer.appendChild(wrapper);
-    
+
     contentContainer.appendChild(contentElement);
     closer.appendChild(contentContainer);
     document.body.appendChild(closer);
@@ -136,7 +136,7 @@ module.exports.getEditorKeybordShortcuts = function(editor) {
                 } else {
                     commandMap[command] = {key: key, command: command};
                     keybindings.push(commandMap[command]);
-                }         
+                }
             });
         }
     });
@@ -155,7 +155,7 @@ ace.define("ace/ext/keybinding_menu",["require","exports","module","ace/editor",
             var kb = getEditorKeybordShortcuts(editor);
             var el = document.createElement('div');
             var commands = kb.reduce(function(previous, current) {
-                return previous + '<div class="ace_optionsMenuEntry"><span class="ace_optionsMenuCommand">' 
+                return previous + '<div class="ace_optionsMenuEntry"><span class="ace_optionsMenuCommand">'
                     + current.command + '</span> : '
                     + '<span class="ace_optionsMenuKey">' + current.key + '</span></div>';
             }, '');
@@ -185,4 +185,3 @@ ace.define("ace/ext/keybinding_menu",["require","exports","module","ace/editor",
                         }
                     });
                 })();
-            

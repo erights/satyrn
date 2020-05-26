@@ -4,18 +4,18 @@ ace.define("ace/theme/textmate",["require","exports","module","ace/lib/dom"], fu
 exports.isDark = false;
 exports.cssClass = "ace-tm";
 exports.cssText = ".ace-tm .ace_gutter {\
-background: #f0f0f0;\
+application: #f0f0f0;\
 color: #333;\
 }\
 .ace-tm .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8;\
+application: #e8e8e8;\
 }\
 .ace-tm .ace_fold {\
-background-color: #6B72E6;\
+application-color: #6B72E6;\
 }\
 .ace-tm {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: black;\
 }\
 .ace-tm .ace_cursor {\
@@ -41,7 +41,7 @@ color: rgb(88, 92, 246);\
 color: rgb(6, 150, 14);\
 }\
 .ace-tm .ace_invalid {\
-background-color: rgba(255, 0, 0, 0.1);\
+application-color: rgba(255, 0, 0, 0.1);\
 color: red;\
 }\
 .ace-tm .ace_support.ace_function {\
@@ -94,33 +94,33 @@ color:rgb(0, 22, 142);\
 color: rgb(255, 0, 0)\
 }\
 .ace-tm .ace_marker-layer .ace_selection {\
-background: rgb(181, 213, 255);\
+application: rgb(181, 213, 255);\
 }\
 .ace-tm.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px white;\
 }\
 .ace-tm .ace_marker-layer .ace_step {\
-background: rgb(252, 255, 0);\
+application: rgb(252, 255, 0);\
 }\
 .ace-tm .ace_marker-layer .ace_stack {\
-background: rgb(164, 229, 101);\
+application: rgb(164, 229, 101);\
 }\
 .ace-tm .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-tm .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.07);\
+application: rgba(0, 0, 0, 0.07);\
 }\
 .ace-tm .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+application-color : #dcdcdc;\
 }\
 .ace-tm .ace_marker-layer .ace_selected-word {\
-background: rgb(250, 250, 255);\
+application: rgb(250, 250, 255);\
 border: 1px solid rgb(200, 200, 250);\
 }\
 .ace-tm .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }\
 ";
 exports.$id = "ace/theme/textmate";
@@ -357,7 +357,7 @@ function setupApi(editor, editorDiv, settingDiv, ace, options) {
             case "fontSize":
                 editor.$setOption(key, value);
             break;
-            
+
             default:
                 editor.$setOption(key, toBool(value));
         }
@@ -560,4 +560,3 @@ exports.defaultOptions = {
                         }
                     });
                 })();
-            

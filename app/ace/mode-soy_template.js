@@ -9,7 +9,7 @@ var DocCommentHighlightRules = function() {
         "start" : [ {
             token : "comment.doc.tag",
             regex : "@[\\w\\d_]+" // TODO: fix email addresses
-        }, 
+        },
         DocCommentHighlightRules.getTagRule(),
         {
             defaultToken : "comment.doc",
@@ -582,7 +582,7 @@ var FoldMode = exports.FoldMode = function(commentRegex) {
 oop.inherits(FoldMode, BaseFoldMode);
 
 (function() {
-    
+
     this.foldingStartMarker = /([\{\[\(])[^\}\]\)]*$|^\s*(\/\*)/;
     this.foldingStopMarker = /^[^\[\{\(]*([\}\]\)])|^[\s\*]*(\*\/)/;
     this.singleLineBlockCommentRe= /^\s*(\/\*).*\*\/\s*$/;
@@ -591,42 +591,42 @@ oop.inherits(FoldMode, BaseFoldMode);
     this._getFoldWidgetBase = this.getFoldWidget;
     this.getFoldWidget = function(session, foldStyle, row) {
         var line = session.getLine(row);
-    
+
         if (this.singleLineBlockCommentRe.test(line)) {
             if (!this.startRegionRe.test(line) && !this.tripleStarBlockCommentRe.test(line))
                 return "";
         }
-    
+
         var fw = this._getFoldWidgetBase(session, foldStyle, row);
-    
+
         if (!fw && this.startRegionRe.test(line))
             return "start"; // lineCommentRegionStart
-    
+
         return fw;
     };
 
     this.getFoldWidgetRange = function(session, foldStyle, row, forceMultiline) {
         var line = session.getLine(row);
-        
+
         if (this.startRegionRe.test(line))
             return this.getCommentRegionBlock(session, line, row);
-        
+
         var match = line.match(this.foldingStartMarker);
         if (match) {
             var i = match.index;
 
             if (match[1])
                 return this.openingBracketBlock(session, match[1], row, i);
-                
+
             var range = session.getCommentFoldRange(row, i + match[0].length, 1);
-            
+
             if (range && !range.isMultiLine()) {
                 if (forceMultiline) {
                     range = this.getSectionRange(session, row);
                 } else if (foldStyle != "all")
                     range = null;
             }
-            
+
             return range;
         }
 
@@ -643,7 +643,7 @@ oop.inherits(FoldMode, BaseFoldMode);
             return session.getCommentFoldRange(row, i, -1);
         }
     };
-    
+
     this.getSectionRange = function(session, row) {
         var line = session.getLine(row);
         var startIndent = line.search(/\S/);
@@ -660,7 +660,7 @@ oop.inherits(FoldMode, BaseFoldMode);
             if  (startIndent > indent)
                 break;
             var subRange = this.getFoldWidgetRange(session, "all", row);
-            
+
             if (subRange) {
                 if (subRange.start.row <= startRow) {
                     break;
@@ -672,14 +672,14 @@ oop.inherits(FoldMode, BaseFoldMode);
             }
             endRow = row;
         }
-        
+
         return new Range(startRow, startColumn, endRow, session.getLine(endRow).length);
     };
     this.getCommentRegionBlock = function(session, line, row) {
         var startColumn = line.search(/\s*$/);
         var maxRow = session.getLength();
         var startRow = row;
-        
+
         var re = /^\s*(?:\/\*|\/\/|--)#?(end)?region\b/;
         var depth = 1;
         while (++row < maxRow) {
@@ -715,7 +715,7 @@ var CStyleFoldMode = require("./folding/cstyle").FoldMode;
 
 var Mode = function() {
     this.HighlightRules = JavaScriptHighlightRules;
-    
+
     this.$outdent = new MatchingBraceOutdent();
     this.$behaviour = new CstyleBehaviour();
     this.foldingRules = new CStyleFoldMode();
@@ -795,7 +795,7 @@ ace.define("ace/mode/css_highlight_rules",["require","exports","module","ace/lib
 var oop = require("../lib/oop");
 var lang = require("../lib/lang");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
-var supportType = exports.supportType = "align-content|align-items|align-self|all|animation|animation-delay|animation-direction|animation-duration|animation-fill-mode|animation-iteration-count|animation-name|animation-play-state|animation-timing-function|backface-visibility|background|background-attachment|background-blend-mode|background-clip|background-color|background-image|background-origin|background-position|background-repeat|background-size|border|border-bottom|border-bottom-color|border-bottom-left-radius|border-bottom-right-radius|border-bottom-style|border-bottom-width|border-collapse|border-color|border-image|border-image-outset|border-image-repeat|border-image-slice|border-image-source|border-image-width|border-left|border-left-color|border-left-style|border-left-width|border-radius|border-right|border-right-color|border-right-style|border-right-width|border-spacing|border-style|border-top|border-top-color|border-top-left-radius|border-top-right-radius|border-top-style|border-top-width|border-width|bottom|box-shadow|box-sizing|caption-side|clear|clip|color|column-count|column-fill|column-gap|column-rule|column-rule-color|column-rule-style|column-rule-width|column-span|column-width|columns|content|counter-increment|counter-reset|cursor|direction|display|empty-cells|filter|flex|flex-basis|flex-direction|flex-flow|flex-grow|flex-shrink|flex-wrap|float|font|font-family|font-size|font-size-adjust|font-stretch|font-style|font-variant|font-weight|hanging-punctuation|height|justify-content|left|letter-spacing|line-height|list-style|list-style-image|list-style-position|list-style-type|margin|margin-bottom|margin-left|margin-right|margin-top|max-height|max-width|max-zoom|min-height|min-width|min-zoom|nav-down|nav-index|nav-left|nav-right|nav-up|opacity|order|outline|outline-color|outline-offset|outline-style|outline-width|overflow|overflow-x|overflow-y|padding|padding-bottom|padding-left|padding-right|padding-top|page-break-after|page-break-before|page-break-inside|perspective|perspective-origin|position|quotes|resize|right|tab-size|table-layout|text-align|text-align-last|text-decoration|text-decoration-color|text-decoration-line|text-decoration-style|text-indent|text-justify|text-overflow|text-shadow|text-transform|top|transform|transform-origin|transform-style|transition|transition-delay|transition-duration|transition-property|transition-timing-function|unicode-bidi|user-select|user-zoom|vertical-align|visibility|white-space|width|word-break|word-spacing|word-wrap|z-index";
+var supportType = exports.supportType = "align-content|align-items|align-self|all|animation|animation-delay|animation-direction|animation-duration|animation-fill-mode|animation-iteration-count|animation-name|animation-play-state|animation-timing-function|backface-visibility|application|application-attachment|application-blend-mode|application-clip|application-color|application-image|application-origin|application-position|application-repeat|application-size|border|border-bottom|border-bottom-color|border-bottom-left-radius|border-bottom-right-radius|border-bottom-style|border-bottom-width|border-collapse|border-color|border-image|border-image-outset|border-image-repeat|border-image-slice|border-image-source|border-image-width|border-left|border-left-color|border-left-style|border-left-width|border-radius|border-right|border-right-color|border-right-style|border-right-width|border-spacing|border-style|border-top|border-top-color|border-top-left-radius|border-top-right-radius|border-top-style|border-top-width|border-width|bottom|box-shadow|box-sizing|caption-side|clear|clip|color|column-count|column-fill|column-gap|column-rule|column-rule-color|column-rule-style|column-rule-width|column-span|column-width|columns|content|counter-increment|counter-reset|cursor|direction|display|empty-cells|filter|flex|flex-basis|flex-direction|flex-flow|flex-grow|flex-shrink|flex-wrap|float|font|font-family|font-size|font-size-adjust|font-stretch|font-style|font-variant|font-weight|hanging-punctuation|height|justify-content|left|letter-spacing|line-height|list-style|list-style-image|list-style-position|list-style-type|margin|margin-bottom|margin-left|margin-right|margin-top|max-height|max-width|max-zoom|min-height|min-width|min-zoom|nav-down|nav-index|nav-left|nav-right|nav-up|opacity|order|outline|outline-color|outline-offset|outline-style|outline-width|overflow|overflow-x|overflow-y|padding|padding-bottom|padding-left|padding-right|padding-top|page-break-after|page-break-before|page-break-inside|perspective|perspective-origin|position|quotes|resize|right|tab-size|table-layout|text-align|text-align-last|text-decoration|text-decoration-color|text-decoration-line|text-decoration-style|text-indent|text-justify|text-overflow|text-shadow|text-transform|top|transform|transform-origin|transform-style|transition|transition-delay|transition-duration|transition-property|transition-timing-function|unicode-bidi|user-select|user-zoom|vertical-align|visibility|white-space|width|word-break|word-spacing|word-wrap|z-index";
 var supportFunction = exports.supportFunction = "rgb|rgba|url|attr|counter|counters";
 var supportConstant = exports.supportConstant = "absolute|after-edge|after|all-scroll|all|alphabetic|always|antialiased|armenian|auto|avoid-column|avoid-page|avoid|balance|baseline|before-edge|before|below|bidi-override|block-line-height|block|bold|bolder|border-box|both|bottom|box|break-all|break-word|capitalize|caps-height|caption|center|central|char|circle|cjk-ideographic|clone|close-quote|col-resize|collapse|column|consider-shifts|contain|content-box|cover|crosshair|cubic-bezier|dashed|decimal-leading-zero|decimal|default|disabled|disc|disregard-shifts|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ease-in|ease-in-out|ease-out|ease|ellipsis|end|exclude-ruby|fill|fixed|georgian|glyphs|grid-height|groove|hand|hanging|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|icon|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|ideographic|inactive|include-ruby|inherit|initial|inline-block|inline-box|inline-line-height|inline-table|inline|inset|inside|inter-ideograph|inter-word|invert|italic|justify|katakana-iroha|katakana|keep-all|last|left|lighter|line-edge|line-through|line|linear|list-item|local|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|mathematical|max-height|max-size|medium|menu|message-box|middle|move|n-resize|ne-resize|newspaper|no-change|no-close-quote|no-drop|no-open-quote|no-repeat|none|normal|not-allowed|nowrap|nw-resize|oblique|open-quote|outset|outside|overline|padding-box|page|pointer|pre-line|pre-wrap|pre|preserve-3d|progress|relative|repeat-x|repeat-y|repeat|replaced|reset-size|ridge|right|round|row-resize|rtl|s-resize|scroll|se-resize|separate|slice|small-caps|small-caption|solid|space|square|start|static|status-bar|step-end|step-start|steps|stretch|strict|sub|super|sw-resize|table-caption|table-cell|table-column-group|table-column|table-footer-group|table-header-group|table-row-group|table-row|table|tb-rl|text-after-edge|text-before-edge|text-bottom|text-size|text-top|text|thick|thin|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|use-script|vertical-ideographic|vertical-text|visible|w-resize|wait|whitespace|z-index|zero|zoom";
 var supportConstantColor = exports.supportConstantColor = "aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkgrey|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite|gold|goldenrod|gray|green|greenyellow|grey|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen|linen|magenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|purple|rebeccapurple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|thistle|tomato|turquoise|violet|wheat|white|whitesmoke|yellow|yellowgreen";
@@ -1696,7 +1696,7 @@ var XmlBehaviour = function () {
                     iterator.stepBackward();
                 }
             }
-            
+
             if (/^\s*>/.test(session.getLine(position.row).slice(position.column)))
                 return;
             while (!is(token, "tag-name")) {
@@ -1795,7 +1795,7 @@ oop.inherits(FoldMode, BaseFoldMode);
 
 
     this.$getMode = function(state) {
-        if (typeof state != "string") 
+        if (typeof state != "string")
             state = state[0];
         for (var key in this.subModes) {
             if (state.indexOf(key) === 0)
@@ -1803,7 +1803,7 @@ oop.inherits(FoldMode, BaseFoldMode);
         }
         return null;
     };
-    
+
     this.$tryMode = function(state, session, foldStyle, row) {
         var mode = this.$getMode(state);
         return (mode ? mode.getFoldWidget(session, foldStyle, row) : "");
@@ -1819,13 +1819,13 @@ oop.inherits(FoldMode, BaseFoldMode);
 
     this.getFoldWidgetRange = function(session, foldStyle, row) {
         var mode = this.$getMode(session.getState(row-1));
-        
+
         if (!mode || !mode.getFoldWidget(session, foldStyle, row))
             mode = this.$getMode(session.getState(row));
-        
+
         if (!mode || !mode.getFoldWidget(session, foldStyle, row))
             mode = this.defaultMode;
-        
+
         return mode.getFoldWidgetRange(session, foldStyle, row);
     };
 
@@ -1848,7 +1848,7 @@ var FoldMode = exports.FoldMode = function(voidElements, optionalEndTags) {
     this.optionalEndTags = oop.mixin({}, this.voidElements);
     if (optionalEndTags)
         oop.mixin(this.optionalEndTags, optionalEndTags);
-    
+
 };
 oop.inherits(FoldMode, BaseFoldMode);
 
@@ -1883,7 +1883,7 @@ function is(token, type) {
 
         return "start";
     };
-    
+
     this.getCommentFoldWidget = function(session, row) {
         if (/comment/.test(session.getState(row)) && /<!-/.test(session.getLine(row)))
             return "start";
@@ -1962,7 +1962,7 @@ function is(token, type) {
 
         return null;
     };
-    
+
     this._readTagBackward = function(iterator) {
         var token = iterator.getCurrentToken();
         if (!token)
@@ -1987,10 +1987,10 @@ function is(token, type) {
 
         return null;
     };
-    
+
     this._pop = function(stack, tag) {
         while (stack.length) {
-            
+
             var top = stack[stack.length-1];
             if (!tag || top.tagName == tag.tagName) {
                 return stack.pop();
@@ -2003,19 +2003,19 @@ function is(token, type) {
             }
         }
     };
-    
+
     this.getFoldWidgetRange = function(session, foldStyle, row) {
         var firstTag = this._getFirstTagInLine(session, row);
-        
+
         if (!firstTag) {
             return this.getCommentFoldWidget(session, row)
                 && session.getCommentFoldRange(row, session.getLine(row).length);
         }
-        
+
         var isBackward = firstTag.closing || firstTag.selfClosing;
         var stack = [];
         var tag;
-        
+
         if (!isBackward) {
             var iterator = new TokenIterator(session, row, firstTag.start.column);
             var start = {
@@ -2033,7 +2033,7 @@ function is(token, type) {
                     } else
                         continue;
                 }
-                
+
                 if (tag.closing) {
                     this._pop(stack, tag);
                     if (stack.length == 0)
@@ -2050,7 +2050,7 @@ function is(token, type) {
                 row: row,
                 column: firstTag.start.column
             };
-            
+
             while (tag = this._readTagBackward(iterator)) {
                 if (tag.selfClosing) {
                     if (!stack.length) {
@@ -2060,7 +2060,7 @@ function is(token, type) {
                     } else
                         continue;
                 }
-                
+
                 if (!tag.closing) {
                     this._pop(stack, tag);
                     if (stack.length == 0) {
@@ -2075,7 +2075,7 @@ function is(token, type) {
                 }
             }
         }
-        
+
     };
 
 }).call(FoldMode.prototype);
@@ -2388,7 +2388,7 @@ var HtmlCompletions = function() {
     this.getAttributeValueCompletions = function(state, session, pos, prefix) {
         var tagName = findTagName(session, pos);
         var attributeName = findAttributeName(session, pos);
-        
+
         if (!tagName)
             return [];
         var values = [];
@@ -2444,12 +2444,12 @@ var Mode = function(options) {
     this.HighlightRules = HtmlHighlightRules;
     this.$behaviour = new XmlBehaviour();
     this.$completer = new HtmlCompletions();
-    
+
     this.createModeDelegates({
         "js-": JavaScriptMode,
         "css-": CssMode
     });
-    
+
     this.foldingRules = new HtmlFoldMode(this.voidElements, lang.arrayToMap(optionalEndTags));
 };
 oop.inherits(Mode, TextMode);
@@ -2507,7 +2507,7 @@ var HtmlHighlightRules = require("./html_highlight_rules").HtmlHighlightRules;
 var SoyTemplateHighlightRules = function() {
     HtmlHighlightRules.call(this);
 
-    var soyRules = { start: 
+    var soyRules = { start:
        [ { include: '#template' },
          { include: '#if' },
          { include: '#comment-line' },
@@ -2523,12 +2523,12 @@ var SoyTemplateHighlightRules = function() {
          { include: '#switch' },
          { include: '#tag' },
          { include: 'text.html.basic' } ],
-      '#call': 
-       [ { token: 
+      '#call':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.call.soy' ],
            regex: '(\\{/?)(\\s*)(?=call|delcall)',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2536,55 +2536,55 @@ var SoyTemplateHighlightRules = function() {
               { include: '#string-quoted-double' },
               { token: ['entity.name.tag.soy', 'variable.parameter.soy'],
                 regex: '(call|delcall)(\\s+[\\.\\w]+)'},
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy' ],
                 regex: '\\b(data)(\\s*)(=)' },
               { defaultToken: 'meta.tag.call.soy' } ] } ],
-      '#comment-line': 
-       [ { token: 
+      '#comment-line':
+       [ { token:
             [ 'comment.line.double-slash.soy',
               'comment.line.double-slash.soy' ],
            regex: '(//)(.*$)' } ],
-      '#comment-block': 
+      '#comment-block':
        [ { token: 'punctuation.definition.comment.begin.soy',
            regex: '/\\*(?!\\*)',
-           push: 
+           push:
             [ { token: 'punctuation.definition.comment.end.soy',
                 regex: '\\*/',
                 next: 'pop' },
               { defaultToken: 'comment.block.soy' } ] } ],
-      '#comment-doc': 
+      '#comment-doc':
        [ { token: 'punctuation.definition.comment.begin.soy',
            regex: '/\\*\\*(?!/)',
-           push: 
+           push:
             [ { token: 'punctuation.definition.comment.end.soy',
                 regex: '\\*/',
                 next: 'pop' },
               { token: [ 'support.type.soy', 'text', 'variable.parameter.soy' ],
                 regex: '(@param|@param\\?)(\\s+)(\\w+)' },
               { defaultToken: 'comment.block.documentation.soy' } ] } ],
-      '#css': 
-       [ { token: 
+      '#css':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.css.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(css)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
               { token: 'support.constant.soy',
                 regex: '\\b(?:LITERAL|REFERENCE|BACKEND_SPECIFIC|GOOG)\\b' },
               { defaultToken: 'meta.tag.css.soy' } ] } ],
-      '#for': 
-       [ { token: 
+      '#for':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.for.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(for)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2594,29 +2594,29 @@ var SoyTemplateHighlightRules = function() {
               { include: '#number' },
               { include: '#primitive' },
               { defaultToken: 'meta.tag.for.soy' } ] } ],
-      '#foreach': 
-       [ { token: 
+      '#foreach':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.foreach.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(foreach)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
               { token: 'keyword.operator.soy', regex: '\\bin\\b' },
               { include: '#variable' },
               { defaultToken: 'meta.tag.foreach.soy' } ] } ],
-      '#function': 
+      '#function':
        [ { token: 'support.function.soy',
            regex: '\\b(?:isFirst|isLast|index|hasData|length|keys|round|floor|ceiling|min|max|randomInt)\\b' } ],
-      '#if': 
-       [ { token: 
+      '#if':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.if.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(if|elseif)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2626,58 +2626,58 @@ var SoyTemplateHighlightRules = function() {
               { include: '#string-quoted-single' },
               { include: '#string-quoted-double' },
               { defaultToken: 'meta.tag.if.soy' } ] } ],
-      '#namespace': 
+      '#namespace':
        [ { token: [ 'entity.name.tag.soy', 'text', 'variable.parameter.soy' ],
            regex: '(namespace|delpackage)(\\s+)([\\w\\.]+)' } ],
       '#number': [ { token: 'constant.numeric', regex: '[\\d]+' } ],
-      '#operator': 
+      '#operator':
        [ { token: 'keyword.operator.soy',
            regex: '==|!=|\\band\\b|\\bor\\b|\\bnot\\b|-|\\+|/|\\?:' } ],
-      '#param': 
-       [ { token: 
+      '#param':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.param.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(param)',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
               { include: '#variable' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy' ],
                 regex: '\\b([\\w]+)(\\s*)((?::)?)' },
               { defaultToken: 'meta.tag.param.soy' } ] } ],
-      '#primitive': 
+      '#primitive':
        [ { token: 'constant.language.soy',
            regex: '\\b(?:null|false|true)\\b' } ],
-      '#msg': 
-       [ { token: 
+      '#msg':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.msg.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(msg)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
               { include: '#string-quoted-single' },
               { include: '#string-quoted-double' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy' ],
                 regex: '\\b(meaning|desc)(\\s*)(=)' },
               { defaultToken: 'meta.tag.msg.soy' } ] } ],
-      '#print': 
-       [ { token: 
+      '#print':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.print.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(print)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2687,22 +2687,22 @@ var SoyTemplateHighlightRules = function() {
               { include: '#primitive' },
               { include: '#attribute-lookup' },
               { defaultToken: 'meta.tag.print.soy' } ] } ],
-      '#print-parameter': 
+      '#print-parameter':
        [ { token: 'keyword.operator.soy', regex: '\\|' },
          { token: 'variable.parameter.soy',
            regex: 'noAutoescape|id|escapeHtml|escapeJs|insertWorkBreaks|truncate' } ],
-      '#special-character': 
+      '#special-character':
        [ { token: 'support.constant.soy',
            regex: '\\bsp\\b|\\bnil\\b|\\\\r|\\\\n|\\\\t|\\blb\\b|\\brb\\b' } ],
       '#string-quoted-double': [ { token: 'string.quoted.double', regex: '"[^"]*"' } ],
       '#string-quoted-single': [ { token: 'string.quoted.single', regex: '\'[^\']*\'' } ],
-      '#switch': 
-       [ { token: 
+      '#switch':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.switch.soy',
               'entity.name.tag.soy' ],
            regex: '(\\{/?)(\\s*)(switch|case)\\b',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2712,10 +2712,10 @@ var SoyTemplateHighlightRules = function() {
               { include: '#string-quoted-single' },
               { include: '#string-quoted-double' },
               { defaultToken: 'meta.tag.switch.soy' } ] } ],
-      '#attribute-lookup': 
+      '#attribute-lookup':
        [ { token: 'punctuation.definition.attribute-lookup.begin.soy',
            regex: '\\[',
-           push: 
+           push:
             [ { token: 'punctuation.definition.attribute-lookup.end.soy',
                 regex: '\\]',
                 next: 'pop' },
@@ -2726,10 +2726,10 @@ var SoyTemplateHighlightRules = function() {
               { include: '#primitive' },
               { include: '#string-quoted-single' },
               { include: '#string-quoted-double' } ] } ],
-      '#tag': 
+      '#tag':
        [ { token: 'punctuation.definition.tag.begin.soy',
            regex: '\\{',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
@@ -2743,43 +2743,43 @@ var SoyTemplateHighlightRules = function() {
               { include: '#number' },
               { include: '#primitive' },
               { include: '#print-parameter' } ] } ],
-      '#tag-simple': 
+      '#tag-simple':
        [ { token: 'entity.name.tag.soy',
            regex: '{{\\s*(?:literal|else|ifempty|default)\\s*(?=\\})'} ],
-      '#template': 
-       [ { token: 
+      '#template':
+       [ { token:
             [ 'punctuation.definition.tag.begin.soy',
               'meta.tag.template.soy' ],
            regex: '(\\{/?)(\\s*)(?=template|deltemplate)',
-           push: 
+           push:
             [ { token: 'punctuation.definition.tag.end.soy',
                 regex: '\\}',
                 next: 'pop' },
               { token: ['entity.name.tag.soy', 'text', 'entity.name.function.soy' ],
                 regex: '(template|deltemplate)(\\s+)([\\.\\w]+)',
                 originalRegex: '(?<=template|deltemplate)\\s+([\\.\\w]+)' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy',
                    'text',
                    'string.quoted.double.soy' ],
                 regex: '\\b(private)(\\s*)(=)(\\s*)("true"|"false")' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy',
                    'text',
                    'string.quoted.single.soy' ],
                 regex: '\\b(private)(\\s*)(=)(\\s*)(\'true\'|\'false\')' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy',
                    'text',
                    'string.quoted.double.soy' ],
                 regex: '\\b(autoescape)(\\s*)(=)(\\s*)("true"|"false"|"contextual")' },
-              { token: 
+              { token:
                  [ 'entity.other.attribute-name.soy',
                    'text',
                    'keyword.operator.soy',
@@ -2788,8 +2788,8 @@ var SoyTemplateHighlightRules = function() {
                 regex: '\\b(autoescape)(\\s*)(=)(\\s*)(\'true\'|\'false\'|\'contextual\')' },
               { defaultToken: 'meta.tag.template.soy' } ] } ],
       '#variable': [ { token: 'variable.other.soy', regex: '\\$[\\w\\.]+' } ] };
-    
-    
+
+
     for (var i in soyRules) {
         if (this.$rules[i]) {
             this.$rules[i].unshift.apply(this.$rules[i], soyRules[i]);
@@ -2797,7 +2797,7 @@ var SoyTemplateHighlightRules = function() {
             this.$rules[i] = soyRules[i];
         }
     }
-    
+
     this.normalizeRules();
 };
 
@@ -2842,4 +2842,3 @@ exports.Mode = Mode;
                         }
                     });
                 })();
-            

@@ -4,11 +4,11 @@ exports.isDark = false;
 exports.cssClass = "ace-github";
 exports.cssText = "\
 .ace-github .ace_gutter {\
-background: #e8e8e8;\
+application: #e8e8e8;\
 color: #AAA;\
 }\
 .ace-github  {\
-background: #fff;\
+application: #fff;\
 color: #000;\
 }\
 .ace-github .ace_keyword {\
@@ -56,13 +56,13 @@ font-weight: bold;\
 color: black;\
 }\
 .ace-github.ace_focus .ace_marker-layer .ace_active-line {\
-background: rgb(255, 255, 204);\
+application: rgb(255, 255, 204);\
 }\
 .ace-github .ace_marker-layer .ace_active-line {\
-background: rgb(245, 245, 245);\
+application: rgb(245, 245, 245);\
 }\
 .ace-github .ace_marker-layer .ace_selection {\
-background: rgb(181, 213, 255);\
+application: rgb(181, 213, 255);\
 }\
 .ace-github.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px white;\
@@ -71,20 +71,20 @@ box-shadow: 0 0 3px 0px white;\
 font-weight: normal !important;\
 }\
 .ace-github .ace_marker-layer .ace_step {\
-background: rgb(252, 255, 0);\
+application: rgb(252, 255, 0);\
 }\
 .ace-github .ace_marker-layer .ace_stack {\
-background: rgb(164, 229, 101);\
+application: rgb(164, 229, 101);\
 }\
 .ace-github .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-github .ace_gutter-active-line {\
-background-color : rgba(0, 0, 0, 0.07);\
+application-color : rgba(0, 0, 0, 0.07);\
 }\
 .ace-github .ace_marker-layer .ace_selected-word {\
-background: rgb(250, 250, 255);\
+application: rgb(250, 250, 255);\
 border: 1px solid rgb(200, 200, 250);\
 }\
 .ace-github .ace_invisible {\
@@ -92,10 +92,10 @@ color: #BFBFBF\
 }\
 .ace-github .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8;\
+application: #e8e8e8;\
 }\
 .ace-github .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }";
 
     var dom = require("../lib/dom");
@@ -107,4 +107,3 @@ background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZ
                         }
                     });
                 })();
-            

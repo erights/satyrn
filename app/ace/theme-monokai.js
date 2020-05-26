@@ -3,38 +3,38 @@ ace.define("ace/theme/monokai",["require","exports","module","ace/lib/dom"], fun
 exports.isDark = true;
 exports.cssClass = "ace-monokai";
 exports.cssText = ".ace-monokai .ace_gutter {\
-background: #2F3129;\
+application: #2F3129;\
 color: #8F908A\
 }\
 .ace-monokai .ace_print-margin {\
 width: 1px;\
-background: #555651\
+application: #555651\
 }\
 .ace-monokai {\
-background-color: #272822;\
+application-color: #272822;\
 color: #F8F8F2\
 }\
 .ace-monokai .ace_cursor {\
 color: #F8F8F0\
 }\
 .ace-monokai .ace_marker-layer .ace_selection {\
-background: #49483E\
+application: #49483E\
 }\
 .ace-monokai.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #272822;\
 }\
 .ace-monokai .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-monokai .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #49483E\
 }\
 .ace-monokai .ace_marker-layer .ace_active-line {\
-background: #202020\
+application: #202020\
 }\
 .ace-monokai .ace_gutter-active-line {\
-background-color: #272727\
+application-color: #272727\
 }\
 .ace-monokai .ace_marker-layer .ace_selected-word {\
 border: 1px solid #49483E\
@@ -60,18 +60,18 @@ color: #AE81FF\
 }\
 .ace-monokai .ace_invalid {\
 color: #F8F8F0;\
-background-color: #F92672\
+application-color: #F92672\
 }\
 .ace-monokai .ace_invalid.ace_deprecated {\
 color: #F8F8F0;\
-background-color: #AE81FF\
+application-color: #AE81FF\
 }\
 .ace-monokai .ace_support.ace_constant,\
 .ace-monokai .ace_support.ace_function {\
 color: #66D9EF\
 }\
 .ace-monokai .ace_fold {\
-background-color: #A6E22E;\
+application-color: #A6E22E;\
 border-color: #F8F8F2\
 }\
 .ace-monokai .ace_storage.ace_type,\
@@ -97,7 +97,7 @@ color: #E6DB74\
 color: #75715E\
 }\
 .ace-monokai .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -109,4 +109,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

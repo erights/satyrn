@@ -3,38 +3,38 @@ ace.define("ace/theme/solarized_light",["require","exports","module","ace/lib/do
 exports.isDark = false;
 exports.cssClass = "ace-solarized-light";
 exports.cssText = ".ace-solarized-light .ace_gutter {\
-background: #fbf1d3;\
+application: #fbf1d3;\
 color: #333\
 }\
 .ace-solarized-light .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8\
+application: #e8e8e8\
 }\
 .ace-solarized-light {\
-background-color: #FDF6E3;\
+application-color: #FDF6E3;\
 color: #586E75\
 }\
 .ace-solarized-light .ace_cursor {\
 color: #000000\
 }\
 .ace-solarized-light .ace_marker-layer .ace_selection {\
-background: rgba(7, 54, 67, 0.09)\
+application: rgba(7, 54, 67, 0.09)\
 }\
 .ace-solarized-light.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #FDF6E3;\
 }\
 .ace-solarized-light .ace_marker-layer .ace_step {\
-background: rgb(255, 255, 0)\
+application: rgb(255, 255, 0)\
 }\
 .ace-solarized-light .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(147, 161, 161, 0.50)\
 }\
 .ace-solarized-light .ace_marker-layer .ace_active-line {\
-background: #EEE8D5\
+application: #EEE8D5\
 }\
 .ace-solarized-light .ace_gutter-active-line {\
-background-color : #EDE5C1\
+application-color : #EDE5C1\
 }\
 .ace-solarized-light .ace_marker-layer .ace_selected-word {\
 border: 1px solid #7f9390\
@@ -59,7 +59,7 @@ color: #B58900\
 color: #D33682\
 }\
 .ace-solarized-light .ace_fold {\
-background-color: #268BD2;\
+application-color: #268BD2;\
 border-color: #586E75\
 }\
 .ace-solarized-light .ace_entity.ace_name.ace_function,\
@@ -83,7 +83,7 @@ color: #D30102\
 color: #93A1A1\
 }\
 .ace-solarized-light .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYHjy8NJ/AAjgA5fzQUmBAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYHjy8NJ/AAjgA5fzQUmBAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -95,4 +95,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

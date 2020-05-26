@@ -3,38 +3,38 @@ ace.define("ace/theme/vibrant_ink",["require","exports","module","ace/lib/dom"],
 exports.isDark = true;
 exports.cssClass = "ace-vibrant-ink";
 exports.cssText = ".ace-vibrant-ink .ace_gutter {\
-background: #1a1a1a;\
+application: #1a1a1a;\
 color: #BEBEBE\
 }\
 .ace-vibrant-ink .ace_print-margin {\
 width: 1px;\
-background: #1a1a1a\
+application: #1a1a1a\
 }\
 .ace-vibrant-ink {\
-background-color: #0F0F0F;\
+application-color: #0F0F0F;\
 color: #FFFFFF\
 }\
 .ace-vibrant-ink .ace_cursor {\
 color: #FFFFFF\
 }\
 .ace-vibrant-ink .ace_marker-layer .ace_selection {\
-background: #6699CC\
+application: #6699CC\
 }\
 .ace-vibrant-ink.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #0F0F0F;\
 }\
 .ace-vibrant-ink .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-vibrant-ink .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #404040\
 }\
 .ace-vibrant-ink .ace_marker-layer .ace_active-line {\
-background: #333333\
+application: #333333\
 }\
 .ace-vibrant-ink .ace_gutter-active-line {\
-background-color: #333333\
+application-color: #333333\
 }\
 .ace-vibrant-ink .ace_marker-layer .ace_selected-word {\
 border: 1px solid #6699CC\
@@ -58,10 +58,10 @@ color: #99CC99\
 .ace-vibrant-ink .ace_invalid,\
 .ace-vibrant-ink .ace_invalid.ace_deprecated {\
 color: #CCFF33;\
-background-color: #000000\
+application-color: #000000\
 }\
 .ace-vibrant-ink .ace_fold {\
-background-color: #FFCC00;\
+application-color: #FFCC00;\
 border-color: #FFFFFF\
 }\
 .ace-vibrant-ink .ace_entity.ace_name.ace_function,\
@@ -86,7 +86,7 @@ font-style: italic;\
 color: #99CC99\
 }\
 .ace-vibrant-ink .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYNDTc/oPAALPAZ7hxlbYAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYNDTc/oPAALPAZ7hxlbYAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -98,4 +98,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            
