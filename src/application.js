@@ -47,28 +47,46 @@ app.on("ready", () => {
 //////////////////////////////////////////////////////////////////////////////////
 export let newSatyrnWindow = (satyrnDocumentUrl) => {
   // first define the callback function for window creation
-  let onReady = (currentElectronWindow) => {
+  let onDomReady = (electronWindow) => {
     // first, store the URL for reloading later (if called to do so)
-    currentElectronWindow.reloadContent = {
+    electronWindow.reloadContent = {
       url: satyrnDocumentUrl
     };
-
+    setWindowTitle(electronWindow, satyrnDocumentUrl);
     // now send the URL to the window so it loads the Satyrn file
-    currentElectronWindow.send('load-document', satyrnDocumentUrl);
+    electronWindow.send('load-document', satyrnDocumentUrl);
   };
+
+  const electronWindow = createElectronWindow(satyrnDocumentUrl, {
+    width: 1000,
+    height: 600,
+    webPreferences: {
+      nativeWindowOpen: true,
+      nodeIntegration: true
+    },
+  });
+
+  const satyrnWindowTemplateUrl = url.format({
+    pathname: path.join(__dirname, "app.html"),
+    protocol: "file:",
+    slashes: true
+  })
+
+  electronWindow.loadURL(
+    satyrnWindowTemplateUrl
+  );
+
+  registerListenersOnElectronWindow(electronWindow, onDomReady)
 
   // create a menu object
   let menu = createMenu();
+  electronWindow.setMenu(menu)
 
-  // create the window, passing the url and onReady callback
-  let window = createSatyrnWindow(satyrnDocumentUrl, onReady);
-
-  window.setMenu(menu)
-  let windowState = new WindowState(window, menu);
+  let windowState = new WindowState(electronWindow, menu);
   windowStates.push(windowState);
-  window.state = windowState;
+  electronWindow.state = windowState;
 
-  return window
+  return electronWindow
 }
 
 
@@ -88,29 +106,7 @@ app.on("window-all-closed", () => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-function createSatyrnWindow(documentUrl, onReady) {
-  const window = createElectronWindow(documentUrl, {
-    width: 1000,
-    height: 600,
-    webPreferences: {
-      nativeWindowOpen: true,
-      nodeIntegration: true
-    },
-  });
-
-
-
-  const satyrnWindowTemplateUrl = url.format({
-    pathname: path.join(__dirname, "app.html"),
-    protocol: "file:",
-    slashes: true
-  })
-
-
-  window.loadURL(
-    satyrnWindowTemplateUrl
-  );
-
+function registerListenersOnElectronWindow(window, onDomReady) {
 
   window.webContents.on('devtools-reload-page', () => {
     window.webContents.once('dom-ready', () => {
@@ -124,15 +120,15 @@ function createSatyrnWindow(documentUrl, onReady) {
 
 
   window.webContents.on('new-window', function (e, newSatyrnDocumentUrl, disposition) {
-    // about:blank is opened when creating stand-alone helper windows
-    // such as for the About page and the Guide
     console.log('new-window', newSatyrnDocumentUrl);
+    // Opens satyrn document in a new electron windown
     if (disposition === "_satyrn") {
       e.preventDefault();
       newSatyrnWindow(newSatyrnDocumentUrl);
       return false
     }
-    if (disposition === "satyrn") {
+    // Opens satyrn document in current electron window
+    else if (disposition === "satyrn") {
       e.preventDefault();
       window.reloadContent = {
         url: newSatyrnDocumentUrl
@@ -145,20 +141,13 @@ function createSatyrnWindow(documentUrl, onReady) {
       window.send("load-document", newSatyrnDocumentUrl);
       return false
     }
-    if (newSatyrnDocumentUrl && newSatyrnDocumentUrl !== 'about:blank') {
-      e.preventDefault();
-      shell.openExternal(newSatyrnDocumentUrl);
-      return false;
-    }
   });
 
   window.webContents.once('dom-ready', () => {
-    onReady(window);
-    setWindowTitle(window, documentUrl);
+    onDomReady(window);
+
 
   })
-
-  return window;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
