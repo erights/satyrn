@@ -100,7 +100,7 @@ function createSatyrnWindow(documentUrl, onReady) {
 
 
 
-  const defaultUrl = url.format({
+  const satyrnWindowTemplateUrl = url.format({
     pathname: path.join(__dirname, "app.html"),
     protocol: "file:",
     slashes: true
@@ -108,7 +108,7 @@ function createSatyrnWindow(documentUrl, onReady) {
 
 
   window.loadURL(
-    defaultUrl
+    satyrnWindowTemplateUrl
   );
 
 
