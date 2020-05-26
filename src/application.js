@@ -14,7 +14,6 @@ import BrowserState from './state/window/browserState';
 // in config/env_xxx.json file.
 import env from "env";
 import WindowState from "./state/application/windowState";
-//import AppState from "./state/application/appState";
 const electronLocalshortcut = require('electron-localshortcut');
 
 //////////////////////////////////////////////////////////////////////////////////
