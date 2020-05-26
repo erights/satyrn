@@ -17,6 +17,18 @@ import WindowState from "./state/application/windowState";
 //import AppState from "./state/application/appState";
 const electronLocalshortcut = require('electron-localshortcut');
 
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+// Save userData in separate folders for each environment.
+// Thanks to this you can use production and development versions of the app
+// on same machine like those are two separate apps.
+if (env.name !== "production") {
+  let reload = require('electron-reload')
+  reload(__dirname);
+  const userDataPath = app.getPath("userData");
+  app.setPath("userData", `${userDataPath} (${env.name})`);
+}
+
 // the only state managemed by application.js is the array of windows
 // (each window keeps track of its own menus and context
 let windowStates = [];
@@ -70,19 +82,6 @@ export const createMenu = () => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// Save userData in separate folders for each environment.
-// Thanks to this you can use production and development versions of the app
-// on same machine like those are two separate apps.
-if (env.name !== "production") {
-  let reload = require('electron-reload')
-  reload(__dirname);
-  const userDataPath = app.getPath("userData");
-  app.setPath("userData", `${userDataPath} (${env.name})`);
-}
-
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 app.on("window-all-closed", () => {
   app.quit();
 });
@@ -131,14 +130,6 @@ function createSatyrnWindow(filePath, onReady) {
     if (disposition === "_satyrn") {
       e.preventDefault();
       newSatyrnWindow(url);
-      // let onReady = (currentWindow) => {
-      //   currentWindow.reloadContent = {
-      //     url: url
-      //   };
-      //   currentWindow.send("load-url", url);
-      // }
-      // let newWindow = createSatyrnWindow(url, onReady);
-      // newWindow.setMenu(createMenu());
       return false
     }
     if (disposition === "satyrn") {
