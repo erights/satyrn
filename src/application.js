@@ -1,7 +1,11 @@
+// application.js
+// ---------------------------------------------------------------------------
 // This is main process of Electron, started as first thing when your
 // app starts. It runs through entire life of your application.
 // It doesn't have any windows which you can see on screen, but we can open
 // window from here.
+
+
 import path from "path";
 import url from "url";
 import { app, Menu, ipcMain, shell, BrowserWindow, remote, dialog } from "electron";
