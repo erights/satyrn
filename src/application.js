@@ -119,7 +119,7 @@ function registerListenersOnElectronWindow(window, onDomReady) {
     window.toggleDevTools();
   });
 
-
+  // new-window is the event fired after loading the original html template
   window.webContents.on('new-window', function (e, newSatyrnDocumentUrl, disposition) {
     console.log('new-window', newSatyrnDocumentUrl);
     // Opens satyrn document in a new electron windown
