@@ -68,7 +68,7 @@ export let newSatyrnWindow = (satyrnDocumentUrl) => {
   });
 
   const satyrnWindowTemplateUrl = url.format({
-    pathname: path.join(__dirname, "app.html"),
+    pathname: path.join(__dirname, "satyrn-window.html"),
     protocol: "file:",
     slashes: true
   })

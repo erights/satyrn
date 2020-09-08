@@ -47,7 +47,7 @@
 | showdown                                    | https://github.com/showdownjs/showdown                                                        | BSD            |
 | source-map                                  | https://github.com/mozilla/source-map                                                         | BSD            |
 | sprintf-js                                  | https://github.com/alexei/sprintf.js                                                          | BSD            |
-| terser                                      | https://github.com/fabiosantoscode/terser                                                     | BSD            |
+| terser                                      | https://github.com/terser/terser                                                              | BSD            |
 | tough-cookie                                | https://github.com/salesforce/tough-cookie                                                    | BSD            |
 | uglify-js                                   | https://github.com/mishoo/UglifyJS2                                                           | BSD            |
 | update-notifier                             | https://github.com/yeoman/update-notifier                                                     | BSD            |
@@ -58,9 +58,10 @@
 | ansi-align                                  | https://github.com/nexdrew/ansi-align                                                         | ISC            |
 | anymatch                                    | https://github.com/micromatch/anymatch                                                        | ISC            |
 | aproba                                      | https://github.com/iarna/aproba                                                               | ISC            |
+| at-least-node                               | https://github.com/RyanZim/at-least-node                                                      | ISC            |
 | browser-stdout                              | https://github.com/kumavis/browser-stdout                                                     | ISC            |
 | browserify-sign                             | https://github.com/crypto-browserify/browserify-sign                                          | ISC            |
-| cacache                                     | https://github.com/zkat/cacache                                                               | ISC            |
+| cacache                                     | https://github.com/npm/cacache                                                                | ISC            |
 | chownr                                      | https://github.com/isaacs/chownr                                                              | ISC            |
 | cli-width                                   | https://github.com/knownasilya/cli-width                                                      | ISC            |
 | cliui                                       | https://github.com/yargs/cliui                                                                | ISC            |
@@ -71,13 +72,14 @@
 | fs-write-stream-atomic                      | https://github.com/npm/fs-write-stream-atomic                                                 | ISC            |
 | fs.realpath                                 | https://github.com/isaacs/fs.realpath                                                         | ISC            |
 | get-caller-file                             | https://github.com/stefanpenner/get-caller-file                                               | ISC            |
-| glob-parent                                 | https://github.com/es128/glob-parent                                                          | ISC            |
+| glob-parent                                 | https://github.com/gulpjs/glob-parent                                                         | ISC            |
 | glob                                        | https://github.com/isaacs/node-glob                                                           | ISC            |
 | graceful-fs                                 | https://github.com/isaacs/node-graceful-fs                                                    | ISC            |
 | har-schema                                  | https://github.com/ahmadnassri/har-schema                                                     | ISC            |
 | hosted-git-info                             | https://github.com/npm/hosted-git-info                                                        | ISC            |
 | icss-replace-symbols                        | https://github.com/css-modules/icss-replace-symbols                                           | ISC            |
 | icss-utils                                  | https://github.com/css-modules/icss-utils                                                     | ISC            |
+| infer-owner                                 | https://github.com/npm/infer-owner                                                            | ISC            |
 | inflight                                    | https://github.com/npm/inflight                                                               | ISC            |
 | inherits                                    | https://github.com/isaacs/inherits                                                            | ISC            |
 | ini                                         | https://github.com/isaacs/ini                                                                 | ISC            |
@@ -305,7 +307,7 @@
 | fill-range                                  | https://github.com/jonschlinkert/fill-range                                                   | MIT            |
 | find-cache-dir                              | https://github.com/avajs/find-cache-dir                                                       | MIT            |
 | find-up                                     | https://github.com/sindresorhus/find-up                                                       | MIT            |
-| findup-sync                                 | https://github.com/js-cli/node-findup-sync                                                    | MIT            |
+| findup-sync                                 | https://github.com/gulpjs/findup-sync                                                         | MIT            |
 | flush-write-stream                          | https://github.com/mafintosh/flush-write-stream                                               | MIT            |
 | for-in                                      | https://github.com/jonschlinkert/for-in                                                       | MIT            |
 | form-data                                   | https://github.com/form-data/form-data                                                        | MIT            |
@@ -374,7 +376,7 @@
 | is-extglob                                  | https://github.com/jonschlinkert/is-extglob                                                   | MIT            |
 | is-finite                                   | https://github.com/sindresorhus/is-finite                                                     | MIT            |
 | is-fullwidth-code-point                     | https://github.com/sindresorhus/is-fullwidth-code-point                                       | MIT            |
-| is-glob                                     | https://github.com/jonschlinkert/is-glob                                                      | MIT            |
+| is-glob                                     | https://github.com/micromatch/is-glob                                                         | MIT            |
 | is-installed-globally                       | https://github.com/sindresorhus/is-installed-globally                                         | MIT            |
 | is-npm                                      | https://github.com/sindresorhus/is-npm                                                        | MIT            |
 | is-number                                   | https://github.com/jonschlinkert/is-number                                                    | MIT            |
@@ -391,6 +393,7 @@
 | is-typedarray                               | https://github.com/hughsk/is-typedarray                                                       | MIT            |
 | is-utf8                                     | https://github.com/wayfind/is-utf8                                                            | MIT            |
 | is-windows                                  | https://github.com/jonschlinkert/is-windows                                                   | MIT            |
+| is-wsl                                      | https://github.com/sindresorhus/is-wsl                                                        | MIT            |
 | isarray                                     | https://github.com/juliangruber/isarray                                                       | MIT            |
 | isbinaryfile                                | https://github.com/gjtorikian/isBinaryFile                                                    | MIT            |
 | isobject                                    | https://github.com/jonschlinkert/isobject                                                     | MIT            |
@@ -498,6 +501,7 @@
 | pbkdf2                                      | https://github.com/crypto-browserify/pbkdf2                                                   | MIT            |
 | pend                                        | https://github.com/andrewrk/node-pend                                                         | MIT            |
 | performance-now                             | https://github.com/braveg1rl/performance-now                                                  | MIT            |
+| picomatch                                   | https://github.com/micromatch/picomatch                                                       | MIT            |
 | pify                                        | https://github.com/sindresorhus/pify                                                          | MIT            |
 | pinkie-promise                              | https://github.com/floatdrop/pinkie-promise                                                   | MIT            |
 | pinkie                                      | https://github.com/floatdrop/pinkie                                                           | MIT            |
@@ -639,9 +643,10 @@
 | util.promisify                              | https://github.com/ljharb/util.promisify                                                      | MIT            |
 | util                                        | https://github.com/defunctzombie/node-util                                                    | MIT            |
 | uuid                                        |                                                                                               | MIT            |
-| v8-compile-cache                            |                                                                                               | MIT            |
+| v8-compile-cache                            | https://github.com/zertosh/v8-compile-cache                                                   | MIT            |
 | verror                                      | https://github.com/davepacheco/node-verror                                                    | MIT            |
 | vm-browserify                               | https://github.com/substack/vm-browserify                                                     | MIT            |
+| watchpack-chokidar2                         | https://github.com/webpack/watchpack                                                          | MIT            |
 | watchpack                                   | https://github.com/webpack/watchpack                                                          | MIT            |
 | wdio-dot-reporter                           | https://github.com/webdriverio/wdio-dot-reporter                                              | MIT            |
 | webdriverio                                 | https://github.com/webdriverio/webdriverio                                                    | MIT            |
