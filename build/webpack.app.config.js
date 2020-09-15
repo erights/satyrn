@@ -6,7 +6,7 @@ module.exports = env => {
   return merge(base(env), {
     entry: {
       application: "./src/application.js",
-      satyrnWindow: "./src/satyrn-window.js",
+      satyrnWindow: "./src/satyrnWindow.js",
       browserState: "./src/state/application/windowState.js",
       // contentState: "./stc/state/contentState.js"
     },

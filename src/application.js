@@ -9,9 +9,9 @@
 import path from "path";
 import url from "url";
 import { app, Menu, ipcMain, shell, BrowserWindow, remote, dialog } from "electron";
-import { editMenuTemplate } from "./menu/edit_menu_template";
-import { fileMenuTemplate } from "./menu/file_menu_template";
-import { helpMenuTemplate } from "./menu/help_menu_template";
+import { editMenuTemplate } from "./menu/editMenuTemplate";
+import { fileMenuTemplate } from "./menu/fileMenuTemplate";
+import { helpMenuTemplate } from "./menu/helpMenuTemplate";
 import createElectronWindow from "./helpers/window";
 import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared

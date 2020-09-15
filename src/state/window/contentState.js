@@ -1,5 +1,5 @@
 import { Kernel } from '../kernel'
-import showdownConverter from '../../helpers/showdown-converter';
+import showdownConverter from '../../helpers/showdownConverter';
 import path from "path";
 
 const EDITOR_ID = "editor-"

@@ -3,7 +3,7 @@ import { createMenu, newSatyrnWindow, saveFileAs, setWindowTitle } from "../appl
 
 var path = require('path');
 import env from "env";
-import { helpMenuTemplate } from "./help_menu_template";
+import { helpMenuTemplate } from "./helpMenuTemplate";
 import url from "url";
 
 export const fileMenuTemplate = {

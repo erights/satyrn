@@ -1,5 +1,5 @@
 import { newSatyrnWindow } from "../application";
-import { fileMenuTemplate } from "./help_popup_window_file_menu_template";
+import { fileMenuTemplate } from "./helpPopupMenuTemplate";
 import { Menu } from "electron";
 import WindowState from "../state/application/windowState";
 
