@@ -1,9 +1,8 @@
-import { app, BrowserWindow, dialog, Menu, remote } from "electron";
-import { createMenu, newSatyrnWindow, saveFileAs, setWindowTitle } from "../application";
+import {remote, ipcRenderer} from "electron";
+import {saveFile, toggleEditMode, toggleRealtimeRendering, loadSatyrnDocument, reloadWindow, saveFileAs} from '../satyrnWindow'
 
 var path = require('path');
 import env from "env";
-import { helpMenuTemplate } from "./helpMenuTemplate";
 import url from "url";
 
 export const fileMenuTemplate = {
@@ -22,18 +21,18 @@ export const fileMenuTemplate = {
     {
       label: "Reload",
       accelerator: "CmdOrCtrl+R",
-      click: reloadPage
+      click: reloadWindow
     },
     {
       label: "Save",
       accelerator: "CmdOrCtrl+S",
-      click: saveFile
+      click: () => saveFile()
     },
     {
       label: "Save As",
       click: saveFileAs
     },
-    { type: "separator" },
+    {type: "separator"},
     {
       label: "Edit Mode",
       type: "checkbox",
@@ -45,7 +44,7 @@ export const fileMenuTemplate = {
       label: "Real-time Render",
       type: "checkbox",
       accelerator: "CmdOrCtrl+T",
-      click: toggleRealTimeRender,
+      click: toggleRealtimeRendering,
       checked: true
     },
     { type: "separator" },
@@ -53,84 +52,52 @@ export const fileMenuTemplate = {
       label: "Close",
       // accelerator: "CmdOrCtrl+Q",
       click: () => {
-        BrowserWindow.getFocusedWindow().close()
+        remote.getCurrentWindow().close()
       }
     },
     {
       label: "Quit",
       accelerator: "CmdOrCtrl+Q",
       click: () => {
-        app.quit();
+        ipcRenderer.send("quit-app")
       }
     },
   ]
 };
 
+
+
 function newFile() {
   let url = process.cwd() + "/markdown/untitled.mdt";
-
-  let window = newSatyrnWindow(url);
-  const menus = [fileMenuTemplate, helpMenuTemplate];
-  window.setMenu(Menu.buildFromTemplate(menus));
+  ipcRenderer.send('new-satyrn-window', url)
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-function reloadPage() {
-  let focusedWindow = BrowserWindow.getFocusedWindow();
-  // TODO check it is okay not to use this
-  // focusedWindow.reload()
-  // BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
-  // focusedWindow.setMenu(createMenu());
-  focusedWindow.send('reload-window-content');
-
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-function toggleEditMode() {
-
-  BrowserWindow.getFocusedWindow().send('toggle-edit-mode');
-
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-function toggleRealTimeRender() {
-
-  BrowserWindow.getFocusedWindow().send('toggle-realtime-render');
-
-}
-
-function saveFile() {
-
-  BrowserWindow.getFocusedWindow().send('save-file', null);
-}
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 function fileOpenDialog() {
-  const focusedWindow = BrowserWindow.getFocusedWindow();
-  const options = {
+  const focusedWindow = remote.getCurrentWindow();
+  let options = {
     title: 'Open a markdown file',
     buttonLabel: 'Open',
     filters: [
-      { name: 'markdown', extensions: ['md'] }
+      {name: 'markdown', extensions: ['md']}
     ]
   };
 
-  dialog.showOpenDialog(focusedWindow, options, (fileNames) => {
+  remote.dialog.showOpenDialog(focusedWindow, options, (fileNames) => {
 
     // fileNames is an array that contains all the selected
-    if (fileNames === undefined) {
+    if(fileNames === undefined)
+    {
       console.log("No file selected");
       return;
     }
-
-    focusedWindow.documentSrcUrl = fileNames[0]
-    setWindowTitle(focusedWindow, fileNames[0]);
-    focusedWindow.state.newBrowser()
-    focusedWindow.send('load-document', fileNames[0]);
+    let filename = fileNames[0]
+    focusedWindow.documentSrcUrl = filename
+    focusedWindow.setTitle(filename + " -- Satyrn")
+    // focusedWindow.state.newBrowser()
+    loadSatyrnDocument(filename);
 
   })
 }

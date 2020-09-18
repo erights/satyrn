@@ -1,59 +1,29 @@
-import { newSatyrnWindow } from "../application";
 import { fileMenuTemplate } from "./helpPopupMenuTemplate";
-import { Menu } from "electron";
-import WindowState from "../state/application/windowState";
+import { ipcRenderer } from "electron";
 
-let aboutWindow = null;
-let tutorialWindow = null;
-let copyrightWindow = null;
 
 export const helpMenuTemplate = {
   label: "Help",
   submenu: [
     {
       label: "Tutorial",
-      click: () => showHelpMenuWindow(tutorialWindow, "Tutorial", "/markdown/tutorial.md")
+      click: () => showHelpMenuWindow("/markdown/tutorial.md")
     },
     {
       label: "About",
-      click: () => showHelpMenuWindow(aboutWindow, "About", "/markdown/about.md")
+      click: () => showHelpMenuWindow("/markdown/about.md")
     },
     {
       label: "Copyright",
-      click: () => showHelpMenuWindow(copyrightWindow, "Copyright", "/license.md")
+      click: () => showHelpMenuWindow("/license.md")
     }
   ]
 };
 
-function showHelpMenuWindow(helpWindow, name, url) {
-  console.log("HELP WINDOW", helpWindow);
-  if (helpWindow) {
-    helpWindow.focus()
-  } else {
-    helpWindow = createHelpWindow(name, url);
-    helpWindow.on("close", () => {
-      helpWindow = null;
-    });
-    if (name === "About") {
-      aboutWindow = helpWindow;
-    } else if (name === "Tutorial") {
-      tutorialWindow = helpWindow;
-    } else if (name === "Copyright") {
-      copyrightWindow = helpWindow;
-    }
-  }
-
+function showHelpMenuWindow(path) {
+  let url = process.cwd() + path;
+  ipcRenderer.send('new-satyrn-window', url)
 }
 
-function createHelpWindow(name, url) {
-  let fileUrl = process.cwd() + url;
-
-  let window = newSatyrnWindow(fileUrl);
-  const menus = [fileMenuTemplate];
-
-  window.setMenu(Menu.buildFromTemplate(menus));
-  window.setMenuBarVisibility(false);
-  return window;
-}
 
 

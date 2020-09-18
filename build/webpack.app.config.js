@@ -7,8 +7,6 @@ module.exports = env => {
     entry: {
       application: "./src/application.js",
       satyrnWindow: "./src/satyrnWindow.js",
-      browserState: "./src/state/application/windowState.js",
-      // contentState: "./stc/state/contentState.js"
     },
     output: {
       filename: "[name].js",

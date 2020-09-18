@@ -5,19 +5,13 @@
 // It doesn't have any windows which you can see on screen, but we can open
 // window from here.
 
-
 import path from "path";
 import url from "url";
 import { app, Menu, ipcMain, shell, BrowserWindow, remote, dialog } from "electron";
-import { editMenuTemplate } from "./menu/editMenuTemplate";
-import { fileMenuTemplate } from "./menu/fileMenuTemplate";
-import { helpMenuTemplate } from "./menu/helpMenuTemplate";
 import createElectronWindow from "./helpers/window";
-import BrowserState from './state/window/browserState';
 // Special module holding environment variables which you declared
 // in config/env_xxx.json file.
 import env from "env";
-import WindowState from "./state/application/windowState";
 const electronLocalshortcut = require('electron-localshortcut');
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -31,11 +25,6 @@ if (env.name !== "production") {
   const userDataPath = app.getPath("userData");
   app.setPath("userData", `${userDataPath} (${env.name})`);
 }
-
-// the only state managemed by application.js is the array of windows
-// (each window keeps track of its own menus and context
-let windowStates = [];
-// TODO: we need to add the ability to reopen closed windows
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
@@ -79,24 +68,11 @@ export let newSatyrnWindow = (satyrnDocumentUrl) => {
 
   registerListenersOnElectronWindow(electronWindow, onDomReady)
 
-  // create a menu object
-  let menu = createMenu();
-  electronWindow.setMenu(menu)
 
-  let windowState = new WindowState(electronWindow, menu);
-  windowStates.push(windowState);
-  electronWindow.state = windowState;
 
   return electronWindow
 }
 
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-export const createMenu = () => {
-  const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
-  return Menu.buildFromTemplate(menus);
-};
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -134,8 +110,6 @@ function registerListenersOnElectronWindow(window, onDomReady) {
       window.documentSrcUrl = newSatyrnDocumentUrl
 
       setWindowTitle(window, newSatyrnDocumentUrl);
-      console.log("Set Menu")
-      window.state.newMenu()
 
       window.send("load-document", newSatyrnDocumentUrl);
       return false
@@ -182,26 +156,11 @@ export function saveFileAs(focusedWindow) {
   })
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-ipcMain.on('set-document-src-url', (event, documentSrcUrl) => {
-  let focusedWindow = event.sender.getOwnerBrowserWindow()
-  focusedWindow.documentSrcUrl = documentSrcUrl
-});
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-ipcMain.on('save-file-as', (event) => {
-  let focusedWindow = event.sender.getOwnerBrowserWindow()
-  saveFileAs(focusedWindow);
+ipcMain.on('new-satyrn-window', (event, url) => {
+  newSatyrnWindow(url)
 })
 
-ipcMain.on('navigate-backwards', (event) => {
-  let focusedWindow = event.sender.getOwnerBrowserWindow()
-  focusedWindow.state.navigateBackwards();
-})
-
-ipcMain.on('navigate-forwards', (event) => {
-  let focusedWindow = event.sender.getOwnerBrowserWindow()
-  focusedWindow.state.navigateForwards();
+ipcMain.on('quit-app', () => {
+  app.quit()
 })

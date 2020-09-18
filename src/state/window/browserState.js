@@ -27,8 +27,6 @@ function BrowserState(file) {
       this.contentState = previousContentState;
 
       this.contentState.rebuildDocument()
-      ipcRenderer.send("navigate-backwards")
-
     } else {
       console.log("Nothing on the backwards stack")
     }
@@ -41,7 +39,6 @@ function BrowserState(file) {
       this.backwardStack.push(this.contentState);
       this.contentState = nextContentState;
       this.contentState.rebuildDocument()
-      ipcRenderer.send("navigate-forwards")
 
     } else {
       console.log("Nothing on the forwards stack")

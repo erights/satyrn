@@ -8,10 +8,12 @@ import "./helpers/contextMenu.js";
 import "./helpers/externalLinks.js";
 
 import {ipcRenderer, dialog, remote} from "electron";
-
+let Menu = remote.Menu
 import showdown  from 'showdown';
 window.showdown = showdown;
-
+import { editMenuTemplate } from "./menu/editMenuTemplate";
+import { fileMenuTemplate } from "./menu/fileMenuTemplate";
+import { helpMenuTemplate } from "./menu/helpMenuTemplate";
 
 // --------------------- --------------------- ---------------------
 // application state
@@ -20,29 +22,45 @@ import BrowserState from './state/window/browserState'
 let browserState = new BrowserState();
 window.browserState = browserState;
 
-
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-//  save-file -> write the current document to a file.
-ipcRenderer.on('save-file', function(event, arg) {
-  saveFile(event, arg)
+export const createMenu = () => {
+  const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
+  return Menu.buildFromTemplate(menus);
+};
+remote.getCurrentWindow().setMenu(createMenu())
 
-});
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-edit-mode -> enable document editing (teacher mode)
-ipcRenderer.on('toggle-edit-mode', function(event, args) {
+export function toggleEditMode() {
   browserState.contentState.setEditMode(!browserState.contentState.isEditMode)
 
-});
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-realtime-render -> flip real time render mode
-ipcRenderer.on('toggle-realtime-render', (event, args) => {
+export function toggleRealtimeRendering() {
   browserState.contentState.toggleRealTimeRender();
+};
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+ipcRenderer.on('reload-window-content', (event) => {
+  reloadWindow()
+
 });
+
+export function reloadWindow() {
+  console.log("Reload window content", browserState);
+  window.browserState.contentState.reloadContent();
+}
+
+ipcRenderer.on('browser-state', (event, newBrowserState) => {
+  console.log("New Browser State", newBrowserState);
+})
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
@@ -53,20 +71,8 @@ ipcRenderer.on('load-document', (event,url) => {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-ipcRenderer.on('reload-window-content', (event) => {
-  console.log("Reload window content", browserState);
-  window.browserState.contentState.reloadContent();
-
-});
-
-ipcRenderer.on('browser-state', (event, newBrowserState) => {
-  console.log("New Browser State", newBrowserState);
-})
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 // loadSatyrnDocument is called when a link has been clicked on
-function loadSatyrnDocument(url) {
+export function loadSatyrnDocument(url) {
   console.log('loading satyrn document from url : ', url);
 
   let request = new XMLHttpRequest();
@@ -74,8 +80,6 @@ function loadSatyrnDocument(url) {
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
-//      let type = request.getResponseHeader('Content-Type');
-//      if (type.indexOf("text") !== 1) {
         window.browserState.openFile(url, request.responseText)
     }
   }
@@ -83,7 +87,7 @@ function loadSatyrnDocument(url) {
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-function  saveFile(event, url) {
+export function saveFile(url) {
   let protectedFolderPath = process.cwd() + '/markdown/';
   let fileContent = document.getElementById("teacher").value;
   let fileName = url ? url : browserState.contentState.currentFile;
@@ -99,27 +103,50 @@ function  saveFile(event, url) {
       if (response === 0) {
         console.log("Cancelled Save")
       } else if (response === 1) {
-        event.sender.send("save-file-as")
+        saveFileAs()
       } else if (response === 2) {
-        writeFile(event.sender, fileName, fileContent)
+        writeFile(fileName, fileContent)
       }
     })
   }
   else {
-    writeFile(event.sender, fileName, fileContent);
+    writeFile(fileName, fileContent);
   }
 }
 
-function writeFile(sender, fileName, fileContent) {
-  console.log("Write file", fileName);
-  fs.writeFile(fileName, fileContent, function(err) {
+export function saveFileAs() {
+  const focusedWindow = remote.getCurrentWindow()
+  const options = {
+    title: 'Save Markdown As',
+    buttonLabel: 'Save',
+    filters: [
+      {name: 'markdown', extensions: ['md']}
+    ]
+  };
+  remote.dialog.showSaveDialog(focusedWindow, options, (filename) => {
+
+    // fileNames is an array that contains all the selected
+    if(filename === undefined)
+    {
+      console.log("No file selected");
+      return;
+    }
+    console.log(filename)
+    focusedWindow.setTitle(filename)
+    saveFile(filename)
+  })
+}
+
+function writeFile(filename, fileContent) {
+  console.log("Write file", filename);
+  fs.writeFile(filename, fileContent, function(err) {
     if(err) {
       return alert(err);
     }
-    browserState.contentState.saveFile(fileName, fileContent);
+    browserState.contentState.saveFile(filename, fileContent);
 
     console.log("The file was saved and the name was changed!");
-    sender.send("set-document-src-url", fileName)
+    remote.getCurrentWindow().documentSrcUrl = documentSrcUrl
   });
 }
 
