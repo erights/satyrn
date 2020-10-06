@@ -11,24 +11,17 @@ import {ipcRenderer, dialog, remote} from "electron";
 let Menu = remote.Menu
 import showdown  from 'showdown';
 window.showdown = showdown;
-import { editMenuTemplate } from "./menu/editMenuTemplate";
-import { fileMenuTemplate } from "./menu/fileMenuTemplate";
-import { helpMenuTemplate } from "./menu/helpMenuTemplate";
+
 
 // --------------------- --------------------- ---------------------
 // application state
 import BrowserState from './state/window/browserState'
 
 let browserState = new BrowserState();
+browserState.buildMenu()
 window.browserState = browserState;
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-export const createMenu = () => {
-  const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
-  return Menu.buildFromTemplate(menus);
-};
-remote.getCurrentWindow().setMenu(createMenu())
+
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +48,7 @@ ipcRenderer.on('reload-window-content', (event) => {
 
 export function reloadWindow() {
   console.log("Reload window content", browserState);
-  window.browserState.contentState.reloadContent();
+  browserState.contentState.reloadContent();
 }
 
 ipcRenderer.on('browser-state', (event, newBrowserState) => {
@@ -80,7 +73,7 @@ export function loadSatyrnDocument(url) {
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
-        window.browserState.openFile(url, request.responseText)
+        browserState.openFile(url, request.responseText)
     }
   }
 }
@@ -150,7 +143,4 @@ function writeFile(filename, fileContent) {
   });
 }
 
-window.navigateBackwards = function() {
-  let contentState = browserState.navigateBackwards();
-  console.log("Navigation Backwards content state", contentState)
-};
+

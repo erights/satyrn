@@ -169,8 +169,6 @@ function ContentState (){
     this.renderDocument(this.teacherMarkdown)
   }
 
-
-
 };
 
 

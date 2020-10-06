@@ -5,29 +5,31 @@ var path = require('path');
 import env from "env";
 import url from "url";
 
-export const fileMenuTemplate = {
-  label: "File",
-  submenu: [
-    {
-      label: "New",
-      accelerator: "CmdOrCtrl+N",
-      click: newFile
-    },
-    {
-      label: "Open",
-      accelerator: "CmdOrCtrl+O",
-      click: fileOpenDialog
-    },
-    {
-      label: "Reload",
-      accelerator: "CmdOrCtrl+R",
-      click: reloadWindow
-    },
-    {
-      label: "Save",
-      accelerator: "CmdOrCtrl+S",
-      click: () => saveFile()
-    },
+export function buildFileMenuTemplate(isEdit, isRealtime) {
+
+  return {
+    label: "File",
+    submenu: [
+      {
+        label: "New",
+        accelerator: "CmdOrCtrl+N",
+        click: newFile
+      },
+      {
+        label: "Open",
+        accelerator: "CmdOrCtrl+O",
+        click: fileOpenDialog
+      },
+      {
+        label: "Reload",
+        accelerator: "CmdOrCtrl+R",
+        click: reloadWindow
+      },
+      {
+        label: "Save",
+        accelerator: "CmdOrCtrl+S",
+        click: () => saveFile()
+  },
     {
       label: "Save As",
       click: saveFileAs
@@ -38,32 +40,33 @@ export const fileMenuTemplate = {
       type: "checkbox",
       accelerator: "CmdOrCtrl+E",
       click: toggleEditMode,
-      checked: false
+      checked: isEdit
     },
     {
       label: "Real-time Render",
       type: "checkbox",
       accelerator: "CmdOrCtrl+T",
       click: toggleRealtimeRendering,
-      checked: true
+      checked: isRealtime
     },
     { type: "separator" },
-    {
-      label: "Close",
-      // accelerator: "CmdOrCtrl+Q",
-      click: () => {
-        remote.getCurrentWindow().close()
-      }
-    },
-    {
-      label: "Quit",
+  {
+    label: "Close",
+    // accelerator: "CmdOrCtrl+Q",
+    click: () => {
+    remote.getCurrentWindow().close()
+}
+},
+  {
+    label: "Quit",
       accelerator: "CmdOrCtrl+Q",
-      click: () => {
-        ipcRenderer.send("quit-app")
-      }
-    },
-  ]
-};
+    click: () => {
+    ipcRenderer.send("quit-app")
+  }
+  },
+]
+}
+}
 
 
 

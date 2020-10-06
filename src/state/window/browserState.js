@@ -1,17 +1,31 @@
 import ContentState from './contentState';
-import {ipcRenderer} from "electron";
-
+import {ipcRenderer, remote} from "electron";
+import { editMenuTemplate } from "../../menu/editMenuTemplate";
+import { buildFileMenuTemplate } from "../../menu/fileMenuTemplate";
+import { helpMenuTemplate } from "../../menu/helpMenuTemplate";
+let Menu = remote.Menu
 function BrowserState(file) {
 
   this.forwardStack = [];
   this.backwardStack = [];
   this.contentState = new ContentState()
 
+  //////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////
+  this.buildMenu = () => {
+    let fileMenuTemplate = buildFileMenuTemplate(this.contentState.isEditMode, this.contentState.shouldRealTimeRender)
+    const menus = [fileMenuTemplate, editMenuTemplate, helpMenuTemplate];
+    let electronMenu = Menu.buildFromTemplate(menus)
+    remote.getCurrentWindow().setMenu(electronMenu)
+  };
+
+
   this.openFile = (filePath, content) => {
     this.updateBackwardStack()
     this.contentState = new ContentState();
     this.contentState.openFile(filePath, content)
     this.contentState.rebuildDocument();
+    this.buildMenu()
   }
 
   this.updateBackwardStack = () => {
@@ -27,6 +41,7 @@ function BrowserState(file) {
       this.contentState = previousContentState;
 
       this.contentState.rebuildDocument()
+      this.buildMenu()
     } else {
       console.log("Nothing on the backwards stack")
     }
@@ -39,6 +54,7 @@ function BrowserState(file) {
       this.backwardStack.push(this.contentState);
       this.contentState = nextContentState;
       this.contentState.rebuildDocument()
+      this.buildMenu()
 
     } else {
       console.log("Nothing on the forwards stack")
