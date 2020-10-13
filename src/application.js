@@ -42,7 +42,6 @@ export let newSatyrnWindow = (satyrnDocumentUrl) => {
   let onDomReady = (electronWindow) => {
     // first, store the URL for reloading later (if called to do so)
     electronWindow.documentSrcUrl = satyrnDocumentUrl
-    setWindowTitle(electronWindow, satyrnDocumentUrl);
     // now send the URL to the window so it loads the Satyrn file
     electronWindow.send('load-document', satyrnDocumentUrl);
   };
@@ -109,8 +108,6 @@ function registerListenersOnElectronWindow(window, onDomReady) {
       e.preventDefault();
       window.documentSrcUrl = newSatyrnDocumentUrl
 
-      setWindowTitle(window, newSatyrnDocumentUrl);
-
       window.send("load-document", newSatyrnDocumentUrl);
       return false
     }
@@ -118,41 +115,6 @@ function registerListenersOnElectronWindow(window, onDomReady) {
 
   window.webContents.once('dom-ready', () => {
     onDomReady(window);
-
-
-  })
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-export function setWindowTitle(window, filePath) {
-  if (!window) {
-    window = BrowserWindow.get;
-  }
-  let filename = path.parse(filePath).base;
-
-  window.setTitle(filename + " -- Satyrn")
-}
-
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-export function saveFileAs(focusedWindow) {
-  const options = {
-    title: 'Save Markdown As',
-    buttonLabel: 'Save',
-    filters: [
-      { name: 'markdown', extensions: ['md'] }
-    ]
-  };
-  dialog.showSaveDialog(focusedWindow, options, (fileNames) => {
-
-    // fileNames is an array that contains all the selected
-    if (fileNames === undefined) {
-      console.log("No file selected");
-      return;
-    }
-    setWindowTitle(focusedWindow, fileNames);
-    focusedWindow.send('save-file', fileNames);
   })
 }
 

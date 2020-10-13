@@ -1,5 +1,6 @@
 import { Kernel } from '../kernel'
 import showdownConverter from '../../helpers/showdownConverter';
+import {remote} from "electron";
 import path from "path";
 
 const EDITOR_ID = "editor-"
@@ -63,6 +64,7 @@ function ContentState (){
     this.resetKernel();
     this.editors = {};
     this.currentFile = fname;
+    remote.getCurrentWindow().setTitle(fname)
     this.currentFileSaved = true;
     const text = data.toString();
     this.renderDocument(text);
@@ -74,6 +76,7 @@ function ContentState (){
 
   this.saveFile = (fileName, fileContent) => {
     state.currentFile = fileName;
+    remote.getCurrentWindow().setTitle(fname)
     state.currentFileSaved = true;
     state.renderDocument(fileContent);
     this.savedTeacherMarkdown = fileContent;
@@ -135,7 +138,6 @@ function ContentState (){
   };
 
   this.renderDocument = (text) => {
-    // console.log("Render Document", text);
     this.teacherMarkdown  = text;
     const html  = showdownConverter.makeHtml(text);
     let teacher = document.getElementById("teacher")
@@ -167,6 +169,7 @@ function ContentState (){
   this.rebuildDocument= () => {
     this.setEditMode(this.isEditMode)
     this.renderDocument(this.teacherMarkdown)
+    remote.getCurrentWindow().setTitle(this.currentFile)
   }
 
 };
