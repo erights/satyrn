@@ -90,7 +90,7 @@ export function saveFile(url) {
     remote.dialog.showMessageBox(remote.getCurrentWindow(), {
       type: "question",
       title: "Modify Satryn file?",
-      message: "You asked to save to a Satyrn program file. This may make Satyrn unusable. Continue with save?",
+      message: `You asked to save to a Satyrn program file: ${browserState.contentState.currentFile}. This may make Satyrn unusable. Continue with save?`,
       buttons: ["Cancel", "Save as", "Save"]
     }, response => {
       if (response === 0) {
