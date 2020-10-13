@@ -24,7 +24,7 @@ var OcamlHighlightRules = function() {
         "allow_unsafe_modules|always|append|appname_get|appname_set|" +
         "approx_num_exp|approx_num_fix|arg|argv|arith_status|array|" +
         "array1_of_genarray|array2_of_genarray|array3_of_genarray|asin|asr|" +
-        "assoc|assq|at_exit|atan|atan2|auto_synchronize|background|basename|" +
+        "assoc|assq|at_exit|atan|atan2|auto_synchronize|application|basename|" +
         "beginning_of_input|big_int_of_int|big_int_of_num|big_int_of_string|bind|" +
         "bind_class|bind_tag|bits|bits_of_float|black|blit|blit_image|blue|bool|" +
         "bool_of_string|bounded_full_split|bounded_split|bounded_split_delim|" +
@@ -357,7 +357,7 @@ var Range = require("../range").Range;
 var Mode = function() {
     this.HighlightRules = OcamlHighlightRules;
     this.$behaviour = this.$defaultBehaviour;
-    
+
     this.$outdent   = new MatchingBraceOutdent();
 };
 oop.inherits(Mode, TextMode);
@@ -418,4 +418,3 @@ exports.Mode = Mode;
                         }
                     });
                 })();
-            

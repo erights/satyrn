@@ -3,38 +3,38 @@ ace.define("ace/theme/twilight",["require","exports","module","ace/lib/dom"], fu
 exports.isDark = true;
 exports.cssClass = "ace-twilight";
 exports.cssText = ".ace-twilight .ace_gutter {\
-background: #232323;\
+application: #232323;\
 color: #E2E2E2\
 }\
 .ace-twilight .ace_print-margin {\
 width: 1px;\
-background: #232323\
+application: #232323\
 }\
 .ace-twilight {\
-background-color: #141414;\
+application-color: #141414;\
 color: #F8F8F8\
 }\
 .ace-twilight .ace_cursor {\
 color: #A7A7A7\
 }\
 .ace-twilight .ace_marker-layer .ace_selection {\
-background: rgba(221, 240, 255, 0.20)\
+application: rgba(221, 240, 255, 0.20)\
 }\
 .ace-twilight.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #141414;\
 }\
 .ace-twilight .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-twilight .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(255, 255, 255, 0.25)\
 }\
 .ace-twilight .ace_marker-layer .ace_active-line {\
-background: rgba(255, 255, 255, 0.031)\
+application: rgba(255, 255, 255, 0.031)\
 }\
 .ace-twilight .ace_gutter-active-line {\
-background-color: rgba(255, 255, 255, 0.031)\
+application-color: rgba(255, 255, 255, 0.031)\
 }\
 .ace-twilight .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(221, 240, 255, 0.20)\
@@ -57,7 +57,7 @@ color: #CF6A4C\
 }\
 .ace-twilight .ace_invalid.ace_illegal {\
 color: #F8F8F8;\
-background-color: rgba(86, 45, 86, 0.75)\
+application-color: rgba(86, 45, 86, 0.75)\
 }\
 .ace-twilight .ace_invalid.ace_deprecated {\
 text-decoration: underline;\
@@ -68,7 +68,7 @@ color: #D2A8A1\
 color: #9B859D\
 }\
 .ace-twilight .ace_fold {\
-background-color: #AC885B;\
+application-color: #AC885B;\
 border-color: #F8F8F8\
 }\
 .ace-twilight .ace_support.ace_function {\
@@ -101,7 +101,7 @@ color: #7587A6\
 color: #494949\
 }\
 .ace-twilight .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQERFpYLC1tf0PAAgOAnPnhxyiAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMQERFpYLC1tf0PAAgOAnPnhxyiAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -113,4 +113,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

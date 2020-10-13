@@ -67,6 +67,7 @@ Thumbs.db
 
 # ignore everything in 'app' folder what had been generated from 'src' folder
 /app/window.js
-/app/windowState.js
-/app/background.js
+/app/contentState.js
+/app/application.js
 /app/**/*.map
+/app/*.js

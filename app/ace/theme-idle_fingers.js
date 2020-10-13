@@ -3,38 +3,38 @@ ace.define("ace/theme/idle_fingers",["require","exports","module","ace/lib/dom"]
 exports.isDark = true;
 exports.cssClass = "ace-idle-fingers";
 exports.cssText = ".ace-idle-fingers .ace_gutter {\
-background: #3b3b3b;\
+application: #3b3b3b;\
 color: rgb(153,153,153)\
 }\
 .ace-idle-fingers .ace_print-margin {\
 width: 1px;\
-background: #3b3b3b\
+application: #3b3b3b\
 }\
 .ace-idle-fingers {\
-background-color: #323232;\
+application-color: #323232;\
 color: #FFFFFF\
 }\
 .ace-idle-fingers .ace_cursor {\
 color: #91FF00\
 }\
 .ace-idle-fingers .ace_marker-layer .ace_selection {\
-background: rgba(90, 100, 126, 0.88)\
+application: rgba(90, 100, 126, 0.88)\
 }\
 .ace-idle-fingers.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #323232;\
 }\
 .ace-idle-fingers .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-idle-fingers .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #404040\
 }\
 .ace-idle-fingers .ace_marker-layer .ace_active-line {\
-background: #353637\
+application: #353637\
 }\
 .ace-idle-fingers .ace_gutter-active-line {\
-background-color: #353637\
+application-color: #353637\
 }\
 .ace-idle-fingers .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(90, 100, 126, 0.88)\
@@ -55,10 +55,10 @@ color: #6C99BB\
 }\
 .ace-idle-fingers .ace_invalid {\
 color: #FFFFFF;\
-background-color: #FF0000\
+application-color: #FF0000\
 }\
 .ace-idle-fingers .ace_fold {\
-background-color: #CC7833;\
+application-color: #CC7833;\
 border-color: #FFFFFF\
 }\
 .ace-idle-fingers .ace_support.ace_function {\
@@ -85,10 +85,10 @@ color: #FFC66D\
 }\
 .ace-idle-fingers .ace_collab.ace_user1 {\
 color: #323232;\
-background-color: #FFF980\
+application-color: #FFF980\
 }\
 .ace-idle-fingers .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMwMjLyZYiPj/8PAAreAwAI1+g0AAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWMwMjLyZYiPj/8PAAreAwAI1+g0AAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -100,4 +100,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

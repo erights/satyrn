@@ -89,14 +89,14 @@ oop.inherits(Occur, Search);
 var dom = require('./lib/dom');
 dom.importCssString(".ace_occur-highlight {\n\
     border-radius: 4px;\n\
-    background-color: rgba(87, 255, 8, 0.25);\n\
+    application-color: rgba(87, 255, 8, 0.25);\n\
     position: absolute;\n\
     z-index: 4;\n\
     box-sizing: border-box;\n\
     box-shadow: 0 0 4px rgb(91, 255, 50);\n\
 }\n\
 .ace_dark .ace_occur-highlight {\n\
-    background-color: rgb(80, 140, 85);\n\
+    application-color: rgb(80, 140, 85);\n\
     box-shadow: 0 0 4px rgb(60, 120, 70);\n\
 }\n", "incremental-occur-highlighting");
 
@@ -567,11 +567,11 @@ dom.importCssString && dom.importCssString("\
 }\
 div.ace_isearch-result {\
   border-radius: 4px;\
-  background-color: rgba(255, 200, 0, 0.5);\
+  application-color: rgba(255, 200, 0, 0.5);\
   box-shadow: 0 0 4px rgb(255, 200, 0);\
 }\
 .ace_dark div.ace_isearch-result {\
-  background-color: rgb(100, 110, 160);\
+  application-color: rgb(100, 110, 160);\
   box-shadow: 0 0 4px rgb(80, 90, 140);\
 }", "incremental-search-highlighting");
 var commands = require("./commands/command_manager");
@@ -625,16 +625,16 @@ exports.handler.attach = function(editor) {
             .emacs-mode .ace_cursor{\
                 border: 1px rgba(50,250,50,0.8) solid!important;\
                 box-sizing: border-box!important;\
-                background-color: rgba(0,250,0,0.9);\
+                application-color: rgba(0,250,0,0.9);\
                 opacity: 0.5;\
             }\
             .emacs-mode .ace_hidden-cursors .ace_cursor{\
                 opacity: 1;\
-                background-color: transparent;\
+                application-color: transparent;\
             }\
             .emacs-mode .ace_overwrite-cursors .ace_cursor {\
                 opacity: 1;\
-                background-color: transparent;\
+                application-color: transparent;\
                 border-width: 0 0 2px 2px !important;\
             }\
             .emacs-mode .ace_text-layer {\
@@ -853,7 +853,7 @@ exports.handler.handleKeyboard = function(data, hashId, key, keyCode) {
 
     if (!command.readOnly && editor.emacsMark())
         editor.setEmacsMark(null);
-        
+
     if (data.count) {
         var count = data.count;
         data.count = 0;
@@ -1050,7 +1050,7 @@ exports.handler.addCommands({
         var line = editor.session.getLine(range.start.row);
         range.end.column = line.length;
         line = line.substr(range.start.column);
-        
+
         var foldLine = editor.session.getFoldLine(range.start.row);
         if (foldLine && range.end.row != foldLine.end.row) {
             range.end.row = foldLine.end.row;
@@ -1166,4 +1166,3 @@ exports.killRing = {
                         }
                     });
                 })();
-            

@@ -4,118 +4,143 @@ import path from 'path';
 import "./stylesheets/main.css";
 
 // Small helpers you might want to keep
-import "./helpers/context_menu.js";
-import "./helpers/external_links.js";
+import "./helpers/contextMenu.js";
+import "./helpers/externalLinks.js";
 
 import {ipcRenderer, dialog, remote} from "electron";
-
+let Menu = remote.Menu
 import showdown  from 'showdown';
 window.showdown = showdown;
 
 
 // --------------------- --------------------- ---------------------
 // application state
-import state from './state/windowState'
-window.state = state;
+import BrowserState from './state/window/browserState'
+
+let browserState = new BrowserState();
+browserState.buildMenu()
+window.browserState = browserState;
 
 
-//////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-//  save-file -> write the current document to a file.
-ipcRenderer.on('save-file', function(event, arg) {
-  saveFile(event, arg)
 
-});
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-edit-mode -> enable document editing (teacher mode)
-ipcRenderer.on('toggle-edit-mode', function(event, args) {
-  state.isEditMode ? document.querySelector("#teacher-input").style.display = "none"  :  document.querySelector("#teacher-input").style.display = "block";
-  state.isEditMode = !state.isEditMode;
-});
+export function toggleEditMode() {
+  browserState.contentState.setEditMode(!browserState.contentState.isEditMode)
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 //  toggle-realtime-render -> flip real time render mode
-ipcRenderer.on('toggle-realtime-render', (event, args) => {
-  state.shouldRealTimeRender = !state.shouldRealTimeRender;
-});
+export function toggleRealtimeRendering() {
+  browserState.contentState.toggleRealTimeRender();
+};
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// load-url-> loads either a file or external url
-ipcRenderer.on('load-url', (event,url) => {
-  loadUrl(url);
+ipcRenderer.on('reload-window-content', (event) => {
+  reloadWindow()
+
+});
+
+export function reloadWindow() {
+  console.log("Reload window content", browserState);
+  browserState.contentState.reloadContent();
+}
+
+ipcRenderer.on('browser-state', (event, newBrowserState) => {
+  console.log("New Browser State", newBrowserState);
 })
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-ipcRenderer.on('reload-window', (event, reloadContents) => {
-  loadUrl(reloadContents.url);
-});
+// load-document-> loads a satyrn document from either a file or external url
+ipcRenderer.on('load-document', (event,url) => {
+  loadSatyrnDocument(url);
+})
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-// loadUrl is called when a link has been clicked on
-function loadUrl(url) {
-  console.log('loading url', url);
+// loadSatyrnDocument is called when a link has been clicked on
+export function loadSatyrnDocument(url) {
+  console.log('loading satyrn document from url : ', url);
 
   let request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.send(null);
   request.onreadystatechange = () => {
     if (request.readyState === 4 && request.status === 200) {
-//      let type = request.getResponseHeader('Content-Type');
-//      if (type.indexOf("text") !== 1) {
-        state.openFile(url, request.responseText)
-//
-//      }
+        browserState.openFile(url, request.responseText)
     }
   }
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
-function  saveFile(event, url) {
+export function saveFile(url) {
   let protectedFolderPath = process.cwd() + '/markdown/';
   let fileContent = document.getElementById("teacher").value;
-  let fileName = url ? url : state.currentFile;
+  let fileName = url ? url : browserState.contentState.currentFile;
   console.log(fileName, protectedFolderPath);
   if (fileName.includes(protectedFolderPath)) {
 
     remote.dialog.showMessageBox(remote.getCurrentWindow(), {
       type: "question",
       title: "Modify Satryn file?",
-      message: "You asked to save to a Satyrn program file. This may make Satyrn unusable. Continue with save?",
+      message: `You asked to save to a Satyrn program file: ${browserState.contentState.currentFile}. This may make Satyrn unusable. Continue with save?`,
       buttons: ["Cancel", "Save as", "Save"]
     }, response => {
       if (response === 0) {
         console.log("Cancelled Save")
       } else if (response === 1) {
-        event.sender.send("save-file-as")
+        saveFileAs()
       } else if (response === 2) {
-        writeFile(event.sender, fileName, fileContent)
+        writeFile(fileName, fileContent)
       }
     })
   }
   else {
-    writeFile(event.sender, fileName, fileContent);
+    writeFile(fileName, fileContent);
   }
 }
 
-function writeFile(sender, fileName, fileContent) {
-  console.log("Write file", fileName);
-  fs.writeFile(fileName, fileContent, function(err) {
+export function saveFileAs() {
+  const focusedWindow = remote.getCurrentWindow()
+  const options = {
+    title: 'Save Markdown As',
+    buttonLabel: 'Save',
+    filters: [
+      {name: 'markdown', extensions: ['md']}
+    ]
+  };
+  remote.dialog.showSaveDialog(focusedWindow, options, (filename) => {
+
+    // fileNames is an array that contains all the selected
+    if(filename === undefined)
+    {
+      console.log("No file selected");
+      return;
+    }
+    console.log(filename)
+    focusedWindow.setTitle(filename)
+    saveFile(filename)
+  })
+}
+
+function writeFile(filename, fileContent) {
+  console.log("Write file", filename);
+  fs.writeFile(filename, fileContent, function(err) {
     if(err) {
       return alert(err);
     }
-    state.currentFile = fileName;
-    state.currentFileSaved = true;
-    state.renderDocument(fileContent);
+    browserState.contentState.saveFile(filename, fileContent);
+
     console.log("The file was saved and the name was changed!");
-    sender.send("set-reload-url", {
-      url: fileName
-    })
+    remote.getCurrentWindow().documentSrcUrl = documentSrcUrl
   });
 }
+
+

@@ -5,14 +5,13 @@ const base = require("./webpack.base.config");
 module.exports = env => {
   return merge(base(env), {
     entry: {
-      background: "./src/background.js",
-      window: "./src/window.js",
-      windowState: "./src/state/windowState.js",
+      application: "./src/application.js",
+      satyrnWindow: "./src/satyrnWindow.js",
     },
     output: {
       filename: "[name].js",
       path: path.resolve(__dirname, "../app")
     }
-    },
- );
+  },
+  );
 };

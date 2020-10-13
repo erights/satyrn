@@ -3,38 +3,38 @@ ace.define("ace/theme/kr_theme",["require","exports","module","ace/lib/dom"], fu
 exports.isDark = true;
 exports.cssClass = "ace-kr-theme";
 exports.cssText = ".ace-kr-theme .ace_gutter {\
-background: #1c1917;\
+application: #1c1917;\
 color: #FCFFE0\
 }\
 .ace-kr-theme .ace_print-margin {\
 width: 1px;\
-background: #1c1917\
+application: #1c1917\
 }\
 .ace-kr-theme {\
-background-color: #0B0A09;\
+application-color: #0B0A09;\
 color: #FCFFE0\
 }\
 .ace-kr-theme .ace_cursor {\
 color: #FF9900\
 }\
 .ace-kr-theme .ace_marker-layer .ace_selection {\
-background: rgba(170, 0, 255, 0.45)\
+application: rgba(170, 0, 255, 0.45)\
 }\
 .ace-kr-theme.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #0B0A09;\
 }\
 .ace-kr-theme .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-kr-theme .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(255, 177, 111, 0.32)\
 }\
 .ace-kr-theme .ace_marker-layer .ace_active-line {\
-background: #38403D\
+application: #38403D\
 }\
 .ace-kr-theme .ace_gutter-active-line {\
-background-color : #38403D\
+application-color : #38403D\
 }\
 .ace-kr-theme .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(170, 0, 255, 0.45)\
@@ -54,7 +54,7 @@ color: rgba(210, 117, 24, 0.76)\
 }\
 .ace-kr-theme .ace_invalid {\
 color: #F8F8F8;\
-background-color: #A41300\
+application-color: #A41300\
 }\
 .ace-kr-theme .ace_support {\
 color: #9FC28A\
@@ -63,7 +63,7 @@ color: #9FC28A\
 color: #C27E66\
 }\
 .ace-kr-theme .ace_fold {\
-background-color: #949C8B;\
+application-color: #949C8B;\
 border-color: #FCFFE0\
 }\
 .ace-kr-theme .ace_support.ace_function {\
@@ -87,7 +87,7 @@ color: #D1A796\
 }\
 .ace-kr-theme .ace_list,\
 .ace-kr-theme .ace_markup.ace_list {\
-background-color: #0F0040\
+application-color: #0F0040\
 }\
 .ace-kr-theme .ace_variable.ace_language {\
 color: #FF80E1\
@@ -96,7 +96,7 @@ color: #FF80E1\
 color: #BABD9C\
 }\
 .ace-kr-theme .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYFBXV/8PAAJoAXX4kT2EAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYFBXV/8PAAJoAXX4kT2EAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -108,4 +108,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

@@ -3,38 +3,38 @@ ace.define("ace/theme/tomorrow",["require","exports","module","ace/lib/dom"], fu
 exports.isDark = false;
 exports.cssClass = "ace-tomorrow";
 exports.cssText = ".ace-tomorrow .ace_gutter {\
-background: #f6f6f6;\
+application: #f6f6f6;\
 color: #4D4D4C\
 }\
 .ace-tomorrow .ace_print-margin {\
 width: 1px;\
-background: #f6f6f6\
+application: #f6f6f6\
 }\
 .ace-tomorrow {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: #4D4D4C\
 }\
 .ace-tomorrow .ace_cursor {\
 color: #AEAFAD\
 }\
 .ace-tomorrow .ace_marker-layer .ace_selection {\
-background: #D6D6D6\
+application: #D6D6D6\
 }\
 .ace-tomorrow.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #FFFFFF;\
 }\
 .ace-tomorrow .ace_marker-layer .ace_step {\
-background: rgb(255, 255, 0)\
+application: rgb(255, 255, 0)\
 }\
 .ace-tomorrow .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #D1D1D1\
 }\
 .ace-tomorrow .ace_marker-layer .ace_active-line {\
-background: #EFEFEF\
+application: #EFEFEF\
 }\
 .ace-tomorrow .ace_gutter-active-line {\
-background-color : #dcdcdc\
+application-color : #dcdcdc\
 }\
 .ace-tomorrow .ace_marker-layer .ace_selected-word {\
 border: 1px solid #D6D6D6\
@@ -65,14 +65,14 @@ color: #666969\
 }\
 .ace-tomorrow .ace_invalid {\
 color: #FFFFFF;\
-background-color: #C82829\
+application-color: #C82829\
 }\
 .ace-tomorrow .ace_invalid.ace_deprecated {\
 color: #FFFFFF;\
-background-color: #8959A8\
+application-color: #8959A8\
 }\
 .ace-tomorrow .ace_fold {\
-background-color: #4271AE;\
+application-color: #4271AE;\
 border-color: #4D4D4C\
 }\
 .ace-tomorrow .ace_entity.ace_name.ace_function,\
@@ -100,7 +100,7 @@ color: #C82829\
 color: #8E908C\
 }\
 .ace-tomorrow .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bdu3f/BwAlfgctduB85QAAAABJRU5ErkJggg==) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bdu3f/BwAlfgctduB85QAAAABJRU5ErkJggg==) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -112,4 +112,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

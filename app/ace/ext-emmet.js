@@ -16,7 +16,7 @@ var SnippetManager = function() {
 
 (function() {
     oop.implement(this, EventEmitter);
-    
+
     this.getTokenizer = function() {
         function TabstopToken(str, _, stack) {
             str = str.substr(1);
@@ -239,7 +239,7 @@ var SnippetManager = function() {
         var line = editor.session.getLine(cursor.row);
         var tabString = editor.session.getTabString();
         var indentString = line.match(/^\s*/)[0];
-        
+
         if (cursor.column < indentString.length)
             indentString = indentString.slice(0, cursor.column);
 
@@ -306,7 +306,7 @@ var SnippetManager = function() {
                     expanding[id] = null;
                 continue;
             }
-            
+
             var ts = tabstops[id];
             var arg = typeof ts.value == "string" ? [ts.value] : copyValue(ts.value);
             arg.unshift(i + 1, Math.max(0, i1 - i));
@@ -342,16 +342,16 @@ var SnippetManager = function() {
         var selectionId = editor.inVirtualSelectionMode && editor.selection.index;
         tabstopManager.addTabstops(tabstops, range.start, end, selectionId);
     };
-    
+
     this.insertSnippet = function(editor, snippetText) {
         var self = this;
         if (editor.inVirtualSelectionMode)
             return self.insertSnippetForSelection(editor, snippetText);
-        
+
         editor.forEachSelection(function() {
             self.insertSnippetForSelection(editor, snippetText);
         }, null, {keepOrder: true});
-        
+
         if (editor.tabstopManager)
             editor.tabstopManager.tabNext();
     };
@@ -360,7 +360,7 @@ var SnippetManager = function() {
         var scope = editor.session.$mode.$id || "";
         scope = scope.split("/").pop();
         if (scope === "html" || scope === "php") {
-            if (scope === "php" && !editor.session.$mode.inlinePhp) 
+            if (scope === "php" && !editor.session.$mode.inlinePhp)
                 scope = "html";
             var c = editor.getCursorPosition();
             var state = editor.session.getState(c.row);
@@ -376,7 +376,7 @@ var SnippetManager = function() {
                     scope = "php";
             }
         }
-        
+
         return scope;
     };
 
@@ -400,7 +400,7 @@ var SnippetManager = function() {
             editor.tabstopManager.tabNext();
         return result;
     };
-    
+
     this.expandSnippetForSelection = function(editor, options) {
         var cursor = editor.getCursorPosition();
         var line = editor.session.getLine(cursor.row);
@@ -456,10 +456,10 @@ var SnippetManager = function() {
         var snippetMap = this.snippetMap;
         var snippetNameMap = this.snippetNameMap;
         var self = this;
-        
-        if (!snippets) 
+
+        if (!snippets)
             snippets = [];
-        
+
         function wrapRegexp(src) {
             if (src && !/^\^?\(.*\)\$?$|^\\b$/.test(src))
                 src = "(?:" + src + ")";
@@ -504,10 +504,10 @@ var SnippetManager = function() {
                     s.guard = "\\b";
                 s.trigger = lang.escapeRegExp(s.tabTrigger);
             }
-            
+
             if (!s.trigger && !s.guard && !s.endTrigger && !s.endGuard)
                 return;
-            
+
             s.startRe = guardedRegexp(s.trigger, s.guard, true);
             s.triggerRe = new RegExp(s.trigger);
 
@@ -519,7 +519,7 @@ var SnippetManager = function() {
             addSnippet(snippets);
         else if (Array.isArray(snippets))
             snippets.forEach(addSnippet);
-        
+
         this._signal("registerSnippets", {scope: scope});
     };
     this.unregister = function(snippets, scope) {
@@ -736,9 +736,9 @@ var TabstopManager = function(editor) {
         ts = this.tabstops[this.index];
         if (!ts || !ts.length)
             return;
-        
+
         this.selectedTabstop = ts;
-        if (!this.editor.inVirtualSelectionMode) {        
+        if (!this.editor.inVirtualSelectionMode) {
             var sel = this.editor.multiSelect;
             sel.toSingleRange(ts.firstNonLinked.clone());
             for (var i = ts.length; i--;) {
@@ -751,7 +751,7 @@ var TabstopManager = function(editor) {
         } else {
             this.editor.selection.setRange(ts.firstNonLinked);
         }
-        
+
         this.editor.keyBinding.addKeyboardHandler(this.keyboardHandler);
     };
     this.addTabstops = function(tabstops, start, end) {
@@ -770,7 +770,7 @@ var TabstopManager = function(editor) {
         var ranges = this.ranges;
         tabstops.forEach(function(ts, index) {
             var dest = this.$openTabstops[index] || ts;
-                
+
             for (var i = ts.length; i--;) {
                 var p = ts[i];
                 var range = Range.fromPoints(p.start, p.end || p.start);
@@ -797,7 +797,7 @@ var TabstopManager = function(editor) {
             }
             this.addTabstopMarkers(dest);
         }, this);
-        
+
         if (arg.length > 2) {
             if (this.tabstops.length)
                 arg.push(arg.splice(2, 1)[0]);
@@ -865,7 +865,7 @@ changeTracker.setPosition = function(row, column) {
 };
 changeTracker.update = function(pos, delta, $insertRight) {
     this.$insertRight = $insertRight;
-    this.pos = pos; 
+    this.pos = pos;
     this.onChange(delta);
 };
 
@@ -886,7 +886,7 @@ require("./lib/dom").importCssString("\
 .ace_snippet-marker {\
     -moz-box-sizing: border-box;\
     box-sizing: border-box;\
-    background: rgba(194, 193, 208, 0.09);\
+    application: rgba(194, 193, 208, 0.09);\
     border: 1px dotted rgba(211, 208, 235, 0.62);\
     position: absolute;\
 }");
@@ -967,15 +967,15 @@ AceEmmetEditor.prototype = {
         if (end == null)
             end = start == null ? this.getContent().length : start;
         if (start == null)
-            start = 0;        
-        
+            start = 0;
+
         var editor = this.ace;
         var doc = editor.session.doc;
         var range = Range.fromPoints(doc.indexToPosition(start), doc.indexToPosition(end));
         editor.session.remove(range);
-        
+
         range.end = range.start;
-        
+
         value = this.$updateTabstops(value);
         snippetManager.insertSnippet(editor, value);
     },
@@ -1071,7 +1071,7 @@ AceEmmetEditor.prototype = {
             var common = emmet.utils ? emmet.utils.common : emmet.require('utils');
             value = common.replaceSubstring(value, '${0}', lastZero[0], lastZero[1]);
         }
-        
+
         return value;
     }
 };
@@ -1109,7 +1109,7 @@ exports.runEmmetCommand = function runEmmetCommand(editor) {
     try {
         editorProxy.setupContext(editor);
         var actions = emmet.actions || emmet.require("actions");
-    
+
         if (this.action == "expand_abbreviation_with_tab") {
             if (!editor.selection.isEmpty())
                 return false;
@@ -1118,13 +1118,13 @@ exports.runEmmetCommand = function runEmmetCommand(editor) {
             if (token && /\btag\b/.test(token.type))
                 return false;
         }
-        
+
         if (this.action == "wrap_with_abbreviation") {
             return setTimeout(function() {
                 actions.run("wrap_with_abbreviation", editorProxy);
             }, 0);
         }
-        
+
         var result = actions.run(this.action, editorProxy);
     } catch(e) {
         if (!emmet) {
@@ -1223,4 +1223,3 @@ exports.setCore = function(e) {
                         }
                     });
                 })();
-            

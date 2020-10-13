@@ -3,15 +3,15 @@ ace.define("ace/theme/tomorrow_night_eighties",["require","exports","module","ac
 exports.isDark = true;
 exports.cssClass = "ace-tomorrow-night-eighties";
 exports.cssText = ".ace-tomorrow-night-eighties .ace_gutter {\
-background: #272727;\
+application: #272727;\
 color: #CCC\
 }\
 .ace-tomorrow-night-eighties .ace_print-margin {\
 width: 1px;\
-background: #272727\
+application: #272727\
 }\
 .ace-tomorrow-night-eighties {\
-background-color: #2D2D2D;\
+application-color: #2D2D2D;\
 color: #CCCCCC\
 }\
 .ace-tomorrow-night-eighties .ace_constant.ace_other,\
@@ -19,26 +19,26 @@ color: #CCCCCC\
 color: #CCCCCC\
 }\
 .ace-tomorrow-night-eighties .ace_marker-layer .ace_selection {\
-background: #515151\
+application: #515151\
 }\
 .ace-tomorrow-night-eighties.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #2D2D2D;\
 }\
 .ace-tomorrow-night-eighties .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-tomorrow-night-eighties .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #6A6A6A\
 }\
 .ace-tomorrow-night-bright .ace_stack {\
-background: rgb(66, 90, 44)\
+application: rgb(66, 90, 44)\
 }\
 .ace-tomorrow-night-eighties .ace_marker-layer .ace_active-line {\
-background: #393939\
+application: #393939\
 }\
 .ace-tomorrow-night-eighties .ace_gutter-active-line {\
-background-color: #393939\
+application-color: #393939\
 }\
 .ace-tomorrow-night-eighties .ace_marker-layer .ace_selected-word {\
 border: 1px solid #515151\
@@ -66,14 +66,14 @@ color: #F99157\
 }\
 .ace-tomorrow-night-eighties .ace_invalid {\
 color: #CDCDCD;\
-background-color: #F2777A\
+application-color: #F2777A\
 }\
 .ace-tomorrow-night-eighties .ace_invalid.ace_deprecated {\
 color: #CDCDCD;\
-background-color: #CC99CC\
+application-color: #CC99CC\
 }\
 .ace-tomorrow-night-eighties .ace_fold {\
-background-color: #6699CC;\
+application-color: #6699CC;\
 border-color: #CCCCCC\
 }\
 .ace-tomorrow-night-eighties .ace_entity.ace_name.ace_function,\
@@ -100,7 +100,7 @@ color: #999999\
 color: #F2777A\
 }\
 .ace-tomorrow-night-eighties .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ09NrYAgMjP4PAAtGAwchHMyAAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ09NrYAgMjP4PAAtGAwchHMyAAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -112,4 +112,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

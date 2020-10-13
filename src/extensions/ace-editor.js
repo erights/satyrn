@@ -1,5 +1,4 @@
 const showdown  = require('showdown');
-import state from '../state/windowState';
 
 showdown.extension('aceEditor', () => {
   let content = [];
@@ -17,10 +16,11 @@ showdown.extension('aceEditor', () => {
     {
       type: 'output',
       filter: function (text) {
+        // TODO could this be done better. How to access state more easily
         for (var index=0; index< content.length; ++index) {
           var pat = '%EDITOR' + index + '%';
-          text = text.replace(new RegExp(pat, 'gi'), state.getEditorHtml(content[index], index));
-          state.editors[index] = null;
+          text = text.replace(new RegExp(pat, 'gi'), window.browserState.contentState.getEditorHtml(content[index], index));
+          window.browserState.contentState.editors[index] = null;
         }
         content = [];
         return text;
