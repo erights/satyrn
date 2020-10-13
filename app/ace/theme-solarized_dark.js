@@ -3,15 +3,15 @@ ace.define("ace/theme/solarized_dark",["require","exports","module","ace/lib/dom
 exports.isDark = true;
 exports.cssClass = "ace-solarized-dark";
 exports.cssText = ".ace-solarized-dark .ace_gutter {\
-background: #01313f;\
+application: #01313f;\
 color: #d0edf7\
 }\
 .ace-solarized-dark .ace_print-margin {\
 width: 1px;\
-background: #33555E\
+application: #33555E\
 }\
 .ace-solarized-dark {\
-background-color: #002B36;\
+application-color: #002B36;\
 color: #93A1A1\
 }\
 .ace-solarized-dark .ace_entity.ace_other.ace_attribute-name,\
@@ -24,20 +24,20 @@ color: #D30102\
 }\
 .ace-solarized-dark .ace_marker-layer .ace_active-line,\
 .ace-solarized-dark .ace_marker-layer .ace_selection {\
-background: rgba(255, 255, 255, 0.1)\
+application: rgba(255, 255, 255, 0.1)\
 }\
 .ace-solarized-dark.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #002B36;\
 }\
 .ace-solarized-dark .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-solarized-dark .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(147, 161, 161, 0.50)\
 }\
 .ace-solarized-dark .ace_gutter-active-line {\
-background-color: #0d3440\
+application-color: #0d3440\
 }\
 .ace-solarized-dark .ace_marker-layer .ace_selected-word {\
 border: 1px solid #073642\
@@ -62,7 +62,7 @@ color: #B58900\
 color: #D33682\
 }\
 .ace-solarized-dark .ace_fold {\
-background-color: #268BD2;\
+application-color: #268BD2;\
 border-color: #93A1A1\
 }\
 .ace-solarized-dark .ace_entity.ace_name.ace_function,\
@@ -80,7 +80,7 @@ font-style: italic;\
 color: #657B83\
 }\
 .ace-solarized-dark .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNg0Db1ZVCxc/sPAAd4AlUHlLenAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNg0Db1ZVCxc/sPAAd4AlUHlLenAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -92,4 +92,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

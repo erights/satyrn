@@ -4,15 +4,15 @@ exports.isDark = false;
 exports.cssClass = "ace-katzenmilch";
 exports.cssText = ".ace-katzenmilch .ace_gutter,\
 .ace-katzenmilch .ace_gutter {\
-background: #e8e8e8;\
+application: #e8e8e8;\
 color: #333\
 }\
 .ace-katzenmilch .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8\
+application: #e8e8e8\
 }\
 .ace-katzenmilch {\
-background-color: #f3f2f3;\
+application-color: #f3f2f3;\
 color: rgba(15, 0, 9, 1.0)\
 }\
 .ace-katzenmilch .ace_cursor {\
@@ -23,23 +23,23 @@ border-left: 0px;\
 border-bottom: 1px solid #100011\
 }\
 .ace-katzenmilch .ace_marker-layer .ace_selection {\
-background: rgba(100, 5, 208, 0.27)\
+application: rgba(100, 5, 208, 0.27)\
 }\
 .ace-katzenmilch.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #f3f2f3;\
 }\
 .ace-katzenmilch .ace_marker-layer .ace_step {\
-background: rgb(198, 219, 174)\
+application: rgb(198, 219, 174)\
 }\
 .ace-katzenmilch .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(0, 0, 0, 0.33);\
 }\
 .ace-katzenmilch .ace_marker-layer .ace_active-line {\
-background: rgb(232, 242, 254)\
+application: rgb(232, 242, 254)\
 }\
 .ace-katzenmilch .ace_gutter-active-line {\
-background-color: rgb(232, 242, 254)\
+application-color: rgb(232, 242, 254)\
 }\
 .ace-katzenmilch .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(100, 5, 208, 0.27)\
@@ -48,7 +48,7 @@ border: 1px solid rgba(100, 5, 208, 0.27)\
 color: #BFBFBF\
 }\
 .ace-katzenmilch .ace_fold {\
-background-color: rgba(2, 95, 73, 0.97);\
+application-color: rgba(2, 95, 73, 0.97);\
 border-color: rgba(15, 0, 9, 1.0)\
 }\
 .ace-katzenmilch .ace_keyword {\
@@ -125,4 +125,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

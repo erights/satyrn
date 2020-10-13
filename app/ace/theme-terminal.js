@@ -3,44 +3,44 @@ ace.define("ace/theme/terminal",["require","exports","module","ace/lib/dom"], fu
 exports.isDark = true;
 exports.cssClass = "ace-terminal-theme";
 exports.cssText = ".ace-terminal-theme .ace_gutter {\
-background: #1a0005;\
+application: #1a0005;\
 color: steelblue\
 }\
 .ace-terminal-theme .ace_print-margin {\
 width: 1px;\
-background: #1a1a1a\
+application: #1a1a1a\
 }\
 .ace-terminal-theme {\
-background-color: black;\
+application-color: black;\
 color: #DEDEDE\
 }\
 .ace-terminal-theme .ace_cursor {\
 color: #9F9F9F\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_selection {\
-background: #424242\
+application: #424242\
 }\
 .ace-terminal-theme.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px black;\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_step {\
-background: rgb(0, 0, 0)\
+application: rgb(0, 0, 0)\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_bracket {\
-background: #090;\
+application: #090;\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_bracket-start {\
-background: #090;\
+application: #090;\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_bracket-unmatched {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #900\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_active-line {\
-background: #2A2A2A\
+application: #2A2A2A\
 }\
 .ace-terminal-theme .ace_gutter-active-line {\
-background-color: #2A112A\
+application-color: #2A112A\
 }\
 .ace-terminal-theme .ace_marker-layer .ace_selected-word {\
 border: 1px solid #424242\
@@ -71,14 +71,14 @@ color: gold\
 }\
 .ace-terminal-theme .ace_invalid {\
 color: yellow;\
-background-color: red\
+application-color: red\
 }\
 .ace-terminal-theme .ace_invalid.ace_deprecated {\
 color: #CED2CF;\
-background-color: #B798BF\
+application-color: #B798BF\
 }\
 .ace-terminal-theme .ace_fold {\
-background-color: #7AA6DA;\
+application-color: #7AA6DA;\
 border-color: #DEDEDE\
 }\
 .ace-terminal-theme .ace_entity.ace_name.ace_function,\
@@ -105,7 +105,7 @@ color: #D54E53\
 color: orangered\
 }\
 .ace-terminal-theme .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYLBWV/8PAAK4AYnhiq+xAAAAAElFTkSuQmCC) right repeat-y;\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYLBWV/8PAAK4AYnhiq+xAAAAAElFTkSuQmCC) right repeat-y;\
 }\
 ";
 
@@ -118,4 +118,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

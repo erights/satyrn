@@ -4,38 +4,38 @@ exports.isDark = false;
 exports.cssClass = "ace-xcode";
 exports.cssText = "\
 .ace-xcode .ace_gutter {\
-background: #e8e8e8;\
+application: #e8e8e8;\
 color: #333\
 }\
 .ace-xcode .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8\
+application: #e8e8e8\
 }\
 .ace-xcode {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: #000000\
 }\
 .ace-xcode .ace_cursor {\
 color: #000000\
 }\
 .ace-xcode .ace_marker-layer .ace_selection {\
-background: #B5D5FF\
+application: #B5D5FF\
 }\
 .ace-xcode.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #FFFFFF;\
 }\
 .ace-xcode .ace_marker-layer .ace_step {\
-background: rgb(198, 219, 174)\
+application: rgb(198, 219, 174)\
 }\
 .ace-xcode .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #BFBFBF\
 }\
 .ace-xcode .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.071)\
+application: rgba(0, 0, 0, 0.071)\
 }\
 .ace-xcode .ace_gutter-active-line {\
-background-color: rgba(0, 0, 0, 0.071)\
+application-color: rgba(0, 0, 0, 0.071)\
 }\
 .ace-xcode .ace_marker-layer .ace_selected-word {\
 border: 1px solid #B5D5FF\
@@ -62,7 +62,7 @@ color: #3A00DC\
 color: #450084\
 }\
 .ace-xcode .ace_fold {\
-background-color: #C800A4;\
+application-color: #C800A4;\
 border-color: #000000\
 }\
 .ace-xcode .ace_entity.ace_name.ace_tag,\
@@ -80,7 +80,7 @@ color: #DF0002\
 color: #008E00\
 }\
 .ace-xcode .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -92,4 +92,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

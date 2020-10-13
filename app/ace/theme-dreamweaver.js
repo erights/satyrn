@@ -2,19 +2,19 @@ ace.define("ace/theme/dreamweaver",["require","exports","module","ace/lib/dom"],
 exports.isDark = false;
 exports.cssClass = "ace-dreamweaver";
 exports.cssText = ".ace-dreamweaver .ace_gutter {\
-background: #e8e8e8;\
+application: #e8e8e8;\
 color: #333;\
 }\
 .ace-dreamweaver .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8;\
+application: #e8e8e8;\
 }\
 .ace-dreamweaver {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: black;\
 }\
 .ace-dreamweaver .ace_fold {\
-background-color: #757AD8;\
+application-color: #757AD8;\
 }\
 .ace-dreamweaver .ace_cursor {\
 color: black;\
@@ -36,7 +36,7 @@ color: rgb(88, 92, 246);\
 color: rgb(6, 150, 14);\
 }\
 .ace-dreamweaver .ace_invalid {\
-background-color: rgb(153, 0, 0);\
+application-color: rgb(153, 0, 0);\
 color: white;\
 }\
 .ace-dreamweaver .ace_support.ace_function {\
@@ -86,26 +86,26 @@ color: rgb(12, 7, 255);\
 color:rgb(185, 6, 144);\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_selection {\
-background: rgb(181, 213, 255);\
+application: rgb(181, 213, 255);\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_step {\
-background: rgb(252, 255, 0);\
+application: rgb(252, 255, 0);\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_stack {\
-background: rgb(164, 229, 101);\
+application: rgb(164, 229, 101);\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.07);\
+application: rgba(0, 0, 0, 0.07);\
 }\
 .ace-dreamweaver .ace_gutter-active-line {\
-background-color : #DCDCDC;\
+application-color : #DCDCDC;\
 }\
 .ace-dreamweaver .ace_marker-layer .ace_selected-word {\
-background: rgb(250, 250, 255);\
+application: rgb(250, 250, 255);\
 border: 1px solid rgb(200, 200, 250);\
 }\
 .ace-dreamweaver .ace_meta.ace_tag {\
@@ -133,7 +133,7 @@ color:#099;\
 color: rgb(255, 0, 0)\
 }\
 .ace-dreamweaver .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }";
 
 var dom = require("../lib/dom");
@@ -145,4 +145,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

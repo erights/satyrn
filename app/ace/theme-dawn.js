@@ -3,38 +3,38 @@ ace.define("ace/theme/dawn",["require","exports","module","ace/lib/dom"], functi
 exports.isDark = false;
 exports.cssClass = "ace-dawn";
 exports.cssText = ".ace-dawn .ace_gutter {\
-background: #ebebeb;\
+application: #ebebeb;\
 color: #333\
 }\
 .ace-dawn .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8\
+application: #e8e8e8\
 }\
 .ace-dawn {\
-background-color: #F9F9F9;\
+application-color: #F9F9F9;\
 color: #080808\
 }\
 .ace-dawn .ace_cursor {\
 color: #000000\
 }\
 .ace-dawn .ace_marker-layer .ace_selection {\
-background: rgba(39, 95, 255, 0.30)\
+application: rgba(39, 95, 255, 0.30)\
 }\
 .ace-dawn.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #F9F9F9;\
 }\
 .ace-dawn .ace_marker-layer .ace_step {\
-background: rgb(255, 255, 0)\
+application: rgb(255, 255, 0)\
 }\
 .ace-dawn .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(75, 75, 126, 0.50)\
 }\
 .ace-dawn .ace_marker-layer .ace_active-line {\
-background: rgba(36, 99, 180, 0.12)\
+application: rgba(36, 99, 180, 0.12)\
 }\
 .ace-dawn .ace_gutter-active-line {\
-background-color : #dcdcdc\
+application-color : #dcdcdc\
 }\
 .ace-dawn .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(39, 95, 255, 0.30)\
@@ -56,7 +56,7 @@ color: #811F24\
 text-decoration: underline;\
 font-style: italic;\
 color: #F8F8F8;\
-background-color: #B52A1D\
+application-color: #B52A1D\
 }\
 .ace-dawn .ace_invalid.ace_deprecated {\
 text-decoration: underline;\
@@ -70,7 +70,7 @@ color: #691C97\
 color: #B4371F\
 }\
 .ace-dawn .ace_fold {\
-background-color: #794938;\
+application-color: #794938;\
 border-color: #080808\
 }\
 .ace-dawn .ace_list,\
@@ -100,7 +100,7 @@ color: #19356D\
 color: #234A97\
 }\
 .ace-dawn .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYLh/5+x/AAizA4hxNNsZAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYLh/5+x/AAizA4hxNNsZAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -112,4 +112,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

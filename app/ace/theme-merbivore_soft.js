@@ -3,38 +3,38 @@ ace.define("ace/theme/merbivore_soft",["require","exports","module","ace/lib/dom
 exports.isDark = true;
 exports.cssClass = "ace-merbivore-soft";
 exports.cssText = ".ace-merbivore-soft .ace_gutter {\
-background: #262424;\
+application: #262424;\
 color: #E6E1DC\
 }\
 .ace-merbivore-soft .ace_print-margin {\
 width: 1px;\
-background: #262424\
+application: #262424\
 }\
 .ace-merbivore-soft {\
-background-color: #1C1C1C;\
+application-color: #1C1C1C;\
 color: #E6E1DC\
 }\
 .ace-merbivore-soft .ace_cursor {\
 color: #FFFFFF\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_selection {\
-background: #494949\
+application: #494949\
 }\
 .ace-merbivore-soft.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #1C1C1C;\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #404040\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_active-line {\
-background: #333435\
+application: #333435\
 }\
 .ace-merbivore-soft .ace_gutter-active-line {\
-background-color: #333435\
+application-color: #333435\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_selected-word {\
 border: 1px solid #494949\
@@ -73,10 +73,10 @@ color: #7FC578\
 .ace-merbivore-soft .ace_invalid,\
 .ace-merbivore-soft .ace_invalid.ace_deprecated {\
 color: #FFFFFF;\
-background-color: #FE3838\
+application-color: #FE3838\
 }\
 .ace-merbivore-soft .ace_fold {\
-background-color: #FC803A;\
+application-color: #FC803A;\
 border-color: #E6E1DC\
 }\
 .ace-merbivore-soft .ace_comment,\
@@ -88,7 +88,7 @@ color: #AC4BB8\
 color: #EAF1A3\
 }\
 .ace-merbivore-soft .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWOQkpLyZfD09PwPAAfYAnaStpHRAAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWOQkpLyZfD09PwPAAfYAnaStpHRAAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -100,4 +100,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

@@ -3,38 +3,38 @@ ace.define("ace/theme/pastel_on_dark",["require","exports","module","ace/lib/dom
 exports.isDark = true;
 exports.cssClass = "ace-pastel-on-dark";
 exports.cssText = ".ace-pastel-on-dark .ace_gutter {\
-background: #353030;\
+application: #353030;\
 color: #8F938F\
 }\
 .ace-pastel-on-dark .ace_print-margin {\
 width: 1px;\
-background: #353030\
+application: #353030\
 }\
 .ace-pastel-on-dark {\
-background-color: #2C2828;\
+application-color: #2C2828;\
 color: #8F938F\
 }\
 .ace-pastel-on-dark .ace_cursor {\
 color: #A7A7A7\
 }\
 .ace-pastel-on-dark .ace_marker-layer .ace_selection {\
-background: rgba(221, 240, 255, 0.20)\
+application: rgba(221, 240, 255, 0.20)\
 }\
 .ace-pastel-on-dark.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #2C2828;\
 }\
 .ace-pastel-on-dark .ace_marker-layer .ace_step {\
-background: rgb(102, 82, 0)\
+application: rgb(102, 82, 0)\
 }\
 .ace-pastel-on-dark .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgba(255, 255, 255, 0.25)\
 }\
 .ace-pastel-on-dark .ace_marker-layer .ace_active-line {\
-background: rgba(255, 255, 255, 0.031)\
+application: rgba(255, 255, 255, 0.031)\
 }\
 .ace-pastel-on-dark .ace_gutter-active-line {\
-background-color: rgba(255, 255, 255, 0.031)\
+application-color: rgba(255, 255, 255, 0.031)\
 }\
 .ace-pastel-on-dark .ace_marker-layer .ace_selected-word {\
 border: 1px solid rgba(221, 240, 255, 0.20)\
@@ -67,7 +67,7 @@ color: #CCCCCC\
 .ace-pastel-on-dark .ace_invalid,\
 .ace-pastel-on-dark .ace_invalid.ace_illegal {\
 color: #F8F8F8;\
-background-color: rgba(86, 45, 86, 0.75)\
+application-color: rgba(86, 45, 86, 0.75)\
 }\
 .ace-pastel-on-dark .ace_invalid.ace_deprecated {\
 text-decoration: underline;\
@@ -75,7 +75,7 @@ font-style: italic;\
 color: #D2A8A1\
 }\
 .ace-pastel-on-dark .ace_fold {\
-background-color: #757aD8;\
+application-color: #757aD8;\
 border-color: #8F938F\
 }\
 .ace-pastel-on-dark .ace_support.ace_function {\
@@ -100,7 +100,7 @@ color: #C1C144\
 color: #494949\
 }\
 .ace-pastel-on-dark .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYIiPj/8PAARgAh2NTMh8AAAAAElFTkSuQmCC) right repeat-y\
+application: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNgYGBgYIiPj/8PAARgAh2NTMh8AAAAAElFTkSuQmCC) right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -112,4 +112,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

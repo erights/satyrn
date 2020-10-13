@@ -3,38 +3,38 @@ ace.define("ace/theme/clouds",["require","exports","module","ace/lib/dom"], func
 exports.isDark = false;
 exports.cssClass = "ace-clouds";
 exports.cssText = ".ace-clouds .ace_gutter {\
-background: #ebebeb;\
+application: #ebebeb;\
 color: #333\
 }\
 .ace-clouds .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8\
+application: #e8e8e8\
 }\
 .ace-clouds {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: #000000\
 }\
 .ace-clouds .ace_cursor {\
 color: #000000\
 }\
 .ace-clouds .ace_marker-layer .ace_selection {\
-background: #BDD5FC\
+application: #BDD5FC\
 }\
 .ace-clouds.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #FFFFFF;\
 }\
 .ace-clouds .ace_marker-layer .ace_step {\
-background: rgb(255, 255, 0)\
+application: rgb(255, 255, 0)\
 }\
 .ace-clouds .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid #BFBFBF\
 }\
 .ace-clouds .ace_marker-layer .ace_active-line {\
-background: #FFFBD1\
+application: #FFFBD1\
 }\
 .ace-clouds .ace_gutter-active-line {\
-background-color : #dcdcdc\
+application-color : #dcdcdc\
 }\
 .ace-clouds .ace_marker-layer .ace_selected-word {\
 border: 1px solid #BDD5FC\
@@ -63,10 +63,10 @@ color: #46A609\
 color: #BF78CC\
 }\
 .ace-clouds .ace_invalid {\
-background-color: #FF002A\
+application-color: #FF002A\
 }\
 .ace-clouds .ace_fold {\
-background-color: #AF956F;\
+application-color: #AF956F;\
 border-color: #000000\
 }\
 .ace-clouds .ace_storage,\
@@ -87,7 +87,7 @@ color: #BCC8BA\
 color: #606060\
 }\
 .ace-clouds .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y\
 }";
 
 var dom = require("../lib/dom");
@@ -99,4 +99,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

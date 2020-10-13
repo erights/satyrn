@@ -3,17 +3,17 @@ ace.define("ace/theme/gruvbox",["require","exports","module","ace/lib/dom"], fun
 exports.isDark = true;
 exports.cssClass = "ace-gruvbox";
 exports.cssText = ".ace-gruvbox .ace_gutter-active-line {\
-background-color: #3C3836;\
+application-color: #3C3836;\
 }\
 .ace-gruvbox {\
 color: #EBDAB4;\
-background-color: #1D2021;\
+application-color: #1D2021;\
 }\
 .ace-gruvbox .ace_invisible {\
 color: #504945;\
 }\
 .ace-gruvbox .ace_marker-layer .ace_selection {\
-background: rgba(179, 101, 57, 0.75)\
+application: rgba(179, 101, 57, 0.75)\
 }\
 .ace-gruvbox.ace_multiselect .ace_selection.ace_start {\
 box-shadow: 0 0 3px 0px #002240;\
@@ -62,7 +62,7 @@ color: #EBDAB4;\
 color: yellow;\
 }\
 .ace-gruvbox .ace_marker-layer .ace_active-line {\
-background: #3C3836;\
+application: #3C3836;\
 }\
 .ace-gruvbox .ace_marker-layer .ace_selected-word {\
 border-radius: 4px;\
@@ -70,10 +70,10 @@ border: 8px solid #3f475d;\
 }\
 .ace-gruvbox .ace_print-margin {\
 width: 5px;\
-background: #3C3836;\
+application: #3C3836;\
 }\
 .ace-gruvbox .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNQUFD4z6Crq/sfAAuYAuYl+7lfAAAAAElFTkSuQmCC\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWNQUFD4z6Crq/sfAAuYAuYl+7lfAAAAAElFTkSuQmCC\") right repeat-y;\
 }";
 
 var dom = require("../lib/dom");
@@ -86,4 +86,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            

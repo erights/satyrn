@@ -3,16 +3,16 @@ ace.define("ace/theme/chrome",["require","exports","module","ace/lib/dom"], func
 exports.isDark = false;
 exports.cssClass = "ace-chrome";
 exports.cssText = ".ace-chrome .ace_gutter {\
-background: #ebebeb;\
+application: #ebebeb;\
 color: #333;\
 overflow : hidden;\
 }\
 .ace-chrome .ace_print-margin {\
 width: 1px;\
-background: #e8e8e8;\
+application: #e8e8e8;\
 }\
 .ace-chrome {\
-background-color: #FFFFFF;\
+application-color: #FFFFFF;\
 color: black;\
 }\
 .ace-chrome .ace_cursor {\
@@ -31,7 +31,7 @@ color: rgb(88, 92, 246);\
 color: rgb(6, 150, 14);\
 }\
 .ace-chrome .ace_invalid {\
-background-color: rgb(153, 0, 0);\
+application-color: rgb(153, 0, 0);\
 color: white;\
 }\
 .ace-chrome .ace_fold {\
@@ -82,26 +82,26 @@ color: rgb(12, 7, 255);\
 color:rgb(185, 6, 144);\
 }\
 .ace-chrome .ace_marker-layer .ace_selection {\
-background: rgb(181, 213, 255);\
+application: rgb(181, 213, 255);\
 }\
 .ace-chrome .ace_marker-layer .ace_step {\
-background: rgb(252, 255, 0);\
+application: rgb(252, 255, 0);\
 }\
 .ace-chrome .ace_marker-layer .ace_stack {\
-background: rgb(164, 229, 101);\
+application: rgb(164, 229, 101);\
 }\
 .ace-chrome .ace_marker-layer .ace_bracket {\
 margin: -1px 0 0 -1px;\
 border: 1px solid rgb(192, 192, 192);\
 }\
 .ace-chrome .ace_marker-layer .ace_active-line {\
-background: rgba(0, 0, 0, 0.07);\
+application: rgba(0, 0, 0, 0.07);\
 }\
 .ace-chrome .ace_gutter-active-line {\
-background-color : #dcdcdc;\
+application-color : #dcdcdc;\
 }\
 .ace-chrome .ace_marker-layer .ace_selected-word {\
-background: rgb(250, 250, 255);\
+application: rgb(250, 250, 255);\
 border: 1px solid rgb(200, 200, 250);\
 }\
 .ace-chrome .ace_storage,\
@@ -119,7 +119,7 @@ color: #1A1AA6;\
 color: #994409;\
 }\
 .ace-chrome .ace_indent-guide {\
-background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
+application: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }\
 ";
 
@@ -132,4 +132,3 @@ dom.importCssString(exports.cssText, exports.cssClass);
                         }
                     });
                 })();
-            
