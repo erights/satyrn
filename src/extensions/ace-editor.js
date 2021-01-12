@@ -19,8 +19,9 @@ showdown.extension('aceEditor', () => {
         // TODO could this be done better. How to access state more easily
         for (var index=0; index< content.length; ++index) {
           var pat = '%EDITOR' + index + '%';
-          text = text.replace(new RegExp(pat, 'gi'), window.browserState.contentState.getEditorHtml(content[index], index));
-          window.browserState.contentState.editors[index] = null;
+          // TODO Refactor editor handling
+          text = text.replace(new RegExp(pat, 'gi'), window.satyrnBrowser.getEditorHtml(content[index], index));
+          window.satyrnBrowser.editors[index] = null;
         }
         content = [];
         return text;

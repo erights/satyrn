@@ -1,21 +1,47 @@
-import { Kernel } from '../kernel'
-import showdownConverter from '../../helpers/showdownConverter';
+import { Kernel } from './state/kernel'
+import showdownConverter from './helpers/showdownConverter';
 import {remote} from "electron";
-import path from "path";
+
+import path from 'path';
 
 const EDITOR_ID = "editor-"
 const EDITOR_OUTPUT_SELECTOR = "#output-editor-"
-// This handles the windowState of a single notebook document.
-function ContentState (){
+
+function SatyrnBrowser(){
+
   this.editors = {};
   this.editorsResetValues = {};
-  this.isEditMode = false;
-  this.shouldRealTimeRender = true;
-  this.currentFile = null;
-  this.currentFileSaved = true;
   this.kernel = null;
-  this.teacherMarkdown = null;
-  this.savedTeacherMarkdown = null;
+  this.satyrnDocument = null;
+
+  this.setDocument = (satyrnDocument) => {
+    this.satyrnDocument = satyrnDocument
+    this.setAbsolutePath(this.satyrnDocument.fileName);
+    // Possibly this is not the browsers responsibility
+    remote.getCurrentWindow().setTitle(this.satyrnDocument.fileName)
+    this.renderDocument()
+  }
+
+  this.reloadDocument = () => {
+    this.renderMarkdown(this.satyrnDocument.savedMarkdown)
+  }
+
+  this.renderDocument = () => {
+     this.renderMarkdown(this.satyrnDocument.markdownContent)
+  }
+
+
+  this.renderMarkdown = (markdown) => {
+
+    const html  = showdownConverter.makeHtml(markdown);
+
+    let teacher = document.getElementById("teacher")
+    teacher.value = markdown;
+    document.getElementById("markdown").innerHTML = html;
+
+    // TODO editor code should be extracted into SatyrnDriver
+    this.initialiseEditors();
+  }
 
   this.initialiseEditors = () => {
     console.log("Editors to initialise : ", this.editors);
@@ -40,46 +66,12 @@ function ContentState (){
     editor.setValue(this.editorsResetValues[key])
   };
 
-  this.toggleRealTimeRender = () => {
-    this.shouldRealTimeRender = !this.shouldRealTimeRender;
-    this.handleTextChange();
-  };
-
-  this.setEditMode = (editMode) => {
-    console.log("Set edit mode", editMode)
-    editMode ? document.querySelector("#teacher-input").style.display = "block"  :  document.querySelector("#teacher-input").style.display = "none";
-    this.isEditMode = editMode
-  }
-
   this.resetKernel = () => {
     if(this.kernel) {
       // TODO kill is not a function? Seems to work without killing - probably not good!
       // windowState.kernel.kill()
     }
     this.kernel = new Kernel(this)
-  };
-
-  this.openFile = (fname,data) => {
-    console.log("Open file", fname, data)
-    this.resetKernel();
-    this.editors = {};
-    this.currentFile = fname;
-    remote.getCurrentWindow().setTitle(fname)
-    this.currentFileSaved = true;
-    const text = data.toString();
-    this.renderDocument(text);
-    this.convertToAbsolutePath();
-    this.savedTeacherMarkdown = text;
-    // console.log("Saved Teacher Markdown", text);
-    this.handleTextChange();
-  };
-
-  this.saveFile = (fileName, fileContent) => {
-    state.currentFile = fileName;
-    remote.getCurrentWindow().setTitle(fname)
-    state.currentFileSaved = true;
-    state.renderDocument(fileContent);
-    this.savedTeacherMarkdown = fileContent;
   };
 
   this.runEditor = (key) => {
@@ -118,8 +110,8 @@ function ContentState (){
   this.getEditorHtml = (content, key) => {
     return "<div class=\"showdown-js-editor\">\n" +
       "    <div>\n" +
-      "    <i class=\"fas fa-play\" onclick=\"window.browserState.contentState.runEditor('"+key+"')\" value=\"Run\" ></i>\n" +
-      "    <i class=\"fas fa-redo\" onclick=\"window.browserState.contentState.resetEditor('"+key+"')\" value=\"Refresh\" ></i>\n" +
+      "    <i class=\"fas fa-play\" onclick=\"window.satyrnBrowser.runEditor('"+key+"')\" value=\"Run\" ></i>\n" +
+      "    <i class=\"fas fa-redo\" onclick=\"window.satyrnBrowser.resetEditor('"+key+"')\" value=\"Refresh\" ></i>\n" +
       "    </div>\n" +
       "\n" +
       "    <pre id=\"editor-"+key+"\" class=\"editor\">" + content +
@@ -129,26 +121,20 @@ function ContentState (){
       "  </div>";
   };
 
+
+  // TODO Need to be able to call this from the HTML. But have no access to document for realTimeRender
   this.handleTextChange =() => {
-    if (this.shouldRealTimeRender) {
+    if (this.satyrnDocument.shouldRealTimeRender) {
       const text = document.getElementById("teacher").value;
-      this.renderDocument(text)
+      this.renderMarkdown(text)
     }
 
   };
 
-  this.renderDocument = (text) => {
-    this.teacherMarkdown  = text;
-    const html  = showdownConverter.makeHtml(text);
-    let teacher = document.getElementById("teacher")
-    teacher.value = text;
-    document.getElementById("markdown").innerHTML = html;
-    this.initialiseEditors();
-  };
-
-  this.convertToAbsolutePath = () => {
-    console.log('setting path for ' + this.currentFile);
-    const baseDir = path.dirname(this.currentFile) + "/"
+  // What is this for again
+  this.setAbsolutePath = (filename) => {
+    console.log('setting path for ' + filename);
+    const baseDir = path.dirname(filename) + "/"
     let baseTag = document.getElementById("base-dir")
     console.log("base tag", baseTag)
     if (!baseTag) {
@@ -161,18 +147,6 @@ function ContentState (){
 
     baseTag.href = baseDir
   };
+}
 
-  this.reloadContent = () => {
-    this.renderDocument(this.savedTeacherMarkdown);
-  }
-
-  this.rebuildDocument= () => {
-    this.setEditMode(this.isEditMode)
-    this.renderDocument(this.teacherMarkdown)
-    remote.getCurrentWindow().setTitle(this.currentFile)
-  }
-
-};
-
-
-export default ContentState;
+export default SatyrnBrowser
