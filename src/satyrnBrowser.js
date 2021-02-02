@@ -13,6 +13,7 @@ function SatyrnBrowser(){
   this.editorsResetValues = {};
   this.kernel = null;
   this.satyrnDocument = null;
+  this.baseDir = null;
 
   this.setDocument = (satyrnDocument) => {
     this.satyrnDocument = satyrnDocument
@@ -146,6 +147,7 @@ function SatyrnBrowser(){
     }
 
     baseTag.href = baseDir
+    this.baseDir = baseDir;
   };
 }
 
