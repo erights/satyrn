@@ -2,8 +2,6 @@ const showdown  = require('showdown');
 const fs = require('fs');
 const path = require('path');
 
-import state from '../state/windowState';
-
 showdown.extension('include', () => {
 
   return [
@@ -30,10 +28,18 @@ showdown.extension('include', () => {
     if(!src) return '';
 
     console.log('loading source', src);
-    var filePath = path.join(state.baseDir, src);
+    var filePath = path.join(window.satyrnBrowser.baseDir, src);
 
     console.log('front: ', filePath);
-    var inc=fs.readFileSync(filePath,'UTF-8');
+
+    var inc = null;
+    try {
+      inc = fs.readFileSync(filePath, 'UTF-8');
+    } catch (err) {
+      inc = '<div class="includeError">' +
+        err.message +
+        '</div>';
+    }
     return inc+'\n';
   }
 
