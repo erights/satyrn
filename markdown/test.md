@@ -31,3 +31,7 @@ Source specified targets
 
 <a name="example">Example anchor</a>
 
+```include
+included.md
+included.html
+```
